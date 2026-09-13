@@ -1,0 +1,153 @@
+import Image from 'next/image'
+
+import Button from '@/components/ui/Button'
+import Container from '@/components/ui/Container'
+import { siteConfig } from '@/config/site'
+
+// Hardcoded per plans/plan.md ("Not in the editable doc: 4.2 Active
+// Volunteer") — this page has no CMS-driven content.
+
+const volunteerRoles = [
+  {
+    label: 'Event Planning',
+    icon: '/images/volunteer/roles/event-planning.png',
+  },
+  {
+    label: 'Social Media & Communications',
+    icon: '/images/volunteer/roles/social-media.png',
+  },
+  {
+    label: 'Fundraising',
+    icon: '/images/volunteer/roles/fundraising.png',
+  },
+  {
+    label: 'Outreach & Alumni Engagement',
+    icon: '/images/volunteer/roles/outreach-alumni.png',
+  },
+  {
+    label: 'Securing Sponsors',
+    icon: '/images/volunteer/roles/securing-sponsors.png',
+  },
+  {
+    label: 'Blogging/Vlogging',
+    icon: '/images/volunteer/roles/blogging-vlogging.png',
+  },
+]
+
+const volunteerEvents = [
+  {
+    label: 'Fairs',
+    image: '/images/volunteer/events/fairs.jpg',
+    alt: 'Welcome arch at the Ilma Pre-Ramadan Fair',
+  },
+  {
+    label: 'Annual Reunions',
+    image: '/images/volunteer/events/annual-reunions.jpg',
+    alt: 'Festive table setting at an IIOGA annual reunion',
+  },
+  {
+    label: 'Career Guidance',
+    image: '/images/volunteer/events/career-guidance.jpg',
+    alt: 'Career Guidance Fair 2022 attendee badge',
+  },
+  {
+    label: 'Netball Tournament',
+    image: '/images/volunteer/events/netball-tournament.jpg',
+    alt: 'Netball hoop against a blue sky',
+  },
+  {
+    label: 'Badminton Tournament',
+    image: '/images/volunteer/events/badminton-tournament.jpg',
+    alt: 'Badminton racket and shuttlecock',
+  },
+  {
+    label: 'Sports Carnival',
+    image: '/images/volunteer/events/sports-carnival.jpg',
+    alt: 'Sports Carnival event poster',
+  },
+  {
+    label: 'Health Camps',
+    image: '/images/volunteer/events/health-camps.jpg',
+    alt: 'Medical kit used at an IIOGA health camp',
+  },
+  {
+    label: 'Community Service',
+    image: '/images/volunteer/events/community-service.jpg',
+    alt: 'Donation collection box for community service drives',
+  },
+]
+
+export default function ActiveVolunteerPage() {
+  return (
+    <>
+      {/* Hero */}
+      <section className="bg-white px-6 pt-32 pb-16 sm:pt-42 lg:px-16">
+        <Container className="max-w-3xl">
+          <div className="flex flex-col items-center gap-6 text-center">
+            <h1 className="font-poppins text-brand-950 text-5xl font-extrabold tracking-tight sm:text-6xl">
+              Be an Active Volunteer
+            </h1>
+            <Button href={siteConfig.ctaUrls.activeVolunteer} variant="dark">
+              Join Us Now <span aria-hidden="true">→</span>
+            </Button>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {volunteerRoles.map((role) => (
+              <div
+                key={role.label}
+                className="flex items-center gap-3.5 rounded-2xl border border-[rgba(6,78,59,0.1)] bg-[#c5d7cc]/60 px-5 py-4"
+              >
+                <Image
+                  src={role.icon}
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="size-11 shrink-0"
+                />
+                <span className="font-poppins text-brand-950 text-sm font-semibold">
+                  {role.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Volunteer-driven events */}
+      <section className="bg-white px-6 pb-24 lg:px-16">
+        <Container className="max-w-6xl">
+          <div className="rounded-[40px] border border-[rgba(6,78,59,0.1)] bg-[#edf4f0]/80 px-6 py-10 shadow-sm sm:px-12 sm:py-12">
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="font-poppins text-brand-950 text-3xl font-extrabold tracking-tight sm:text-[42px]">
+                Events
+              </h2>
+            </div>
+
+            <div className="mt-8 -mx-6 flex snap-x snap-mandatory gap-7 overflow-x-auto px-6 pb-4 sm:mx-0 sm:grid sm:grid-cols-4 sm:gap-7 sm:overflow-visible sm:px-0">
+              {volunteerEvents.map((event) => (
+                <div
+                  key={event.label}
+                  className="flex w-35 shrink-0 snap-start flex-col items-center gap-4 sm:w-auto"
+                >
+                  <div className="border-brand-800/10 bg-linear-to-br size-35 rounded-full border from-white to-emerald-100 p-1.5 shadow-[0_10px_25px_-5px_rgba(20,56,38,0.12)]">
+                    <Image
+                      src={event.image}
+                      alt={event.alt}
+                      width={140}
+                      height={140}
+                      className="size-full rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="font-poppins text-brand-950 max-w-35 text-center text-sm font-bold">
+                    {event.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
+  )
+}
