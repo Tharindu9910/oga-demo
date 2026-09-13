@@ -14,6 +14,7 @@ export const siteConfig = {
     becomeAMember: '',
     activeVolunteer: '',
     donate: '',
+    loyaltyWhatsapp: '',
   },
   social: {
     facebook: '',

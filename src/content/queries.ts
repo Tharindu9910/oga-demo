@@ -11,6 +11,7 @@ import type {
   Chapter,
   Event,
   HomePage,
+  LoyaltyPage,
   MembershipPage,
   Post,
   Project,
@@ -21,6 +22,7 @@ import aboutPageData from './data/aboutPage.json'
 import chaptersData from './data/chapters.json'
 import eventsData from './data/events.json'
 import homePageData from './data/homePage.json'
+import loyaltyPageData from './data/loyaltyPage.json'
 import membershipPageData from './data/membershipPage.json'
 import postsData from './data/posts.json'
 import projectsData from './data/projects.json'
@@ -44,6 +46,10 @@ export async function getMembershipPage(): Promise<MembershipPage> {
 
 export async function getChapters(): Promise<Chapter[]> {
   return chaptersData as Chapter[]
+}
+
+export async function getLoyaltyPage(): Promise<LoyaltyPage> {
+  return loyaltyPageData as LoyaltyPage
 }
 
 export async function getOngoingProjects(limit?: number): Promise<Project[]> {

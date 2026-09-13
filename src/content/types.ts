@@ -107,6 +107,30 @@ export type Chapter = {
   images: ContentImage[]
 }
 
+export type Merchant = {
+  name: string
+  logo: ContentImage
+}
+
+export type LoyaltyPage = {
+  hero: {
+    headline: string
+    announcement: string
+    benefits: string[]
+    signupHeadline: string
+    signupNote: string
+    ctaLabel: string
+    card: ContentImage
+  }
+  whyPartner: {
+    heading: string
+    subheading: string
+    benefits: { icon: ContentImage; title: string; description: string }[]
+  }
+  merchantsHeading: string
+  merchants: Merchant[]
+}
+
 export type EventLink = { label: string; url: string }
 
 export type Event = {
