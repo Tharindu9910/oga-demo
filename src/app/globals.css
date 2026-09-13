@@ -1,26 +1,23 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-plus-jakarta-sans:
+    var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Brand greens extracted from the Figma design — see Docs/figma/_tokens.md.
+     Everything else (stone, emerald, slate, amber, rose) uses Tailwind's
+     built-in palette directly rather than duplicating it here. */
+  --color-brand-950: #081711;
+  --color-brand-900: #0c2017;
+  --color-brand-800: #113a2c;
+  --color-brand-700: #14261c;
+  --color-brand-600: #1b4d3e;
+  --color-brand-500: #2f6a40;
+  --color-brand-400: #3c8e71;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta-sans);
 }

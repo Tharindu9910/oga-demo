@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "homescience-room",
+    "title": "Homescience Room",
+    "status": "ongoing",
+    "progress": 50,
+    "image": {
+      "src": "/images/home/ongoing-1.jpg",
+      "alt": "Homescience Room interior renovation"
+    },
+    "description": "",
+    "date": "2026-06-01"
+  },
+  {
+    "_id": "computer-labs-senior-junior",
+    "title": "Computer Labs Senior & Junior",
+    "status": "ongoing",
+    "progress": 50,
+    "image": {
+      "src": "/images/home/ongoing-1.jpg",
+      "alt": "Computer labs renovation"
+    },
+    "description": "",
+    "date": "2026-05-01"
+  },
+  {
+    "_id": "staff-room-renovation",
+    "title": "Staff Room Renovation",
+    "status": "ongoing",
+    "progress": 50,
+    "image": {
+      "src": "/images/home/ongoing-1.jpg",
+      "alt": "Staff room renovation carpentry work"
+    },
+    "description": "",
+    "date": "2026-04-01"
+  }
+]

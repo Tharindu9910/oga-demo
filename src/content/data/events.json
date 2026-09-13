@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "health-camp-2026",
+    "title": "Health Camp",
+    "date": "2026-10-15",
+    "description": "",
+    "images": [],
+    "links": []
+  },
+  {
+    "_id": "ilma-pre-ramadan-fair-2027",
+    "title": "Ilma Pre-Ramadan Fair",
+    "date": "2027-01-20",
+    "description": "",
+    "images": [],
+    "links": []
+  },
+  {
+    "_id": "career-guidance-fair-2026",
+    "title": "Career Guidance Fair 2026",
+    "date": "2026-07-22",
+    "description": "4th Annual Career Guidance Fair",
+    "images": [
+      {
+        "src": "/images/home/past-event-1.png",
+        "alt": "4th Annual Career Guidance Fair 2026 poster"
+      }
+    ],
+    "links": []
+  },
+  {
+    "_id": "petals-and-pearls-2026",
+    "title": "Petals & Pearls - Annual Reunion 2026",
+    "date": "2026-07-04",
+    "description": "",
+    "images": [
+      {
+        "src": "/images/home/past-event-2.jpg",
+        "alt": "Petals & Pearls Annual Reunion 2026"
+      }
+    ],
+    "links": []
+  }
+]
