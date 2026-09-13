@@ -69,6 +69,16 @@ export type AboutPage = {
   }
 }
 
+export type MembershipPage = {
+  poster: ContentImage
+  documentsRequired: string[]
+  payment: {
+    lifeMembership: { label: string; badge: string; price: string }
+    replacementCard: { label: string; price: string }
+  }
+  ctaLabel: string
+}
+
 export type Project = {
   _id: string
   title: string

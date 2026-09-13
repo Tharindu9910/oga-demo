@@ -10,6 +10,7 @@ import type {
   AboutPage,
   Event,
   HomePage,
+  MembershipPage,
   Post,
   Project,
   ProjectsPage,
@@ -18,6 +19,7 @@ import type {
 import aboutPageData from './data/aboutPage.json'
 import eventsData from './data/events.json'
 import homePageData from './data/homePage.json'
+import membershipPageData from './data/membershipPage.json'
 import postsData from './data/posts.json'
 import projectsData from './data/projects.json'
 import projectsPageData from './data/projectsPage.json'
@@ -32,6 +34,10 @@ export async function getAboutPage(): Promise<AboutPage> {
 
 export async function getProjectsPage(): Promise<ProjectsPage> {
   return projectsPageData as ProjectsPage
+}
+
+export async function getMembershipPage(): Promise<MembershipPage> {
+  return membershipPageData as MembershipPage
 }
 
 export async function getOngoingProjects(limit?: number): Promise<Project[]> {

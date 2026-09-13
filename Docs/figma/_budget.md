@@ -17,7 +17,8 @@ Starter plan: 20 calls/month. 1 already spent before this project (unrelated tes
 | 8   | 2026-09-13 | `get_design_context` | `1:2381` (Events)         | `Docs/figma/events.md`    | Output truncated after the repeated Header/Footer (already covered) — Upcoming/Past Events + volunteer CTA sections fully captured before the cutoff |
 | 9   | 2026-09-13 | `get_design_context` | `1:2839` (Blogs)          | `Docs/figma/blogs.md`     | Output truncated after the repeated Header/Footer (already covered) — blog card grid + memorial editorial fully captured before the cutoff |
 | 10  | 2026-09-13 | `get_design_context` | `1:672` (About Us)        | `Docs/figma/about.md`     | Output truncated after the repeated Header/Footer (already covered) — hero, Vision/Mission, President's message, Our Team and the Liyanagae tribute fully captured before the cutoff |
+| 11  | 2026-09-13 | `get_design_context` | `1:1057` (Member)         | `Docs/figma/member.md`   | Full frame in one call — poster showcase + Documents Required / Payment Structure cards, no truncation |
 
-**Remaining this month: 9**
+**Remaining this month: 8**
 
-Planned remaining spend (FAQ excluded per your decision): 5 more content pages (Member, Volunteer, Overseas Chapters, Loyalty, Sports) = 5 more `get_design_context` calls → 4 left in reserve after that.
+Planned remaining spend (FAQ excluded per your decision): 4 more content pages (Volunteer, Overseas Chapters, Loyalty, Sports) = 4 more `get_design_context` calls → exactly matches remaining budget, no reserve left after that.
