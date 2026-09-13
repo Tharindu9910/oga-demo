@@ -19,7 +19,7 @@ ILMA OGA needs a new organization website of 11 pages, with lots of images (even
 | Membership / Volunteer / Donation buttons         | External links, **left empty for now** (you confirmed 2026-09-13 to keep them blank until you have the URLs — `siteConfig.ctaUrls` in `src/config/site.ts`; components render a non-clickable "coming soon" state rather than a dead link) |
 | Figma                                             | Stay on Starter (**20 MCP read calls/month, verified against Figma's official rate-limit docs — see Figma call budget below; 1 already spent on an unrelated test call → 19 left this month**) and budget carefully                        |
 | Sanity project                                    | **Deferred.** You said (2026-09-13) to build without a live Sanity project for now, using local JSON files shaped like the Sanity schema instead — see "Mock content layer" below                                                          |
-| FAQ frame in Figma                                | Found in the file (`1:3269`) but not in the original 11-page list — you said (2026-09-13) to skip it for now                                                                                                                               |
+| FAQ frame in Figma                                | Found in the file (`1:3269`) but not in the original 11-page list — you said (2026-09-13) to skip it for now. Revisited 2026-09-13: you asked to build it after all. Design/structure captured (`Docs/figma/faq.md`, calls #16–17), but blocked on real answer copy for 10 of the 11 questions — only "Who can join the IIOGA?" has an authored answer in Figma |
 
 ### Tool versions (verified against the npm registry and vendor docs, 2026‑09‑13)
 

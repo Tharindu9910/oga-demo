@@ -107,6 +107,12 @@ export type Chapter = {
   images: ContentImage[]
 }
 
+export type Faq = {
+  _id: string
+  question: string
+  answer: string
+}
+
 export type Merchant = {
   name: string
   logo: ContentImage

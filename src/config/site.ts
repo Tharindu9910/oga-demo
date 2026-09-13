@@ -19,6 +19,7 @@ export const siteConfig = {
     sportsNetballWhatsapp: '',
     sportsBadmintonWhatsapp: '',
     sportsCarnivalWhatsapp: '',
+    faqWhatsapp: '',
   },
   social: {
     facebook: '',
@@ -49,8 +50,8 @@ export const moreNav: NavItem[] = [
   { label: 'Loyalty Program', href: '/loyalty-program' },
   { label: 'Sports', href: '/sports' },
   { label: 'Blogs', href: '/blogs' },
+  { label: 'Frequently Asked Questions', href: '/faq' },
   // No page/URL yet — rendered as non-clickable (see FooterNavLink).
-  { label: 'Frequently Asked Questions', href: '' },
   { label: "Ilma International Girls' School", href: '' },
 ]
 

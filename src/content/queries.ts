@@ -10,6 +10,7 @@ import type {
   AboutPage,
   Chapter,
   Event,
+  Faq,
   HomePage,
   LoyaltyPage,
   MembershipPage,
@@ -21,6 +22,7 @@ import type {
 import aboutPageData from './data/aboutPage.json'
 import chaptersData from './data/chapters.json'
 import eventsData from './data/events.json'
+import faqData from './data/faq.json'
 import homePageData from './data/homePage.json'
 import loyaltyPageData from './data/loyaltyPage.json'
 import membershipPageData from './data/membershipPage.json'
@@ -50,6 +52,10 @@ export async function getChapters(): Promise<Chapter[]> {
 
 export async function getLoyaltyPage(): Promise<LoyaltyPage> {
   return loyaltyPageData as LoyaltyPage
+}
+
+export async function getFaqs(): Promise<Faq[]> {
+  return faqData as Faq[]
 }
 
 export async function getOngoingProjects(limit?: number): Promise<Project[]> {

@@ -23,6 +23,9 @@ Starter plan: 20 calls/month. 1 already spent before this project (unrelated tes
 | 14  | 2026-09-13 | `get_design_context` | `1:3563` (Loyalty Program) | `Docs/figma/loyalty-program.md` | Output truncated after the repeated Header/Footer (already covered) — hero, "Why Partner with us?" (5 benefit cards) and "Our Current Merchants" (10 logos) fully captured before the cutoff. Figma's card visual is an AI-generated mockup; swapped for the real "Loyalty Program — Welcome Aboard!" graphic found in `New Website Images/6-Loyalty Program/` |
 | 15  | 2026-09-13 | `get_design_context` | `1:2039` (Sports)          | `Docs/figma/sports.md`     | Full frame in one call, including header/footer — hero copy, 3 alternating sport sections (Netball, Badminton, Sports Carnival) and the closing WhatsApp CTA panel all fully captured, no truncation |
 
-**Remaining this month: 4**
+| 16  | 2026-09-13 | `get_design_context` | `1:3269` (FAQ)             | `Docs/figma/faq.md`       | Full frame in one call, no truncation — 11 accordion questions captured, but only FAQ 1 ("Who can join the IIOGA?") has its answer text authored in the Figma file; FAQs 2–11 are collapsed accordion items with no answer layer at all |
+| 17  | 2026-09-13 | `get_design_context` | `1:3308` (FAQ 2, isolated) | —                          | Spent confirming FAQ 2's answer text doesn't exist anywhere in the Figma file (not a collapsed-state extraction limitation) before asking you for the real answers rather than fabricating them — see the note in `Docs/figma/faq.md` |
 
-All 11 originally-planned content pages are now built (Home, About, Projects, Member, Volunteer, Overseas Chapters, Events, Loyalty, Blogs list + post, Sports). 4 calls left in reserve — the FAQ frame (`1:3269`) found during metadata extraction was never budgeted for and is still flagged to the user, unbuilt.
+**Remaining this month: 2**
+
+All 11 originally-planned content pages are built, plus the FAQ frame's design/structure is now captured. FAQ page build is blocked on real answer copy for 10 of the 11 questions — see `Docs/figma/faq.md`. Only 2 calls left in reserve; spend the rest carefully.
