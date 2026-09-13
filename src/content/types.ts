@@ -38,6 +38,37 @@ export type ProjectsPage = {
   }
 }
 
+export type TeamMember = { name: string; role: string }
+
+export type AboutPage = {
+  hero: {
+    badges: string[]
+    paragraphs: string[]
+  }
+  vision: { icon: ContentImage; body: string }
+  mission: { icon: ContentImage; body: string }
+  president: {
+    name: string
+    role: string
+    message: string[]
+  }
+  team: {
+    year: string
+    patrons: TeamMember[]
+    committee: TeamMember[]
+  }
+  video: {
+    src: string
+    poster: ContentImage
+  }
+  founderTribute: {
+    name: string
+    photo: ContentImage
+    paragraphs: string[]
+    quote: string
+  }
+}
+
 export type Project = {
   _id: string
   title: string

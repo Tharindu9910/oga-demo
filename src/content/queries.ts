@@ -6,8 +6,16 @@
 
 import { cacheLife } from 'next/cache'
 
-import type { Event, HomePage, Post, Project, ProjectsPage } from './types'
+import type {
+  AboutPage,
+  Event,
+  HomePage,
+  Post,
+  Project,
+  ProjectsPage,
+} from './types'
 
+import aboutPageData from './data/aboutPage.json'
 import eventsData from './data/events.json'
 import homePageData from './data/homePage.json'
 import postsData from './data/posts.json'
@@ -16,6 +24,10 @@ import projectsPageData from './data/projectsPage.json'
 
 export async function getHomePage(): Promise<HomePage> {
   return homePageData as HomePage
+}
+
+export async function getAboutPage(): Promise<AboutPage> {
+  return aboutPageData as AboutPage
 }
 
 export async function getProjectsPage(): Promise<ProjectsPage> {
