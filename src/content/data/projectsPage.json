@@ -1,0 +1,17 @@
+{
+  "dehiwala": {
+    "show": true,
+    "title": "Ilma Dehiwala Project",
+    "body": [
+      "This milestone groundbreaking ceremony for our new building is proudly aligned with the 38th Founders' Day of Ilma International Girls' School. The occasion was enriched by the attendance of dignified guests and well-wishers.",
+      "This new development reflects Ilma International Girls' School's continued commitment to empowering young women through quality education, modern facilities, and a nurturing Islamic environment.",
+      "Together we can build a space that reflects our mission and enables every student to thrive."
+    ],
+    "image": {
+      "src": "/images/projects/dehiwala-hero.jpg",
+      "alt": "Groundbreaking ceremony for the Ilma Dehiwala Project, with the new building render, ground plot and dignitaries turning the soil"
+    },
+    "highlightsLabel": "Ground Breaking Ceremony Highlights",
+    "highlightsUrl": "/events"
+  }
+}

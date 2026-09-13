@@ -1,7 +1,7 @@
 [
   {
     "_id": "homescience-room",
-    "title": "Homescience Room",
+    "title": "Homescience room",
     "status": "ongoing",
     "progress": 50,
     "image": {
@@ -15,7 +15,7 @@
     "_id": "computer-labs-senior-junior",
     "title": "Computer Labs Senior & Junior",
     "status": "ongoing",
-    "progress": 50,
+    "progress": 80,
     "image": {
       "src": "/images/home/ongoing-1.jpg",
       "alt": "Computer labs renovation"
@@ -25,7 +25,7 @@
   },
   {
     "_id": "staff-room-renovation",
-    "title": "Staff Room Renovation",
+    "title": "Staff room Renovation",
     "status": "ongoing",
     "progress": 50,
     "image": {
@@ -34,5 +34,139 @@
     },
     "description": "",
     "date": "2026-04-01"
+  },
+  {
+    "_id": "office-area",
+    "title": "Office Area",
+    "status": "ongoing",
+    "progress": 80,
+    "image": {
+      "src": "/images/home/ongoing-1.jpg",
+      "alt": "Administrative office area renovation"
+    },
+    "description": "",
+    "date": "2026-03-01"
+  },
+  {
+    "_id": "sick-room",
+    "title": "Sick room",
+    "status": "ongoing",
+    "progress": 50,
+    "image": {
+      "src": "/images/home/ongoing-1.jpg",
+      "alt": "School sick room healthcare facility"
+    },
+    "description": "",
+    "date": "2026-02-01"
+  },
+  {
+    "_id": "physics-lab",
+    "title": "Physics Lab",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-physics-lab.jpg",
+      "alt": "Completed Physics Lab installation"
+    },
+    "description": "",
+    "date": "2026-01-15"
+  },
+  {
+    "_id": "biology-lab",
+    "title": "Biology Lab",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-biology-lab.jpg",
+      "alt": "Completed Biology Lab with specimen benches"
+    },
+    "description": "",
+    "date": "2025-12-10"
+  },
+  {
+    "_id": "netball-court",
+    "title": "Netball Court",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-netball-court.jpg",
+      "alt": "Netball Court with new hoop and surfacing"
+    },
+    "description": "",
+    "date": "2025-11-20"
+  },
+  {
+    "_id": "coaster-bus",
+    "title": "Coaster Bus",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-coaster-bus.jpg",
+      "alt": "New Coaster school bus donated by parents"
+    },
+    "description": "",
+    "date": "2025-10-05"
+  },
+  {
+    "_id": "basketball-poles",
+    "title": "Basketball Poles",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-basketball-poles.jpg",
+      "alt": "Basketball poles with acrylic backboard"
+    },
+    "description": "",
+    "date": "2025-09-18"
+  },
+  {
+    "_id": "classroom-partitioning",
+    "title": "Class room Partitioning",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-classroom-partitioning.jpg",
+      "alt": "Acoustic classroom partitioning installation"
+    },
+    "description": "",
+    "date": "2025-08-22"
+  },
+  {
+    "_id": "solar-lights-grounds",
+    "title": "Solar Lights Grounds",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-solar-lights.jpg",
+      "alt": "Night illuminated solar flood lights on the grounds"
+    },
+    "description": "",
+    "date": "2025-07-14"
+  },
+  {
+    "_id": "smart-boards",
+    "title": "5 Smart Boards",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-smart-boards.jpg",
+      "alt": "Interactive smart board display installed in a classroom"
+    },
+    "description": "",
+    "date": "2025-06-09"
+  },
+  {
+    "_id": "stage-auditorium",
+    "title": "Stage for Auditorium",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-stage-auditorium.jpg",
+      "alt": "Carpeted auditorium stage setup"
+    },
+    "description": "",
+    "date": "2025-05-01"
+  },
+  {
+    "_id": "water-filter",
+    "title": "Water Filter",
+    "status": "completed",
+    "image": {
+      "src": "/images/projects/completed-water-filter.jpg",
+      "alt": "Industrial student drinking water filtration system"
+    },
+    "description": "",
+    "date": "2025-04-11"
   }
 ]

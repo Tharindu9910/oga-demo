@@ -27,6 +27,17 @@ export type HomePage = {
   milestones: { value: string; label: string }[]
 }
 
+export type ProjectsPage = {
+  dehiwala: {
+    show: boolean
+    title: string
+    body: string[]
+    image: ContentImage
+    highlightsLabel: string
+    highlightsUrl: string
+  }
+}
+
 export type Project = {
   _id: string
   title: string
