@@ -33,7 +33,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-950 relative flex min-h-[600px] items-center overflow-hidden py-24 sm:min-h-[720px]">
+      <section className="bg-brand-950 relative flex min-h-[600px] items-center overflow-hidden pt-32 pb-24 sm:min-h-180 sm:pt-42 sm:pb-38">
         <Image
           src={home.hero.image.src}
           alt={home.hero.image.alt}

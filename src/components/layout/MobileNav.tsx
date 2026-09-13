@@ -31,7 +31,7 @@ export default function MobileNav() {
         aria-controls="mobile-nav-panel"
         aria-label={open ? 'Close menu' : 'Open menu'}
         onClick={() => setOpen((v) => !v)}
-        className="flex size-10 items-center justify-center rounded-full text-stone-700"
+        className="text-brand-900 flex size-10 shrink-0 items-center justify-center rounded-full bg-white"
       >
         <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
         {open ? (
@@ -92,7 +92,7 @@ export default function MobileNav() {
                 </p>
                 <ul className="flex flex-col gap-3">
                   {memberNav.map((item) => (
-                    <li key={item.href}>
+                    <li key={item.label}>
                       <Link
                         href={item.href}
                         onClick={() => setOpen(false)}
@@ -110,17 +110,28 @@ export default function MobileNav() {
                   More
                 </p>
                 <ul className="flex flex-col gap-3">
-                  {moreNav.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setOpen(false)}
-                        className="font-plus-jakarta-sans text-base text-stone-600"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {moreNav.map((item) =>
+                    item.href ? (
+                      <li key={item.label}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className="font-plus-jakarta-sans text-base text-stone-600"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ) : (
+                      <li key={item.label}>
+                        <span
+                          aria-disabled="true"
+                          className="font-plus-jakarta-sans text-base text-stone-400"
+                        >
+                          {item.label}
+                        </span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
 
