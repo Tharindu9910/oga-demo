@@ -1,0 +1,1 @@
+See `_tokens.md` — the Homepage section covers this frame (`1:4040`) in full (section-by-section breakdown, verbatim copy, image mapping). Kept separate from `_tokens.md`'s color/font tokens only to avoid re-fetching; no additional content beyond what's there.

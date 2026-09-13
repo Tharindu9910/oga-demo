@@ -8,16 +8,18 @@ ILMA OGA needs a new organization website of 11 pages, with lots of images (even
 
 ### Decisions confirmed with you
 
-| Topic                                             | Decision                                                                                                                                                                                                            |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Figma                                             | Stay on Starter (**20 MCP read calls/month**) and budget them carefully                                                                                                                                             |
-| Detail pages                                      | Only blog posts (`/blogs/[slug]`). Everything else is cards on listing pages                                                                                                                                        |
-| About video (60 MB)                               | Compress to about 5–10 MB and upload to Sanity as a file field                                                                                                                                                      |
-| Not in the editable doc                           | Hardcoded: 4.2 Active Volunteer, Sports page, header/footer                                                                                                                                                         |
-| Pages (11)                                        | Home, About, Projects (incl. Dehiwala + Donations), Become a Member, Active Volunteer, Overseas Chapters, Events, Loyalty Program, Blogs list, Blog post, Sports                                                    |
-| Home "Ongoing Projects" / "Past Event Highlights" | Picked automatically: the latest 3 of each                                                                                                                                                                          |
-| Membership / Volunteer / Donation buttons         | External links (**you still need to send the URLs**)                                                                                                                                                                |
-| Figma                                             | Stay on Starter (**20 MCP read calls/month, verified against Figma's official rate-limit docs — see Figma call budget below; 1 already spent on an unrelated test call → 19 left this month**) and budget carefully |
+| Topic                                             | Decision                                                                                                                                                                                                                                   |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Figma                                             | Stay on Starter (**20 MCP read calls/month**) and budget them carefully                                                                                                                                                                    |
+| Detail pages                                      | Only blog posts (`/blogs/[slug]`). Everything else is cards on listing pages                                                                                                                                                               |
+| About video (60 MB)                               | Compress to about 5–10 MB and upload to Sanity as a file field                                                                                                                                                                             |
+| Not in the editable doc                           | Hardcoded: 4.2 Active Volunteer, Sports page, header/footer                                                                                                                                                                                |
+| Pages (11)                                        | Home, About, Projects (incl. Dehiwala + Donations), Become a Member, Active Volunteer, Overseas Chapters, Events, Loyalty Program, Blogs list, Blog post, Sports                                                                           |
+| Home "Ongoing Projects" / "Past Event Highlights" | Picked automatically: the latest 3 of each                                                                                                                                                                                                 |
+| Membership / Volunteer / Donation buttons         | External links, **left empty for now** (you confirmed 2026-09-13 to keep them blank until you have the URLs — `siteConfig.ctaUrls` in `src/config/site.ts`; components render a non-clickable "coming soon" state rather than a dead link) |
+| Figma                                             | Stay on Starter (**20 MCP read calls/month, verified against Figma's official rate-limit docs — see Figma call budget below; 1 already spent on an unrelated test call → 19 left this month**) and budget carefully                        |
+| Sanity project                                    | **Deferred.** You said (2026-09-13) to build without a live Sanity project for now, using local JSON files shaped like the Sanity schema instead — see "Mock content layer" below                                                          |
+| FAQ frame in Figma                                | Found in the file (`1:3269`) but not in the original 11-page list — you said (2026-09-13) to skip it for now                                                                                                                               |
 
 ### Tool versions (verified against the npm registry and vendor docs, 2026‑09‑13)
 
@@ -47,12 +49,18 @@ ILMA OGA needs a new organization website of 11 pages, with lots of images (even
 - **2 webhooks**: 1 is used for on-demand revalidation.
 - 100 GB assets and 100 GB bandwidth: enough for the images and the compressed video.
 
+### Mock content layer (while there's no Sanity project)
+
+Pages import from `src/content/queries.ts` (`getHomePage`, `getOngoingProjects`, `getUpcomingEvents`, etc.) instead of `src/sanity/fetch.ts` + `queries.ts`. Every function is `async` and returns the same shapes the real Sanity schema would (`src/content/types.ts` mirrors the Content model section above), reading from JSON files in `src/content/data/` instead of GROQ. **This is deliberate temporary scaffolding, not the target architecture** — when a real Sanity project exists, Phase 3–4 replace `src/content/` with the real `src/sanity/` layer from the Architecture section, and page components shouldn't need to change since they only import the query functions, never the JSON directly. Images referenced from the mock JSON point at real compressed photos already copied into `public/images/` from `New Website Images/` (not Figma's transient stock-photo exports — see `Docs/figma/_tokens.md`).
+
+Known gaps in the mock data, to fill in once real content/a Sanity project exists: only 1 real photo exists per ongoing project card (reused across cards, same as the Figma mockup itself does); milestone/stat numbers (5000+ members, 26+ events, 20+ projects) are the Figma mockup's placeholder numbers, not verified real counts.
+
 ### Still needed from you before or during the build
 
-1. Figma file URL (the first Figma step lists all frames, so you don't need to send a link per frame).
-2. Exported PNGs of each page frame in `Docs/design/`. Exporting from Figma doesn't use the MCP budget, and I'll use them for visual checks.
-3. External URLs for the Become a Member, Active Volunteer and Donations buttons.
-4. Sanity account/project, GitHub repo, Vercel account, and DNS access for the domain.
+1. ~~Figma file URL~~ — received 2026-09-13: `bhnCKt9RL4sLu7x1FqTnjX`.
+2. Exported PNGs of each page frame in `Docs/design/`. Exporting from Figma doesn't use the MCP budget, and I'll use them for visual checks. **Still outstanding** — none received yet; visual checks so far have relied on `get_screenshot`-equivalent output bundled with each `get_design_context` call instead.
+3. ~~External URLs for the Become a Member, Active Volunteer and Donations buttons~~ — you said 2026-09-13 to leave these empty for now.
+4. Sanity account/project — **deferred**, see "Mock content layer" above. GitHub repo, Vercel account, and DNS access for the domain are still needed before Phase 10 (Launch).
 
 ---
 
@@ -160,15 +168,21 @@ The paths above are placeholders. The final route slugs will follow the Figma na
 
 **Verified against Figma's official docs** (`developers.figma.com/docs/figma-mcp-server/rate-limits-access`): a **Starter-plan seat is capped at 20 MCP tool calls/month** — this is the highest allowance a View/Collab-type seat gets on _any_ plan (Professional, Organization and Enterprise View/Collab seats are actually capped lower, at 6/month). Only a paid **Dev or Full seat** unlocks the bigger 200/day (Professional/Organization) or 600/day (Enterprise) allowance. Rate limits apply per-minute too, but at our volume that never binds. Tools that write to Figma or return account info (`create_new_file`, `add_code_connect_map`, `whoami`) are exempt and don't count — everything we use here (`get_metadata`, `get_variable_defs`, `get_design_context`, `get_screenshot`) does count. Figma exposes no usage dashboard, so `Docs/figma/_budget.md` is the only source of truth for calls remaining — log every call there immediately, including the 1 already spent this month on an unrelated test (call #0, no output kept).
 
-All output is saved to `Docs/figma/<page>.md` so **nothing is fetched twice**.
+All output is saved to `Docs/figma/<page>.md` (and `_tokens.md`, `_metadata.md`) so **nothing is fetched twice**. Live log: `Docs/figma/_budget.md`.
 
-| #     | Call                       | Purpose                                                                        |
-| ----- | -------------------------- | ------------------------------------------------------------------------------ |
-| 0     | _(already spent)_          | Test call, not tied to any page — logged for the count only                    |
-| 1     | `get_metadata` (file/page) | List frame node IDs for all 11 pages                                           |
-| 2     | `get_variable_defs`        | Design tokens                                                                  |
-| 3–13  | `get_design_context` × 11  | One per page frame. The header and footer come from the Home frame             |
-| 14–19 | Reserve (6 calls)          | Section-level re-fetches for frames too large or complex to return in one call |
+| #     | Call                                            | Purpose                                                                               | Status                                                                                                                             |
+| ----- | ----------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| 0     | _(already spent)_                               | Test call, not tied to any page — logged for the count only                           | Done                                                                                                                               |
+| 1     | `get_metadata` (`0:1`)                          | List frame node IDs for the file                                                      | Done — found header/footer are their own frames (not nested in Home as assumed) and an unplanned FAQ frame, which you said to skip |
+| 2     | `get_variable_defs` (`0:1`)                     | Design tokens — attempt 1                                                             | Errored ("nothing selected"), logged as spent anyway                                                                               |
+| 3     | `get_variable_defs` (`1:4040`)                  | Design tokens — attempt 2                                                             | Done — this file barely uses Figma Variables; real tokens came from `get_design_context` output instead                            |
+| 4     | `get_design_context` (`5:60`, Header)           | Shared header                                                                         | Done, built                                                                                                                        |
+| 5     | `get_design_context` (`101:833`, Master Footer) | Shared footer                                                                         | Done, built                                                                                                                        |
+| 6     | `get_design_context` (`1:4040`, Homepage)       | Home page                                                                             | Done, built                                                                                                                        |
+| 7–15  | `get_design_context` × 9                        | About, Projects, Member, Volunteer, Overseas Chapters, Events, Loyalty, Blogs, Sports | Not started                                                                                                                        |
+| 16–19 | Reserve (4 calls)                               | Section-level re-fetches for frames too large/complex for one call                    | —                                                                                                                                  |
+
+**13 calls remain this month** (19 at the start of Phase 2, minus 6 spent above).
 
 **Using the budget intelligently:**
 
@@ -187,19 +201,21 @@ All output is saved to `Docs/figma/<page>.md` so **nothing is fetched twice**.
 
 ## Build phases (one Claude Code session per phase, each ending in a commit)
 
-**0. Setup:** `git init` and `.gitignore` (node_modules, .env*, `New Website Images/`, .next). Add a `CLAUDE.md` with the conventions: server components by default, GROQ only in `queries.ts`, no hardcoded copy in Sanity-driven sections, and budget-logged Figma calls.
+Phases 3–4 are **superseded for now** by the mock content layer (see above) since there's no Sanity project yet — real schemas/Studio/data-layer wiring happens whenever a Sanity project shows up, without needing to touch pages built against `src/content/queries.ts` in the meantime.
 
-**1. Scaffold:** `create-next-app` (TS, Tailwind, ESLint, App Router, `src/`, pnpm), then immediately pin `typescript@6.0.3` (the default install resolves to TS7, which currently breaks Next's TS detection and `typescript-eslint` — see Tool versions above). Then `pnpm create sanity` into the same repo with the Next.js integration. Install `next-sanity @sanity/image-url @portabletext/react motion`, plus Prettier with `prettier-plugin-tailwindcss`. Add `env.ts`, `.env.example` and scripts: `typecheck`, `typegen`.
+**0. Setup — done.** `git init` and `.gitignore` (node_modules, .env*, `New Website Images/`, .next). `CLAUDE.md` with the conventions: server components by default, GROQ only in `queries.ts` (once Sanity exists), no hardcoded copy in Sanity-driven sections, budget-logged Figma calls.
 
-**2. Figma extraction:** make calls 1–13, write the tokens into `@theme`, set up fonts, and save a per-page spec for each page.
+**1. Scaffold — done.** `create-next-app` (TS, Tailwind, ESLint, App Router, `src/`, pnpm), `typescript@6.0.3` pinned (the default install resolves to TS7, which currently breaks Next's TS detection and `typescript-eslint`), `eslint@^9` pinned (ESLint 10 crashes `eslint-config-next`'s lint rules right now). `next-sanity @sanity/image-url @portabletext/react motion sanity @sanity/vision` installed and the Studio scaffolded at `/studio` (empty schema — real schemas are Phase 3, once there's a Sanity project). Prettier + `prettier-plugin-tailwindcss`, `env.ts`, `.env.example`, `typecheck`/`typegen`/`format` scripts. `cacheComponents: true` enabled in `next.config.ts` (Next 16's Cache Components model) — this has real implications documented in "Scaffolding gotchas" above (two-argument `revalidateTag`, `'use cache'`/`cacheLife` needed anywhere a value like `Date.now()` or `new Date()` is read at render/fetch time, not just in the webhook route).
 
-**3. Sanity schemas + Studio:** create the schema types above, `structure.ts` (singletons pinned, Projects split into Ongoing/Completed views, Events split into Upcoming/Past views), validation, previews, and the Presentation tool with `resolve` locations. Run `sanity typegen generate`.
+**2. Figma extraction — in progress.** Metadata + tokens + Header/Footer/Home done (calls 1–6, see the budget table above); About/Projects/Member/Volunteer/Overseas Chapters/Events/Loyalty/Blogs/Sports still need their `get_design_context` call. Tokens are in `@theme` (`src/app/globals.css`, `--color-brand-*`), fonts are wired via `next/font/google` (Poppins, Plus Jakarta Sans, Inter) in the root layout. Per-page specs live in `Docs/figma/`.
 
-**4. Data layer:** `client.ts`, `fetch.ts`, `queries.ts`, `image.ts`, `SanityImage`, `PortableText`, the draft-mode routes, `/api/revalidate` and `<VisualEditing/>`.
+**3. Sanity schemas + Studio — deferred**, see above. `src/sanity/schemaTypes/index.ts` is an empty array waiting for this.
 
-**5. Layout + primitives:** `config/site.ts`, header and mobile nav, footer, `Container`/`Button`/`SectionHeading`, `Reveal` and the security headers.
+**4. Data layer — mocked for now.** `src/content/queries.ts` + `src/content/types.ts` + `src/content/data/*.json` stand in for `sanity/fetch.ts` + `queries.ts` (see "Mock content layer" above). No `SanityImage`, `PortableText`, draft-mode routes, `/api/revalidate` or `<VisualEditing/>` yet — those need a real Sanity project.
 
-**6. Pages:** build in this order: Projects → Events → Blogs + post detail → Home (reuses the project and event cards) → About (video) → Membership → Overseas Chapters → Loyalty → then the hardcoded Active Volunteer and Sports pages. Each page gets an empty state, and I check it against its PNG at 375, 768 and 1440 px.
+**5. Layout + primitives — mostly done.** `config/site.ts`, `Header`/`MobileNav` (accessible: `aria-expanded`, Escape-to-close, portaled out of the header's `backdrop-blur` so `position: fixed` isn't broken by the CSS containing-block rule for filtered ancestors — see commit for the writeup), `Footer`, `Container`/`Button`/`SectionHeading` (Button and Container use `tailwind-merge` via `src/lib/cn.ts` so a caller's `className` reliably overrides the component's own base classes instead of an arbitrary win-by-CSS-output-order). Still missing: `Reveal` (motion), and the security headers in `next.config.ts`.
+
+**6. Pages — Home done**, built against real Figma copy/colors and real photos from `New Website Images/`. Verified in a real browser (Playwright + Chrome) at 390px and 1440px, including the mobile menu open/close and the desktop hover dropdowns — not just a Lighthouse-style static check. Still to build: Projects → Events → Blogs + post detail → About (video) → Membership → Overseas Chapters → Loyalty → Active Volunteer → Sports, each checked against its PNG (still outstanding from you) or the `get_design_context` screenshot at 375/768/1440px, each with an empty state.
 
 **7. SEO:** metadata, sitemap, robots, OG image and JSON-LD.
 
