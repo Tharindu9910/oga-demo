@@ -48,6 +48,17 @@ export type Project = {
   date: string
 }
 
+export type Post = {
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string
+  excerpt: string
+  coverImage: ContentImage
+  body: string[]
+  seoDescription?: string
+}
+
 export type EventLink = { label: string; url: string }
 
 export type Event = {

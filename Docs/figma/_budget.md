@@ -15,7 +15,8 @@ Starter plan: 20 calls/month. 1 already spent before this project (unrelated tes
 
 | 7   | 2026-09-13 | `get_design_context` | `1:2` (Projects)          | `Docs/figma/projects.md`  | Full frame (Ongoing + Completed + Dehiwala + Donations) in one call, no reserve needed |
 | 8   | 2026-09-13 | `get_design_context` | `1:2381` (Events)         | `Docs/figma/events.md`    | Output truncated after the repeated Header/Footer (already covered) — Upcoming/Past Events + volunteer CTA sections fully captured before the cutoff |
+| 9   | 2026-09-13 | `get_design_context` | `1:2839` (Blogs)          | `Docs/figma/blogs.md`     | Output truncated after the repeated Header/Footer (already covered) — blog card grid + memorial editorial fully captured before the cutoff |
 
-**Remaining this month: 11**
+**Remaining this month: 10**
 
-Planned remaining spend (FAQ excluded per your decision): 7 more content pages (About, Member, Volunteer, Overseas Chapters, Loyalty, Blogs, Sports) = 7 more `get_design_context` calls → 4 left in reserve after that.
+Planned remaining spend (FAQ excluded per your decision): 6 more content pages (About, Member, Volunteer, Overseas Chapters, Loyalty, Sports) = 6 more `get_design_context` calls → 4 left in reserve after that.

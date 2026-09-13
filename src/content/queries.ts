@@ -6,10 +6,11 @@
 
 import { cacheLife } from 'next/cache'
 
-import type { Event, HomePage, Project, ProjectsPage } from './types'
+import type { Event, HomePage, Post, Project, ProjectsPage } from './types'
 
 import eventsData from './data/events.json'
 import homePageData from './data/homePage.json'
+import postsData from './data/posts.json'
 import projectsData from './data/projects.json'
 import projectsPageData from './data/projectsPage.json'
 
@@ -55,4 +56,14 @@ export async function getPastEvents(limit?: number): Promise<Event[]> {
     .filter((event) => new Date(event.date).getTime() < now)
     .sort((a, b) => b.date.localeCompare(a.date))
   return limit ? past.slice(0, limit) : past
+}
+
+export async function getPosts(): Promise<Post[]> {
+  return (postsData as Post[])
+    .slice()
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | undefined> {
+  return (postsData as Post[]).find((post) => post.slug === slug)
 }
