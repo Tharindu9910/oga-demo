@@ -15,6 +15,10 @@ export const siteConfig = {
     activeVolunteer: '',
     donate: '',
     loyaltyWhatsapp: '',
+    sportsWhatsapp: '',
+    sportsNetballWhatsapp: '',
+    sportsBadmintonWhatsapp: '',
+    sportsCarnivalWhatsapp: '',
   },
   social: {
     facebook: '',

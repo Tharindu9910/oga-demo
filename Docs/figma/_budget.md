@@ -21,7 +21,8 @@ Starter plan: 20 calls/month. 1 already spent before this project (unrelated tes
 | 12  | 2026-09-13 | `get_design_context` | `1:1649` (Volunteer)      | `Docs/figma/volunteer.md` | Full frame in one call — hero, 6 role cards, Events carousel (design shows 6 circular cards; expanded to all 8 real photos per your instruction), no truncation |
 | 13  | 2026-09-13 | `get_design_context` | `1:1375` (Overseas Chapters) | `Docs/figma/overseas-chapters.md` | Full frame in one call, including header/footer — 5 country sections (Dubai, Australia, UK, Canada, Saudi Arabia); UK/Saudi Arabia are heading-only in the design with no photos or real assets, so only Dubai/Australia/Canada were seeded as real `chapter` documents |
 | 14  | 2026-09-13 | `get_design_context` | `1:3563` (Loyalty Program) | `Docs/figma/loyalty-program.md` | Output truncated after the repeated Header/Footer (already covered) — hero, "Why Partner with us?" (5 benefit cards) and "Our Current Merchants" (10 logos) fully captured before the cutoff. Figma's card visual is an AI-generated mockup; swapped for the real "Loyalty Program — Welcome Aboard!" graphic found in `New Website Images/6-Loyalty Program/` |
+| 15  | 2026-09-13 | `get_design_context` | `1:2039` (Sports)          | `Docs/figma/sports.md`     | Full frame in one call, including header/footer — hero copy, 3 alternating sport sections (Netball, Badminton, Sports Carnival) and the closing WhatsApp CTA panel all fully captured, no truncation |
 
-**Remaining this month: 5**
+**Remaining this month: 4**
 
-Planned remaining spend: 1 more content page (Sports) = 1 more `get_design_context` call → 4 left in reserve after that.
+All 11 originally-planned content pages are now built (Home, About, Projects, Member, Volunteer, Overseas Chapters, Events, Loyalty, Blogs list + post, Sports). 4 calls left in reserve — the FAQ frame (`1:3269`) found during metadata extraction was never budgeted for and is still flagged to the user, unbuilt.
