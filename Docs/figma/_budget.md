@@ -19,7 +19,8 @@ Starter plan: 20 calls/month. 1 already spent before this project (unrelated tes
 | 10  | 2026-09-13 | `get_design_context` | `1:672` (About Us)        | `Docs/figma/about.md`     | Output truncated after the repeated Header/Footer (already covered) — hero, Vision/Mission, President's message, Our Team and the Liyanagae tribute fully captured before the cutoff |
 | 11  | 2026-09-13 | `get_design_context` | `1:1057` (Member)         | `Docs/figma/member.md`   | Full frame in one call — poster showcase + Documents Required / Payment Structure cards, no truncation |
 | 12  | 2026-09-13 | `get_design_context` | `1:1649` (Volunteer)      | `Docs/figma/volunteer.md` | Full frame in one call — hero, 6 role cards, Events carousel (design shows 6 circular cards; expanded to all 8 real photos per your instruction), no truncation |
+| 13  | 2026-09-13 | `get_design_context` | `1:1375` (Overseas Chapters) | `Docs/figma/overseas-chapters.md` | Full frame in one call, including header/footer — 5 country sections (Dubai, Australia, UK, Canada, Saudi Arabia); UK/Saudi Arabia are heading-only in the design with no photos or real assets, so only Dubai/Australia/Canada were seeded as real `chapter` documents |
 
-**Remaining this month: 7**
+**Remaining this month: 6**
 
-Planned remaining spend (FAQ excluded per your decision): 3 more content pages (Overseas Chapters, Loyalty, Sports) = 3 more `get_design_context` calls → 4 left in reserve after that.
+Planned remaining spend (FAQ excluded per your decision): 2 more content pages (Loyalty, Sports) = 2 more `get_design_context` calls → 4 left in reserve after that.

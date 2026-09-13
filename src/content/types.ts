@@ -100,6 +100,13 @@ export type Post = {
   seoDescription?: string
 }
 
+export type Chapter = {
+  _id: string
+  country: string
+  description: string
+  images: ContentImage[]
+}
+
 export type EventLink = { label: string; url: string }
 
 export type Event = {

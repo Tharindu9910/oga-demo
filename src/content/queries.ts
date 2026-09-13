@@ -8,6 +8,7 @@ import { cacheLife } from 'next/cache'
 
 import type {
   AboutPage,
+  Chapter,
   Event,
   HomePage,
   MembershipPage,
@@ -17,6 +18,7 @@ import type {
 } from './types'
 
 import aboutPageData from './data/aboutPage.json'
+import chaptersData from './data/chapters.json'
 import eventsData from './data/events.json'
 import homePageData from './data/homePage.json'
 import membershipPageData from './data/membershipPage.json'
@@ -38,6 +40,10 @@ export async function getProjectsPage(): Promise<ProjectsPage> {
 
 export async function getMembershipPage(): Promise<MembershipPage> {
   return membershipPageData as MembershipPage
+}
+
+export async function getChapters(): Promise<Chapter[]> {
+  return chaptersData as Chapter[]
 }
 
 export async function getOngoingProjects(limit?: number): Promise<Project[]> {
