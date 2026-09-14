@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Plus_Jakarta_Sans, Poppins } from 'next/font/google'
 
+import { SanityLive } from '@/sanity/lib/live'
+
 import './globals.css'
 
 const poppins = Poppins({
@@ -39,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     >
       <body className="flex min-h-full flex-col bg-white text-stone-700">
         {children}
+        <SanityLive />
       </body>
     </html>
   )

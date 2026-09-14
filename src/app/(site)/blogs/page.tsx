@@ -1,11 +1,16 @@
 import { Suspense } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import Container from '@/components/ui/Container'
+import PortableTextBody from '@/components/ui/PortableTextBody'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { getPosts } from '@/content/queries'
-import type { Post } from '@/content/types'
+import {
+  getPostBySlug,
+  getPosts,
+  type Post,
+  type PostDetail,
+} from '@/sanity/lib/content'
 
 function formatPublishedDate(date: string) {
   return new Date(date).toLocaleDateString('en-US', {
@@ -49,12 +54,16 @@ async function BlogsContent({
 
   const { post: requestedSlug } = await searchParams
   const slug = Array.isArray(requestedSlug) ? requestedSlug[0] : requestedSlug
-  const activePost = posts.find((post) => post.slug === slug) ?? posts[0]
+  const activeSlug = posts.some((post) => post.slug === slug)
+    ? slug!
+    : posts[0].slug
+
+  const activePost = await getPostBySlug(activeSlug)
 
   return (
     <>
-      <BlogCardsGrid posts={posts} activeSlug={activePost.slug} />
-      <BlogView post={activePost} />
+      <BlogCardsGrid posts={posts} activeSlug={activeSlug} />
+      {activePost && <BlogView post={activePost} />}
     </>
   )
 }
@@ -79,9 +88,8 @@ function BlogCardsGrid({
             }`}
           >
             <div className="aspect-square overflow-hidden rounded-xl bg-stone-100">
-              <Image
-                src={post.coverImage.src}
-                alt={post.coverImage.alt}
+              <SanityImage
+                image={post.coverImage}
                 width={400}
                 height={400}
                 className="size-full object-cover"
@@ -108,10 +116,7 @@ function BlogCardsGrid({
   )
 }
 
-function BlogView({ post }: { post: Post }) {
-  const paragraphs = post.body.slice(0, -1)
-  const attribution = post.body.at(-1)
-
+function BlogView({ post }: { post: PostDetail }) {
   return (
     <div
       id="blog-view"
@@ -121,26 +126,9 @@ function BlogView({ post }: { post: Post }) {
         {post.title}
       </h2>
 
-      <div className="font-poppins mx-auto mt-10 flex max-w-3xl flex-col gap-5 text-base leading-relaxed text-stone-700">
-        {paragraphs.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
+      <div className="mx-auto mt-10 max-w-3xl">
+        <PortableTextBody value={post.body} />
       </div>
-
-      {attribution && (
-        <div className="mx-auto mt-10 flex max-w-3xl items-end justify-between gap-6 border-t border-stone-900/10 pt-6">
-          <p className="font-poppins text-sm font-medium tracking-[0.35px] text-stone-900">
-            {attribution}
-          </p>
-          <Image
-            src={post.coverImage.src}
-            alt={post.coverImage.alt}
-            width={96}
-            height={74}
-            className="h-auto w-24 shrink-0 object-contain"
-          />
-        </div>
-      )}
     </div>
   )
 }

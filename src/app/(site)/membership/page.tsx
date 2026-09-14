@@ -1,10 +1,9 @@
-import Image from 'next/image'
-
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { siteConfig } from '@/config/site'
-import { getMembershipPage } from '@/content/queries'
+import { getMembershipPage } from '@/sanity/lib/content'
 
 const checkIcon = (
   <svg viewBox="0 0 12 12" fill="none" className="size-3">
@@ -28,9 +27,8 @@ export default async function MembershipPage() {
 
         <div className="mt-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
           <div className="overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
-            <Image
-              src={membership.poster.src}
-              alt={membership.poster.alt}
+            <SanityImage
+              image={membership.poster}
               width={588}
               height={735}
               className="w-full object-cover"
@@ -43,7 +41,7 @@ export default async function MembershipPage() {
                 Documents Required
               </h3>
               <ul className="mt-5 flex flex-col gap-4">
-                {membership.documentsRequired.map((doc) => (
+                {(membership.documentsRequired ?? []).map((doc) => (
                   <li
                     key={doc}
                     className="flex items-start gap-3 rounded-xl border border-[#e8efe9] bg-[#f9fbf9] p-4"
@@ -67,22 +65,22 @@ export default async function MembershipPage() {
                 <div className="flex flex-col gap-2 rounded-xl border border-[#dce9df] bg-gradient-to-r from-[#f7fbf8] to-[#f0f7f2] p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-poppins text-brand-950 text-base font-bold">
-                      {membership.payment.lifeMembership.label}
+                      {membership.payment?.lifeMembership?.label}
                     </span>
                     <span className="bg-brand-900 rounded px-2 py-0.5 text-[10px] font-bold tracking-[0.5px] text-white uppercase">
-                      {membership.payment.lifeMembership.badge}
+                      {membership.payment?.lifeMembership?.badge}
                     </span>
                   </div>
                   <span className="font-poppins text-brand-950 text-xl font-extrabold tracking-tight">
-                    {membership.payment.lifeMembership.price}
+                    {membership.payment?.lifeMembership?.price}
                   </span>
                 </div>
                 <div className="flex items-center justify-between rounded-xl border border-[#e5ede7] bg-[#fbfdfb] p-4">
                   <span className="font-poppins text-sm font-semibold text-stone-700">
-                    {membership.payment.replacementCard.label}
+                    {membership.payment?.replacementCard?.label}
                   </span>
                   <span className="font-poppins text-sm font-bold text-stone-900">
-                    {membership.payment.replacementCard.price}
+                    {membership.payment?.replacementCard?.price}
                   </span>
                 </div>
               </div>

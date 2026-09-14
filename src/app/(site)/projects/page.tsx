@@ -3,13 +3,15 @@ import Link from 'next/link'
 
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import PortableTextBody from '@/components/ui/PortableTextBody'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { siteConfig } from '@/config/site'
 import {
   getCompletedProjects,
   getOngoingProjects,
   getProjectsPage,
-} from '@/content/queries'
+} from '@/sanity/lib/content'
 
 const donationStories = [
   {
@@ -44,12 +46,11 @@ const donationTiers = [
 ]
 
 export default async function ProjectsPage() {
-  const [projectsPage, ongoingProjects, completedProjects] =
-    await Promise.all([
-      getProjectsPage(),
-      getOngoingProjects(),
-      getCompletedProjects(),
-    ])
+  const [projectsPage, ongoingProjects, completedProjects] = await Promise.all([
+    getProjectsPage(),
+    getOngoingProjects(),
+    getCompletedProjects(),
+  ])
   const { dehiwala } = projectsPage
 
   return (
@@ -65,22 +66,22 @@ export default async function ProjectsPage() {
                     {dehiwala.title.split(' ').slice(-1)}
                   </span>
                 </h1>
-                <div className="font-plus-jakarta-sans flex flex-col gap-4 text-lg text-stone-600">
-                  {dehiwala.body.map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
-                  ))}
-                </div>
-                <Link
-                  href={dehiwala.highlightsUrl}
-                  className="border-brand-800/30 text-brand-800 font-poppins inline-flex items-center gap-2 border-b-2 pb-1.5 text-sm font-bold"
-                >
-                  {dehiwala.highlightsLabel} <span aria-hidden="true">→</span>
-                </Link>
+                <PortableTextBody
+                  value={dehiwala.body}
+                  className="font-plus-jakarta-sans text-lg text-stone-600"
+                />
+                {dehiwala.highlightsUrl && (
+                  <Link
+                    href={dehiwala.highlightsUrl}
+                    className="border-brand-800/30 text-brand-800 font-poppins inline-flex items-center gap-2 border-b-2 pb-1.5 text-sm font-bold"
+                  >
+                    {dehiwala.highlightsLabel} <span aria-hidden="true">→</span>
+                  </Link>
+                )}
               </div>
               <div className="lg:col-span-6">
-                <Image
-                  src={dehiwala.image.src}
-                  alt={dehiwala.image.alt}
+                <SanityImage
+                  image={dehiwala.image}
                   width={900}
                   height={870}
                   priority
@@ -110,9 +111,8 @@ export default async function ProjectsPage() {
                 >
                   <div className="flex flex-col gap-4">
                     <div className="overflow-hidden rounded-xl bg-stone-100">
-                      <Image
-                        src={project.image.src}
-                        alt={project.image.alt}
+                      <SanityImage
+                        image={project.image}
                         width={400}
                         height={260}
                         className="aspect-4/3 w-full object-cover"
@@ -159,9 +159,8 @@ export default async function ProjectsPage() {
                   className="flex flex-col justify-between rounded-2xl border border-stone-200/80 bg-white p-4"
                 >
                   <div className="overflow-hidden rounded-xl bg-stone-100">
-                    <Image
-                      src={project.image.src}
-                      alt={project.image.alt}
+                    <SanityImage
+                      image={project.image}
                       width={260}
                       height={200}
                       className="aspect-4/3 w-full object-cover"

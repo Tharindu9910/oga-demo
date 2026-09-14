@@ -2,10 +2,87 @@ import Image from 'next/image'
 
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
 import { siteConfig } from '@/config/site'
-import { getLoyaltyPage } from '@/content/queries'
+import { getLoyaltyPage } from '@/sanity/lib/content'
+
+// Hardcoded per Docs/editable_content.md (Loyalty Program page lists only
+// "Our Merchants" as editable) — hero and "Why Partner" have no Sanity field.
+const hero = {
+  headline: 'Loyalty Program',
+  announcement: 'The IIOGA Membership Loyalty Program is READY!',
+  benefits: [
+    "Enjoy exclusive benefits with every purchase by producing your membership card at checkout at our loyalty partners' stores and e-stores.",
+    "Whether you're an alumna who loves staying connected or someone who never misses an event, this program is for YOU!",
+    "Don't miss out on this opportunity to level up your OGA experience and enjoy all the benefits of staying connected.",
+  ],
+  signupHeadline:
+    "Sign up now if you haven't yet and start collecting rewards!",
+  signupNote:
+    "Let's make your OGA membership card more rewarding than ever. Stay tuned for more exciting updates!",
+  ctaLabel: 'WhatsApp Click to Chat',
+  card: {
+    src: '/images/loyalty/welcome-card.jpg',
+    alt: 'IIOGA Loyalty Program — Welcome Aboard!',
+  },
+}
+
+const whyPartner = {
+  heading: 'Why Partner with us?',
+  subheading:
+    'Here are some key benefits of partnering with our loyalty programme:',
+  benefits: [
+    {
+      icon: {
+        src: '/images/loyalty/benefits/boosted-sales.png',
+        alt: 'Boosted Sales icon',
+      },
+      title: 'Boosted Sales',
+      description:
+        'Loyalty rewards encourage repeat purchases and higher spending',
+    },
+    {
+      icon: {
+        src: '/images/loyalty/benefits/brand-promotion.png',
+        alt: 'Brand Promotion icon',
+      },
+      title: 'Brand Promotion',
+      description:
+        'Get featured across our marketing platforms for added visibility',
+    },
+    {
+      icon: {
+        src: '/images/loyalty/benefits/customer-loyalty.png',
+        alt: 'Customer Loyalty icon',
+      },
+      title: 'Customer Loyalty',
+      description:
+        'Build stronger relationships with a targeted, engaged customer base',
+    },
+    {
+      icon: {
+        src: '/images/loyalty/benefits/event-exposure.png',
+        alt: 'Event Exposure icon',
+      },
+      title: 'Event Exposure',
+      description:
+        'Be part of exclusive events and campaigns that highlight your brand',
+    },
+    {
+      icon: {
+        src: '/images/loyalty/benefits/community-recognition.png',
+        alt: 'Community Recognition icon',
+      },
+      title: 'Community Recognition',
+      description:
+        'Show your commitment to support women-led/student/community-driven initiatives',
+    },
+  ],
+}
+
+const merchantsHeading = 'Our Current Merchants'
 
 const checkIcon = (
   <svg viewBox="0 0 12 12" fill="none" className="size-3.5">
@@ -29,15 +106,15 @@ export default async function LoyaltyProgramPage() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <h1 className="font-poppins text-brand-900 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                {loyalty.hero.headline}
+                {hero.headline}
               </h1>
 
               <p className="font-poppins text-brand-800 mt-6 text-xl font-semibold tracking-tight sm:text-[22px]">
-                {loyalty.hero.announcement}
+                {hero.announcement}
               </p>
 
               <ul className="mt-5 flex flex-col gap-3">
-                {loyalty.hero.benefits.map((benefit) => (
+                {hero.benefits.map((benefit) => (
                   <li key={benefit} className="flex items-start gap-3">
                     <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-100">
                       {checkIcon}
@@ -51,10 +128,10 @@ export default async function LoyaltyProgramPage() {
 
               <div className="mt-6 flex flex-col gap-2 border-t border-stone-100 pt-5">
                 <p className="font-poppins text-brand-900 text-base font-bold">
-                  {loyalty.hero.signupHeadline}
+                  {hero.signupHeadline}
                 </p>
                 <p className="font-plus-jakarta-sans text-sm text-stone-500 italic">
-                  {loyalty.hero.signupNote}
+                  {hero.signupNote}
                 </p>
               </div>
 
@@ -64,7 +141,7 @@ export default async function LoyaltyProgramPage() {
                   className="gap-3 bg-[#25d366] px-7 py-3.5 text-white shadow-[0_4px_7px_0_rgba(37,211,102,0.35)] hover:bg-[#20bd5a]"
                 >
                   <WhatsAppIcon />
-                  {loyalty.hero.ctaLabel}
+                  {hero.ctaLabel}
                 </Button>
               </div>
             </div>
@@ -72,8 +149,8 @@ export default async function LoyaltyProgramPage() {
             <div className="flex justify-center">
               <div className="w-full max-w-md overflow-hidden rounded-[22px] border border-emerald-900/20 shadow-[0_30px_60px_-20px_rgba(17,58,44,0.18)]">
                 <Image
-                  src={loyalty.hero.card.src}
-                  alt={loyalty.hero.card.alt}
+                  src={hero.card.src}
+                  alt={hero.card.alt}
                   width={448}
                   height={448}
                   className="w-full object-cover"
@@ -87,13 +164,13 @@ export default async function LoyaltyProgramPage() {
       <section className="bg-white px-6 pb-20 lg:px-16">
         <Container className="max-w-6xl">
           <div className="rounded-[40px] border border-emerald-900/10 bg-[#edf4f0] px-6 py-12 sm:px-10 sm:py-14">
-            <SectionHeading>{loyalty.whyPartner.heading}</SectionHeading>
+            <SectionHeading>{whyPartner.heading}</SectionHeading>
             <p className="font-plus-jakarta-sans mt-2 max-w-xl text-lg text-stone-500">
-              {loyalty.whyPartner.subheading}
+              {whyPartner.subheading}
             </p>
 
             <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
-              {loyalty.whyPartner.benefits.map((benefit) => (
+              {whyPartner.benefits.map((benefit) => (
                 <div
                   key={benefit.title}
                   className="flex flex-col items-center text-center"
@@ -125,10 +202,10 @@ export default async function LoyaltyProgramPage() {
       <section className="bg-brand-700 border-t border-emerald-950/40 px-6 py-20 lg:px-16">
         <Container className="max-w-5xl">
           <SectionHeading align="center" tone="light">
-            {loyalty.merchantsHeading}
+            {merchantsHeading}
           </SectionHeading>
 
-          {loyalty.merchants.length === 0 ? (
+          {!loyalty.merchants || loyalty.merchants.length === 0 ? (
             <p className="font-plus-jakarta-sans mt-8 text-center text-sm text-emerald-100/70">
               No merchant partners listed yet — check back soon.
             </p>
@@ -136,12 +213,11 @@ export default async function LoyaltyProgramPage() {
             <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
               {loyalty.merchants.map((merchant) => (
                 <div
-                  key={merchant.name}
+                  key={merchant._key}
                   className="flex h-[110px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/95 p-4 sm:h-[130px]"
                 >
-                  <Image
-                    src={merchant.logo.src}
-                    alt={merchant.logo.alt}
+                  <SanityImage
+                    image={merchant.logo}
                     width={200}
                     height={130}
                     className="max-h-full w-full object-contain"

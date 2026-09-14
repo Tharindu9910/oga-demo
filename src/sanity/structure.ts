@@ -62,7 +62,9 @@ export const structure: StructureResolver = (S) => {
                 .child(
                   S.documentList()
                     .title('Upcoming events')
-                    .filter('_type == "event" && dateTime(date) >= now()'),
+                    .filter(
+                      '_type == "event" && dateTime(date) >= dateTime(now())',
+                    ),
                 ),
               S.listItem()
                 .id('event-past')
@@ -70,7 +72,9 @@ export const structure: StructureResolver = (S) => {
                 .child(
                   S.documentList()
                     .title('Past events')
-                    .filter('_type == "event" && dateTime(date) < now()'),
+                    .filter(
+                      '_type == "event" && dateTime(date) < dateTime(now())',
+                    ),
                 ),
             ]),
         ),

@@ -1,7 +1,6 @@
-import Image from 'next/image'
-
 import Container from '@/components/ui/Container'
-import { getChapters } from '@/content/queries'
+import SanityImage from '@/components/ui/SanityImage'
+import { getChapters } from '@/sanity/lib/content'
 
 const sectionBg = ['bg-[#14271f]', 'bg-brand-600', 'bg-[#14271f]'] as const
 
@@ -44,14 +43,13 @@ export default async function OverseasChaptersPage() {
               </p> */}
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                {chapter.images.map((image) => (
+                {(chapter.images ?? []).map((image) => (
                   <div
-                    key={image.src}
+                    key={image._key}
                     className="aspect-[4/3] overflow-hidden rounded-2xl border-[3px] border-white shadow-[0_4px_14px_0_rgba(0,0,0,0.25)]"
                   >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
+                    <SanityImage
+                      image={image}
                       width={400}
                       height={300}
                       className="size-full object-cover"

@@ -169,6 +169,9 @@ importers:
       '@portabletext/react':
         specifier: ^8.0.1
         version: 8.0.1(react@19.3.0)
+      '@sanity/client':
+        specifier: 8.6.1
+        version: 8.6.1
       '@sanity/image-url':
         specifier: ^2.1.1
         version: 2.1.1
@@ -230,6 +233,9 @@ importers:
       tailwindcss:
         specifier: ^4
         version: 4.3.3
+      tsx:
+        specifier: ^4.23.13
+        version: 4.23.13
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

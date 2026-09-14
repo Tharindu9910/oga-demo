@@ -1,16 +1,40 @@
-import { CalendarDays, ClipboardList, Users, type LucideIcon } from 'lucide-react'
+import {
+  CalendarDays,
+  ClipboardList,
+  Users,
+  type LucideIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 
 import PastEventsSection from '@/components/home/PastEventsSection'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import {
   getHomePage,
   getOngoingProjects,
   getPastEvents,
   getUpcomingEvents,
-} from '@/content/queries'
+} from '@/sanity/lib/content'
+
+// Hardcoded per Docs/editable_content.md (Home Page lists only Hero Banner,
+// Ongoing Projects, Milestones, Upcoming Events and Past Event Highlights as
+// editable) — this "about" summary block has no Sanity field.
+const aboutSummary = {
+  heading: "Ilma International Old Girls' Association",
+  paragraphs: [
+    "The Ilma International Old Girls' Association (IIOGA) was established in 1998, upon the School marking its 10th anniversary. The IIOGA is a not-for-profit organization, founded with the intention of bringing together the alumni of Ilma International Girls' School for a collective cause that of uplifting, enhancing and developing their alma mater.",
+    'Since its inception, the IIOGA has been instrumental in engaging in activities that have promoted solidarity and fellowship amongst its members, whilst serving the best interests of the School.',
+    "The IIOGA represents the essence of Ilma International Girls' School and considers itself to be an integral part of upholding the unique values and philosophies that make the School what it is.",
+  ],
+  image: {
+    src: '/images/home/about.jpeg',
+    alt: "Ilma International Girls' School",
+  },
+  ctaLabel: 'About Us',
+  ctaUrl: '/about',
+}
 
 const milestoneIcons: Record<string, LucideIcon> = {
   Members: Users,
@@ -41,9 +65,8 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="bg-brand-950 relative flex min-h-[600px] items-center overflow-hidden pt-32 pb-24 sm:min-h-180 sm:pt-42 sm:pb-38">
-        <Image
-          src={home.hero.image.src}
-          alt={home.hero.image.alt}
+        <SanityImage
+          image={home.hero.image}
           fill
           priority
           sizes="100vw"
@@ -63,9 +86,11 @@ export default async function HomePage() {
               <Button href={home.hero.ctaUrl} variant="light">
                 {home.hero.ctaLabel}
               </Button>
-              <Button href={home.hero.secondaryCtaUrl} variant="glass">
-                {home.hero.secondaryCtaLabel}
-              </Button>
+              {home.hero.secondaryCtaUrl && (
+                <Button href={home.hero.secondaryCtaUrl} variant="glass">
+                  {home.hero.secondaryCtaLabel}
+                </Button>
+              )}
             </div>
           </div>
         </Container>
@@ -76,25 +101,21 @@ export default async function HomePage() {
         <Container className="grid max-w-6xl grid-cols-1 items-center gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 className="font-poppins text-brand-800 text-3xl font-bold tracking-tight uppercase sm:text-4xl">
-              {home.aboutSummary.heading}
+              {aboutSummary.heading}
             </h2>
             <div className="font-inter mt-6 flex flex-col gap-4 text-base text-stone-500">
-              {home.aboutSummary.paragraphs.map((paragraph, i) => (
+              {aboutSummary.paragraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
-            <Button
-              href={home.aboutSummary.ctaUrl}
-              variant="brand"
-              className="mt-8"
-            >
-              {home.aboutSummary.ctaLabel} <span aria-hidden="true">→</span>
+            <Button href={aboutSummary.ctaUrl} variant="brand" className="mt-8">
+              {aboutSummary.ctaLabel} <span aria-hidden="true">→</span>
             </Button>
           </div>
           <div className="lg:col-span-5">
             <Image
-              src={home.aboutSummary.image.src}
-              alt={home.aboutSummary.image.alt}
+              src={aboutSummary.image.src}
+              alt={aboutSummary.image.alt}
               width={800}
               height={800}
               className="aspect-square w-full rounded-[20px] object-cover"
@@ -130,9 +151,8 @@ export default async function HomePage() {
                 >
                   <div className="flex flex-col gap-4">
                     <div className="overflow-hidden rounded-xl bg-stone-100">
-                      <Image
-                        src={project.image.src}
-                        alt={project.image.alt}
+                      <SanityImage
+                        image={project.image}
                         width={400}
                         height={260}
                         className="aspect-[4/3] w-full object-cover"
@@ -163,7 +183,7 @@ export default async function HomePage() {
             Tracking Progress and Milestones
           </SectionHeading>
           <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
-            {home.milestones.map((milestone) => {
+            {(home.milestones ?? []).map((milestone) => {
               const Icon = milestoneIcons[milestone.label] ?? Users
               return (
                 <div

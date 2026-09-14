@@ -13,7 +13,7 @@ const variantClasses = {
 } as const
 
 type ButtonProps = {
-  href: string
+  href?: string
   variant?: keyof typeof variantClasses
   className?: string
   children: React.ReactNode

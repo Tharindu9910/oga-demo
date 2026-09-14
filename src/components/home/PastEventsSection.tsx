@@ -1,9 +1,9 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import Button from '@/components/ui/Button'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
-import type { Event } from '@/content/types'
+import type { Event } from '@/sanity/lib/content'
 
 function formatEventDate(date: string) {
   const d = new Date(date)
@@ -19,7 +19,11 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
       <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-8 sm:p-12">
         <div className="flex items-end justify-between gap-4">
           <SectionHeading>Past Event Highlights</SectionHeading>
-          <Button href="/events" variant="brand" className="px-5 py-2.5 text-xs">
+          <Button
+            href="/events"
+            variant="brand"
+            className="px-5 py-2.5 text-xs"
+          >
             See more <span aria-hidden="true">→</span>
           </Button>
         </div>
@@ -32,16 +36,15 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
           <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {events.map((event) => {
               const { month, day } = formatEventDate(event.date)
-              const image = event.images[0]
+              const image = event.images?.[0]
               return (
                 <article
                   key={event._id}
                   className="overflow-hidden rounded-2xl border border-stone-200/80 bg-white"
                 >
                   {image && (
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
+                    <SanityImage
+                      image={image}
                       width={800}
                       height={556}
                       className="aspect-[16/10] w-full object-cover"

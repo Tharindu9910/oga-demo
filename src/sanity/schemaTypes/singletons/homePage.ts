@@ -33,8 +33,10 @@ export const homePage = defineType({
           name: 'ctaUrl',
           title: 'CTA URL',
           type: 'url',
+          description:
+            'Leave blank to show a disabled "Link coming soon" button.',
           validation: (Rule) =>
-            Rule.required().uri({ scheme: ['http', 'https'] }),
+            Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),
         }),
         defineField({
           name: 'secondaryCtaLabel',
@@ -45,7 +47,8 @@ export const homePage = defineType({
           name: 'secondaryCtaUrl',
           title: 'Secondary CTA URL',
           type: 'url',
-          validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+          validation: (Rule) =>
+            Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),
         }),
       ],
       validation: (Rule) => Rule.required(),

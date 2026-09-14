@@ -226,7 +226,7 @@ export type AboutPage = {
   president: {
     name: string
     role: string
-    photo: ImageWithAlt
+    photo?: ImageWithAlt
     message: Array<{
       children?: Array<{
         marks?: Array<string>
@@ -272,7 +272,7 @@ export type HomePage = {
     headline: string
     image: ImageWithAlt
     ctaLabel: string
-    ctaUrl: string
+    ctaUrl?: string
     secondaryCtaLabel?: string
     secondaryCtaUrl?: string
   }
@@ -423,3 +423,261 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+
+// Source: src/sanity/queries.ts
+// Variable: homePageQuery
+// Query: *[_type == "homePage"][0]{  hero,  milestones}
+export type HomePageQueryResult = {
+  hero: {
+    eyebrow?: string
+    headline: string
+    image: ImageWithAlt
+    ctaLabel: string
+    ctaUrl?: string
+    secondaryCtaLabel?: string
+    secondaryCtaUrl?: string
+  }
+  milestones: Array<
+    {
+      _key: string
+    } & Milestone
+  > | null
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: aboutPageQuery
+// Query: *[_type == "aboutPage"][0]{  president,  team}
+export type AboutPageQueryResult = {
+  president: {
+    name: string
+    role: string
+    photo?: ImageWithAlt
+    message: Array<{
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }>
+  }
+  team: {
+    year?: string
+    patrons?: Array<
+      {
+        _key: string
+      } & TeamMember
+    >
+    committee?: Array<
+      {
+        _key: string
+      } & TeamMember
+    >
+  } | null
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: projectsPageQuery
+// Query: *[_type == "projectsPage"][0]{  dehiwala}
+export type ProjectsPageQueryResult = {
+  dehiwala: {
+    show?: boolean
+    title: string
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>
+        text?: string
+        _type: 'span'
+        _key: string
+      }>
+      style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+      listItem?: 'bullet' | 'number'
+      markDefs?: Array<{
+        href?: string
+        _type: 'link'
+        _key: string
+      }>
+      level?: number
+      _type: 'block'
+      _key: string
+    }>
+    image: ImageWithAlt
+    highlightsLabel?: string
+    highlightsUrl?: string
+  }
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: membershipPageQuery
+// Query: *[_type == "membershipPage"][0]{  poster,  documentsRequired,  payment,  ctaLabel}
+export type MembershipPageQueryResult = {
+  poster: ImageWithAlt
+  documentsRequired: Array<string> | null
+  payment: {
+    lifeMembership?: {
+      label?: string
+      badge?: string
+      price?: string
+    }
+    replacementCard?: {
+      label?: string
+      price?: string
+    }
+  } | null
+  ctaLabel: string | null
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: loyaltyPageQuery
+// Query: *[_type == "loyaltyPage"][0]{  merchants}
+export type LoyaltyPageQueryResult = {
+  merchants: Array<
+    {
+      _key: string
+    } & Merchant
+  > | null
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: chaptersQuery
+// Query: *[_type == "chapter"]{  _id,  country,  description,  images}
+export type ChaptersQueryResult = Array<{
+  _id: string
+  country: string
+  description: string | null
+  images: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  > | null
+}>
+
+// Source: src/sanity/queries.ts
+// Variable: projectsByStatusQuery
+// Query: *[_type == "project" && status == $status] | order(date desc){  _id,  title,  status,  image,  description,  progress,  date}
+export type ProjectsByStatusQueryResult = Array<{
+  _id: string
+  title: string
+  status: 'completed' | 'ongoing'
+  image: ImageWithAlt
+  description: string | null
+  progress: number | null
+  date: string
+}>
+
+// Source: src/sanity/queries.ts
+// Variable: upcomingEventsQuery
+// Query: *[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc){  _id,  title,  date,  description,  images,  links}
+export type UpcomingEventsQueryResult = Array<{
+  _id: string
+  title: string
+  date: string
+  description: string | null
+  images: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  > | null
+  links: Array<
+    {
+      _key: string
+    } & EventLink
+  > | null
+}>
+
+// Source: src/sanity/queries.ts
+// Variable: pastEventsQuery
+// Query: *[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc){  _id,  title,  date,  description,  images,  links}
+export type PastEventsQueryResult = Array<{
+  _id: string
+  title: string
+  date: string
+  description: string | null
+  images: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  > | null
+  links: Array<
+    {
+      _key: string
+    } & EventLink
+  > | null
+}>
+
+// Source: src/sanity/queries.ts
+// Variable: postsQuery
+// Query: *[_type == "post"] | order(publishedAt desc){  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage}
+export type PostsQueryResult = Array<{
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string
+  excerpt: string | null
+  coverImage: ImageWithAlt
+}>
+
+// Source: src/sanity/queries.ts
+// Variable: postBySlugQuery
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage,  body,  seoDescription}
+export type PostBySlugQueryResult = {
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string
+  excerpt: string | null
+  coverImage: ImageWithAlt
+  body: Array<
+    | ({
+        _key: string
+      } & ImageWithAlt)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+  > | null
+  seoDescription: string | null
+} | null
+
+// Query TypeMap
+import '@sanity/client'
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '*[_type == "homePage"][0]{\n  hero,\n  milestones\n}': HomePageQueryResult
+    '*[_type == "aboutPage"][0]{\n  president,\n  team\n}': AboutPageQueryResult
+    '*[_type == "projectsPage"][0]{\n  dehiwala\n}': ProjectsPageQueryResult
+    '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel\n}': MembershipPageQueryResult
+    '*[_type == "loyaltyPage"][0]{\n  merchants\n}': LoyaltyPageQueryResult
+    '*[_type == "chapter"]{\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult
+    '*[_type == "project" && status == $status] | order(date desc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
+    '*[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
+    '*[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
+    '*[_type == "post"] | order(publishedAt desc){\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage\n}': PostsQueryResult
+    '*[_type == "post" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage,\n  body,\n  seoDescription\n}': PostBySlugQueryResult
+  }
+}

@@ -1,11 +1,11 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { siteConfig } from '@/config/site'
-import { getPastEvents, getUpcomingEvents } from '@/content/queries'
+import { getPastEvents, getUpcomingEvents } from '@/sanity/lib/content'
 
 function formatEventDate(date: string) {
   const d = new Date(date)
@@ -79,17 +79,16 @@ export default async function EventsPage() {
             <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
               {pastEvents.map((event) => {
                 const { month, day } = formatEventDate(event.date)
-                const image = event.images[0]
-                const link = event.links[0]
+                const image = event.images?.[0]
+                const link = event.links?.[0]
                 return (
                   <article
                     key={event._id}
                     className="overflow-hidden rounded-3xl border border-emerald-950/10 bg-white shadow-[0_10px_30px_-10px_rgba(20,56,38,0.07)]"
                   >
                     {image && (
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
+                      <SanityImage
+                        image={image}
                         width={800}
                         height={576}
                         className="aspect-[4/3] w-full object-cover"

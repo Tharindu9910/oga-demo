@@ -25,8 +25,8 @@ export const aboutPage = defineType({
         defineField({
           name: 'photo',
           title: 'Photo',
+          description: 'Optional — not currently shown on the site.',
           type: 'imageWithAlt',
-          validation: (Rule) => Rule.required(),
         }),
         defineField({
           name: 'message',

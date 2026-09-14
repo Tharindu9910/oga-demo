@@ -1,8 +1,55 @@
 import Image from 'next/image'
 
 import Container from '@/components/ui/Container'
+import PortableTextBody from '@/components/ui/PortableTextBody'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { getAboutPage } from '@/content/queries'
+import { getAboutPage } from '@/sanity/lib/content'
+
+// Hardcoded per Docs/editable_content.md (About Us Page lists only "Message
+// from the President" and "Team" as editable) — these sections have no
+// Sanity field.
+const hero = {
+  badges: ['Established 1998', 'Colombo, Sri Lanka', '28+ Years'],
+  paragraphs: [
+    'The Ilma International Old Girls' +
+      " Association (IIOGA), established in 1998, is a not-for-profit organization dedicated to bringing together the alumni of Ilma International Girls' School for a collective cause – uplifting, enhancing, and developing their alma mater.",
+    "At IIOGA, we are committed to fostering lifelong connections among our esteemed alumnae, celebrating their achievements, and supporting their endeavors. The association provides a vibrant platform for networking, engages in fundraising activities that support the school's development goals, and offers mentorship and collaboration opportunities that empower our members to thrive both personally and professionally.",
+    "Beyond strengthening the bond between past pupils, IIOGA nurtures a spirit of unity, service, and loyalty among its members. Through community service, collaborative events, and alumni-driven initiatives, we strive to enrich both the school and the wider community. Serving as a hub for professional growth and lifelong friendships, IIOGA ensures that the proud legacy of Ilma International Girls' School continues to flourish for generations to come.",
+  ],
+}
+
+const video = {
+  src: '/videos/about.mp4',
+  poster: {
+    src: '/images/about/about-video-poster.jpg',
+    alt: "Scintillating Silver — IIOGA's 25th Anniversary, Spectrum of Service since 1998",
+  },
+}
+
+const vision = {
+  icon: { src: '/images/about/vision-icon.png', alt: 'Vision icon' },
+  body: 'To guide, support, empower and foster a sense of friendship, good will and culture among old girls and to create unbreakable bonds with one another and our Alma Mater.',
+}
+
+const mission = {
+  icon: { src: '/images/about/mission-icon.png', alt: 'Mission icon' },
+  body: 'Organize events and activities for the benefit of the school whilst making recommendations to the betterment of the school.',
+}
+
+const founderTribute = {
+  name: 'Mrs. Liyanagae, Founder of the IIOGA',
+  photo: {
+    src: '/images/about/mrs-liyanage-founder.jpg',
+    alt: 'Mrs. Liyanagae, founder of the IIOGA',
+  },
+  paragraphs: [
+    'With heartfelt reverence, we remember Mrs. Liyanagae, the visionary founder of the IIOGA. Her dedication, compassion, and unwavering commitment laid the foundation for a community that continues to unite and empower women beyond the walls of Ilma International Girls' +
+      ' School.',
+    'Though she has passed on, her legacy endures in every event we hold and in the bonds we nurture. Her inspiring leadership and genuine care have left an indelible mark on all of us.',
+  ],
+  quote:
+    'We honor her memory by striving to uphold the values she cherished and by carrying forward her vision with the same passion and grace.',
+}
 
 type TeamMember = { name: string; role: string }
 
@@ -22,8 +69,8 @@ function groupByRole(members: TeamMember[]) {
 export default async function AboutPage() {
   const about = await getAboutPage()
 
-  const patronGroups = groupByRole(about.team.patrons)
-  const committeeGroups = groupByRole(about.team.committee)
+  const patronGroups = groupByRole(about.team?.patrons ?? [])
+  const committeeGroups = groupByRole(about.team?.committee ?? [])
   const committeeLeaders = committeeGroups.filter(
     (group) => group.members.length === 1,
   )
@@ -41,11 +88,11 @@ export default async function AboutPage() {
               About Us
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {about.hero.badges.map((badge, i) => (
+              {hero.badges.map((badge, i) => (
                 <span
                   key={badge}
                   className={`font-plus-jakarta-sans rounded-full border border-[#d9e6df] bg-white px-4 py-1.5 text-xs font-semibold ${
-                    i === about.hero.badges.length - 1
+                    i === hero.badges.length - 1
                       ? 'text-brand-800'
                       : 'text-stone-700'
                   }`}
@@ -55,7 +102,7 @@ export default async function AboutPage() {
               ))}
             </div>
             <div className="font-plus-jakarta-sans mt-4 flex flex-col gap-5 text-lg text-stone-600">
-              {about.hero.paragraphs.map((paragraph, i) => (
+              {hero.paragraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
@@ -63,7 +110,7 @@ export default async function AboutPage() {
         </Container>
       </section>
 
-       {/* Our Story video */}
+      {/* Our Story video */}
       <section className="bg-white px-6 pb-16 lg:px-16">
         <Container className="max-w-4xl">
           <div className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
@@ -71,10 +118,10 @@ export default async function AboutPage() {
               controls
               playsInline
               preload="none"
-              poster={about.video.poster.src}
+              poster={video.poster.src}
               className="w-full"
             >
-              <source src={about.video.src} type="video/mp4" />
+              <source src={video.src} type="video/mp4" />
             </video>
           </div>
         </Container>
@@ -84,7 +131,7 @@ export default async function AboutPage() {
       <section className="bg-[#fafbf9] px-6 pb-16 lg:px-16">
         <Container className="max-w-5xl">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {[about.vision, about.mission].map((card, i) => (
+            {[vision, mission].map((card, i) => (
               <div
                 key={i}
                 className="border-brand-950 flex flex-col items-center gap-5 rounded-[32px] border bg-gradient-to-br from-[#1a3f30] via-[#0f2d21] to-[#091f16] p-10 text-center shadow-xl"
@@ -119,18 +166,7 @@ export default async function AboutPage() {
           <div className="border-brand-700 relative mt-10 overflow-hidden rounded-[32px] border border-[#d9e6df] bg-white p-10 shadow-lg">
             {/* <div className="bg-brand-700 absolute inset-y-0 left-0 w-2" /> */}
             <div className="flex flex-col gap-4 pl-2">
-              {about.president.message.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className={
-                    i === 0
-                      ? "font-poppins text-2xl font-bold text-stone-950"
-                      : 'font-plus-jakarta-sans text-stone-600'
-                  }
-                >
-                  {paragraph}
-                </p>
-              ))}
+              <PortableTextBody value={about.president.message} />
               <div className="mt-2 border-t border-stone-100 pt-6">
                 <p className="font-plus-jakarta-sans text-xs font-bold tracking-[1.2px] text-stone-400 uppercase">
                   Warm regards,
@@ -154,7 +190,7 @@ export default async function AboutPage() {
             <div className="flex flex-col items-center gap-3">
               <SectionHeading align="center">Our Team</SectionHeading>
               <span className="bg-brand-700 rounded-full px-3.5 py-1 font-mono text-xs font-bold tracking-[0.6px] text-white">
-                {about.team.year}
+                {about.team?.year}
               </span>
             </div>
             <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -227,23 +263,23 @@ export default async function AboutPage() {
         <Container className="max-w-5xl">
           <div className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
             <Image
-              src={about.founderTribute.photo.src}
-              alt={about.founderTribute.photo.alt}
+              src={founderTribute.photo.src}
+              alt={founderTribute.photo.alt}
               width={246}
               height={290}
               className="w-48 shrink-0 rounded-2xl border border-amber-200/40 object-cover shadow-xl grayscale sm:w-62"
             />
             <div className="flex flex-col gap-4 text-center sm:text-left">
               <h2 className="font-poppins text-3xl leading-tight font-bold text-white">
-                A Tribute to {about.founderTribute.name}
+                A Tribute to {founderTribute.name}
               </h2>
               <div className="font-plus-jakarta-sans flex flex-col gap-3 text-emerald-50/90">
-                {about.founderTribute.paragraphs.map((paragraph, i) => (
+                {founderTribute.paragraphs.map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
               <blockquote className="mt-2 rounded-2xl bg-white/5 p-5 text-sm font-medium text-white italic backdrop-blur-[2px]">
-                {about.founderTribute.quote}
+                {founderTribute.quote}
               </blockquote>
             </div>
           </div>

@@ -43,7 +43,8 @@ export const projectsPage = defineType({
           name: 'highlightsUrl',
           title: 'Highlights link URL',
           type: 'url',
-          validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+          validation: (Rule) =>
+            Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),
         }),
       ],
       validation: (Rule) => Rule.required(),
