@@ -10,16 +10,16 @@ export default async function OverseasChaptersPage() {
 
   return (
     <>
-      <section className="bg-brand-950 px-6 pt-32 pb-12 text-center sm:pt-42 lg:px-16">
+      <section className="bg-[#14271f] px-6 pt-32 pb-12 text-center sm:pt-42 lg:px-16">
         <Container className="max-w-3xl">
-          <h1 className="font-poppins text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h1 className="font-poppins text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             Overseas Chapters
           </h1>
-          <p className="font-plus-jakarta-sans mt-4 text-emerald-100/80">
+          {/* <p className="font-plus-jakarta-sans mt-4 text-emerald-100/80">
             IIOGA members carry the alma mater&apos;s spirit with them
             wherever they go — here&apos;s a look at our chapters around the
             world.
-          </p>
+          </p> */}
         </Container>
       </section>
 
@@ -33,15 +33,15 @@ export default async function OverseasChaptersPage() {
         chapters.map((chapter, i) => (
           <section
             key={chapter._id}
-            className={`${sectionBg[i % sectionBg.length]} border-t border-white/10 px-6 py-14 lg:px-16`}
+            className={`${sectionBg[i % sectionBg.length]} border-b border-white/10 px-6 py-14 lg:px-16`}
           >
             <Container className="max-w-6xl">
               <h2 className="font-poppins text-4xl font-extrabold tracking-[0.05em] text-white uppercase sm:text-5xl">
                 {chapter.country}
               </h2>
-              <p className="font-plus-jakarta-sans mt-3 max-w-2xl text-sm text-emerald-50/80">
+              {/* <p className="font-plus-jakarta-sans mt-3 max-w-2xl text-sm text-emerald-50/80">
                 {chapter.description}
-              </p>
+              </p> */}
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                 {chapter.images.map((image) => (

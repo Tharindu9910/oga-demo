@@ -190,7 +190,7 @@ export default async function ProjectsPage() {
             {donationStories.map((story, i) => (
               <article
                 key={story.title}
-                className="bg-brand-950 overflow-hidden rounded-3xl border border-white/10 shadow-xl"
+                className="bg-brand-700 overflow-hidden rounded-3xl border border-white/10 shadow-xl"
               >
                 <div
                   className={`grid grid-cols-1 items-center gap-8 p-8 sm:p-10 lg:grid-cols-2 ${i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}
@@ -220,7 +220,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Make a Difference donation widget */}
-      <section className="bg-brand-950 px-6 py-20 lg:px-16">
+      <section className="bg-brand-700 px-6 py-20 lg:px-16">
         <Container className="max-w-4xl">
           <SectionHeading align="center" tone="light">
             Make a Difference

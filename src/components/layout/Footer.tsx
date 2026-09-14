@@ -54,14 +54,14 @@ export default async function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-brand-700 border-t border-emerald-950/40">
+    <footer className="bg-brand-700 border-t  border-white/10">
       <Container className="max-w-6xl py-10">
         <div className="flex flex-col gap-10 border-b border-white/10 pb-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           {/* Brand + contact */}
           <div className="flex flex-col items-center text-center lg:max-w-xs lg:items-start lg:text-left">
             <Link href="/" className="flex items-center gap-3.5">
               <Image
-                src="/images/brand/crest-mark.png"
+                src="/images/brand/crest.png"
                 alt={`${siteConfig.name} crest`}
                 width={48}
                 height={48}
@@ -71,8 +71,9 @@ export default async function Footer() {
                 {siteConfig.name}
               </span>
             </Link>
-            <p className="font-poppins mt-4 max-w-sm text-2xl leading-tight font-bold tracking-tight text-white">
-              Give back to your{' '}
+            <p className="font-poppins mt-4 max-w-sm text-3xl leading-tight font-bold tracking-tight text-white">
+              Give back to your
+              <br />
               <span className="font-normal text-emerald-200 italic">
                 Alma Mater
               </span>

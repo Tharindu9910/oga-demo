@@ -4,8 +4,32 @@ import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { getAboutPage } from '@/content/queries'
 
+type TeamMember = { name: string; role: string }
+
+function groupByRole(members: TeamMember[]) {
+  const order: string[] = []
+  const byRole = new Map<string, TeamMember[]>()
+  for (const member of members) {
+    if (!byRole.has(member.role)) {
+      order.push(member.role)
+      byRole.set(member.role, [])
+    }
+    byRole.get(member.role)!.push(member)
+  }
+  return order.map((role) => ({ role, members: byRole.get(role)! }))
+}
+
 export default async function AboutPage() {
   const about = await getAboutPage()
+
+  const patronGroups = groupByRole(about.team.patrons)
+  const committeeGroups = groupByRole(about.team.committee)
+  const committeeLeaders = committeeGroups.filter(
+    (group) => group.members.length === 1,
+  )
+  const committeeGroupedRoles = committeeGroups.filter(
+    (group) => group.members.length > 1,
+  )
 
   return (
     <>
@@ -35,6 +59,23 @@ export default async function AboutPage() {
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
+          </div>
+        </Container>
+      </section>
+
+       {/* Our Story video */}
+      <section className="bg-white px-6 pb-16 lg:px-16">
+        <Container className="max-w-4xl">
+          <div className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
+            <video
+              controls
+              playsInline
+              preload="none"
+              poster={about.video.poster.src}
+              className="w-full"
+            >
+              <source src={about.video.src} type="video/mp4" />
+            </video>
           </div>
         </Container>
       </section>
@@ -76,7 +117,7 @@ export default async function AboutPage() {
             Message from the President
           </SectionHeading>
           <div className="border-brand-700 relative mt-10 overflow-hidden rounded-[32px] border border-[#d9e6df] bg-white p-10 shadow-lg">
-            <div className="bg-brand-700 absolute inset-y-0 left-0 w-2" />
+            {/* <div className="bg-brand-700 absolute inset-y-0 left-0 w-2" /> */}
             <div className="flex flex-col gap-4 pl-2">
               {about.president.message.map((paragraph, i) => (
                 <p
@@ -117,61 +158,66 @@ export default async function AboutPage() {
               </span>
             </div>
             <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+              <div className="flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
                 <h3 className="font-poppins border-b border-stone-100 pb-4 text-2xl text-stone-950">
                   Patrons
                 </h3>
-                <ul className="mt-6 flex flex-col gap-2.5">
-                  {about.team.patrons.map((member) => (
-                    <li
-                      key={member.name}
-                      className="font-plus-jakarta-sans flex items-baseline gap-2 text-stone-600"
-                    >
-                      <span className="font-poppins text-xs font-bold tracking-[0.5px] text-stone-500 uppercase">
-                        {member.role}:
-                      </span>{' '}
-                      {member.name}
-                    </li>
+                <div className="mt-6 flex flex-col gap-6">
+                  {patronGroups.map(({ role, members }) => (
+                    <div key={role}>
+                      <h4 className="font-poppins text-xs font-bold tracking-[0.5px] text-stone-500 uppercase">
+                        {members.length > 1 ? `${role}s` : role}
+                      </h4>
+                      <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-stone-400">
+                        {members.map((member) => (
+                          <li
+                            key={member.name}
+                            className="font-plus-jakarta-sans text-stone-600"
+                          >
+                            {member.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
-              <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
+              <div className="flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
                 <h3 className="font-poppins border-b border-stone-100 pb-4 text-2xl text-stone-950">
                   OGA Committee
                 </h3>
-                <ul className="mt-6 flex flex-col gap-2.5">
-                  {about.team.committee.map((member) => (
-                    <li
-                      key={member.name}
-                      className="font-plus-jakarta-sans flex items-baseline gap-2 text-stone-600"
+                <div className="mt-6 flex flex-col gap-3">
+                  {committeeLeaders.map(({ role, members }) => (
+                    <p
+                      key={role}
+                      className="font-plus-jakarta-sans text-stone-600"
                     >
                       <span className="font-poppins text-xs font-bold tracking-[0.5px] text-stone-500 uppercase">
-                        {member.role}:
+                        {role}
                       </span>{' '}
-                      {member.name}
-                    </li>
+                      - {members[0].name}
+                    </p>
                   ))}
-                </ul>
+                </div>
+                {committeeGroupedRoles.map(({ role, members }) => (
+                  <div key={role} className="mt-6">
+                    <h4 className="font-poppins text-xs font-bold tracking-[0.5px] text-stone-500 uppercase">
+                      {role}s
+                    </h4>
+                    <ul className="mt-3 list-disc space-y-2 pl-5 marker:text-stone-400">
+                      {members.map((member) => (
+                        <li
+                          key={member.name}
+                          className="font-plus-jakarta-sans text-stone-600"
+                        >
+                          {member.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Our Story video */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
-        <Container className="max-w-4xl">
-          <SectionHeading align="center">Our Story</SectionHeading>
-          <div className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
-            <video
-              controls
-              playsInline
-              preload="none"
-              poster={about.video.poster.src}
-              className="w-full"
-            >
-              <source src={about.video.src} type="video/mp4" />
-            </video>
           </div>
         </Container>
       </section>
@@ -179,13 +225,13 @@ export default async function AboutPage() {
       {/* Tribute to the founder */}
       <section className="bg-white px-6 py-16 lg:px-16">
         <Container className="max-w-5xl">
-          <div className="bg-brand-950 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
+          <div className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
             <Image
               src={about.founderTribute.photo.src}
               alt={about.founderTribute.photo.alt}
               width={246}
               height={290}
-              className="w-48 shrink-0 rounded-2xl border border-amber-200/40 object-cover shadow-xl sm:w-62"
+              className="w-48 shrink-0 rounded-2xl border border-amber-200/40 object-cover shadow-xl grayscale sm:w-62"
             />
             <div className="flex flex-col gap-4 text-center sm:text-left">
               <h2 className="font-poppins text-3xl leading-tight font-bold text-white">
