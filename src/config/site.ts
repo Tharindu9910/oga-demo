@@ -11,7 +11,7 @@ export const siteConfig = {
   // Left empty until the client supplies these (see plans/plan.md, "Still
   // needed from you"). Components must render sensibly with an empty href.
   ctaUrls: {
-    becomeAMember: '',
+    becomeAMember: '/membership',
     activeVolunteer: '',
     donate: '',
     loyaltyWhatsapp: '',

@@ -7,7 +7,7 @@ const variantClasses = {
   dark: 'bg-brand-900 text-white hover:bg-brand-800',
   brand: 'bg-brand-600 text-white hover:bg-brand-700',
   light: 'bg-white text-brand-900 hover:bg-stone-100',
-  cream: 'bg-[#cbd9ce] text-stone-900 hover:bg-[#bcccc0]',
+  cream: 'bg-[#cbd9ce] text-black hover:bg-[#bcccc0]',
   glass:
     'border border-white/25 bg-white/10 text-white/95 backdrop-blur-[5px] hover:bg-white/20',
 } as const

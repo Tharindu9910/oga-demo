@@ -175,13 +175,13 @@ export default async function LoyaltyProgramPage() {
                   key={benefit.title}
                   className="flex flex-col items-center text-center"
                 >
-                  <div className="border-brand-800/10 flex size-[100px] items-center justify-center rounded-full border bg-gradient-to-br from-white to-emerald-100 shadow-[0_10px_25px_-5px_rgba(20,56,38,0.12)] sm:size-[120px]">
-                    <div className="bg-brand-900 flex size-[64px] items-center justify-center rounded-full p-4 sm:size-20">
+                  <div className="border-brand-800/10 flex size-25 items-center justify-center rounded-full border bg-gradient-to-br from-white to-emerald-100 shadow-[0_10px_25px_-5px_rgba(20,56,38,0.12)] sm:size-[120px]">
+                    <div className="bg-brand-900 flex size-24 items-center justify-center rounded-full p-4 sm:size-26">
                       <Image
                         src={benefit.icon.src}
                         alt={benefit.icon.alt}
-                        width={56}
-                        height={56}
+                        width={100}
+                        height={100}
                         className="size-full object-contain"
                       />
                     </div>
@@ -214,13 +214,14 @@ export default async function LoyaltyProgramPage() {
               {loyalty.merchants.map((merchant) => (
                 <div
                   key={merchant._key}
-                  className="flex h-[110px] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/95 p-4 sm:h-[130px]"
+                  className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl bg-white/95"
                 >
                   <SanityImage
                     image={merchant.logo}
                     width={200}
-                    height={130}
-                    className="max-h-full w-full object-contain"
+                    height={200}
+                    fit="max"
+                    className="size-full object-contain"
                   />
                 </div>
               ))}

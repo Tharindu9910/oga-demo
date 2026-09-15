@@ -6,6 +6,7 @@ import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import { siteConfig } from '@/config/site'
 import { getPastEvents, getUpcomingEvents } from '@/sanity/lib/content'
+import { LucideArrowRight } from 'lucide-react'
 
 function formatEventDate(date: string) {
   const d = new Date(date)
@@ -107,11 +108,14 @@ export default async function EventsPage() {
                         <h3 className="font-poppins text-lg font-bold tracking-tight text-stone-900">
                           {event.title}
                         </h3>
-                        {event.description && (
+                        {/* {event.description && (
                           <p className="font-plus-jakarta-sans text-sm text-stone-500">
                             {event.description}
                           </p>
-                        )}
+                        )} */}
+                        <p className="flex items-center gap-1 font-plus-jakarta-sans text-sm font-bold text-brand-600">
+                          Check out Event Highlights <LucideArrowRight size={14} />
+                        </p>
                         {link && (
                           <a
                             href={link.url}

@@ -7,7 +7,7 @@ export const projectsPage = defineType({
   fields: [
     defineField({
       name: 'dehiwala',
-      title: 'Dehiwala project',
+      title: 'Recent Project',
       type: 'object',
       fields: [
         defineField({

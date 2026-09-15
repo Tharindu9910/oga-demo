@@ -9,6 +9,7 @@ import { structure } from './src/sanity/structure'
 export default defineConfig({
   name: 'default',
   title: "ILMA International Old Girls' Association",
+  basePath: '/studio',
 
   projectId,
   dataset,

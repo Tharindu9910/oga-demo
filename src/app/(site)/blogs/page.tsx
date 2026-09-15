@@ -5,6 +5,7 @@ import Container from '@/components/ui/Container'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Skeleton from '@/components/ui/Skeleton'
 import {
   getPostBySlug,
   getPosts,
@@ -25,13 +26,7 @@ export default function BlogsPage({ searchParams }: PageProps<'/blogs'>) {
       <Container className="max-w-6xl">
         <SectionHeading align="center">Blogs & Feedback</SectionHeading>
 
-        <Suspense
-          fallback={
-            <p className="font-plus-jakarta-sans mt-10 text-center text-sm text-stone-400">
-              Loading blog posts…
-            </p>
-          }
-        >
+        <Suspense fallback={<BlogsSkeleton />}>
           <BlogsContent searchParams={searchParams} />
         </Suspense>
       </Container>
@@ -65,6 +60,26 @@ async function BlogsContent({
       <BlogCardsGrid posts={posts} activeSlug={activeSlug} />
       {activePost && <BlogView post={activePost} />}
     </>
+  )
+}
+
+function BlogsSkeleton() {
+  return (
+    <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div
+          key={i}
+          className="rounded-2xl border border-stone-200/70 bg-white p-4 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+        >
+          <Skeleton className="aspect-square w-full rounded-xl" />
+          <Skeleton className="mt-3 h-3 w-20" />
+          <Skeleton className="mt-2 h-6 w-4/5" />
+          <div className="mt-3 border-t border-stone-100 pt-3">
+            <Skeleton className="h-3 w-24" />
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }
 

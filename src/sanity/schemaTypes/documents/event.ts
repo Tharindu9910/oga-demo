@@ -19,24 +19,24 @@ export const event = defineType({
         'Whether the event shows as upcoming or past is worked out from this date automatically.',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'images',
-      title: 'Images',
-      type: 'array',
-      of: [defineArrayMember({ type: 'imageWithAlt' })],
-    }),
-    defineField({
-      name: 'links',
-      title: 'Links',
-      type: 'array',
-      of: [defineArrayMember({ type: 'eventLink' })],
-    }),
+    // defineField({
+    //   name: 'description',
+    //   title: 'Description',
+    //   type: 'text',
+    //   rows: 3,
+    // }),
+    // defineField({
+    //   name: 'images',
+    //   title: 'Images',
+    //   type: 'array',
+    //   of: [defineArrayMember({ type: 'imageWithAlt' })],
+    // }),
+    // defineField({
+    //   name: 'links',
+    //   title: 'Links',
+    //   type: 'array',
+    //   of: [defineArrayMember({ type: 'eventLink' })],
+    // }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'date', media: 'images.0' },

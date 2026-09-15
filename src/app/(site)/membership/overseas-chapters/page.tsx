@@ -46,7 +46,7 @@ export default async function OverseasChaptersPage() {
                 {(chapter.images ?? []).map((image) => (
                   <div
                     key={image._key}
-                    className="aspect-[4/3] overflow-hidden rounded-2xl border-[3px] border-white shadow-[0_4px_14px_0_rgba(0,0,0,0.25)]"
+                    className="aspect-[4/3] overflow-hidden rounded-2xl border-[2px] border-white shadow-[0_4px_14px_0_rgba(0,0,0,0.25)]"
                   >
                     <SanityImage
                       image={image}

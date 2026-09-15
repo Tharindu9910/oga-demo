@@ -11,12 +11,12 @@ export const chapter = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-    }),
+    // defineField({
+    //   name: 'description',
+    //   title: 'Description',
+    //   type: 'text',
+    //   rows: 3,
+    // }),
     defineField({
       name: 'images',
       title: 'Images',
