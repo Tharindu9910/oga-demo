@@ -108,7 +108,7 @@ export default function ActiveVolunteerPage() {
             {volunteerRoles.map((role) => (
               <div
                 key={role.label}
-                className="flex items-center gap-3.5 rounded-2xl border border-[rgba(6,78,59,0.1)] bg-[#c5d7cc]/60 px-5 py-4"
+                className="flex min-h-28 items-center gap-3.5 rounded-2xl border border-[rgba(6,78,59,0.1)] bg-[#c5d7cc]/60 px-5 py-4"
               >
                 <Image
                   src={role.icon}
