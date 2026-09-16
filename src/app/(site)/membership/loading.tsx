@@ -3,7 +3,7 @@ import Skeleton from '@/components/ui/Skeleton'
 
 export default function Loading() {
   return (
-    <section className="bg-white px-6 pt-32 pb-24 sm:pt-42 lg:px-16">
+    <section className="bg-white pt-32 pb-24 sm:pt-42">
       <Container className="max-w-5xl">
         <Skeleton className="mx-auto h-9 w-64 max-w-full" />
 

@@ -40,6 +40,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# sanity studio deploy build output
+/dist
+/.sanity
+
+# claude code local worktrees (personal, not shared with the team)
+.claude/worktrees
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -48,7 +48,7 @@ export default function NavDropdown({
         <svg
           viewBox="0 0 12 12"
           className={cn(
-            'size-3 transition-transform',
+            'size-3 transition-transform duration-200 ease-out',
             open && 'rotate-180',
           )}
           fill="none"
@@ -63,35 +63,36 @@ export default function NavDropdown({
         </svg>
       </button>
 
-      {open && (
-        <div
-          role="menu"
-          className="absolute top-full left-0 z-50 min-w-55 rounded-2xl border border-stone-100 bg-white p-2 shadow-lg"
-        >
-          {items.map((item) =>
-            item.href ? (
-              <Link
-                key={item.label}
-                href={item.href}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-700 hover:bg-stone-50"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <span
-                key={item.label}
-                aria-disabled="true"
-                role="menuitem"
-                className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-400"
-              >
-                {item.label}
-              </span>
-            ),
-          )}
-        </div>
-      )}
+      {/* Always rendered so it can animate out: `display` is transitioned
+          discretely, so it only flips to `none` after the fade/drop ends. */}
+      <div
+        role="menu"
+        data-open={open || undefined}
+        className="absolute top-full left-0 z-50 min-w-55 rounded-2xl border border-stone-100 bg-white p-2 shadow-lg transition-[opacity,translate,display] transition-discrete duration-200 ease-out not-data-open:hidden not-data-open:translate-y-1.5 not-data-open:opacity-0 motion-reduce:not-data-open:translate-y-0 starting:translate-y-1.5 starting:opacity-0 motion-reduce:starting:translate-y-0"
+      >
+        {items.map((item) =>
+          item.href ? (
+            <Link
+              key={item.label}
+              href={item.href}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-700 hover:bg-stone-50"
+            >
+              {item.label}
+            </Link>
+          ) : (
+            <span
+              key={item.label}
+              aria-disabled="true"
+              role="menuitem"
+              className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-400"
+            >
+              {item.label}
+            </span>
+          ),
+        )}
+      </div>
     </div>
   )
 }

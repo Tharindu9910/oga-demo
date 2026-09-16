@@ -49,6 +49,14 @@ export const projectsPage = defineType({
       ],
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'droneVideo',
+      title: 'Drone video',
+      description:
+        "Ilma International Girls' School drone video. Leave empty to show a “Video coming soon” placeholder.",
+      type: 'file',
+      options: { accept: 'video/*' },
+    }),
   ],
   preview: {
     prepare: () => ({ title: 'Projects page' }),

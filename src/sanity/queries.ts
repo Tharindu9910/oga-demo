@@ -11,7 +11,8 @@ export const aboutPageQuery = defineQuery(`*[_type == "aboutPage"][0]{
 }`)
 
 export const projectsPageQuery = defineQuery(`*[_type == "projectsPage"][0]{
-  dehiwala
+  dehiwala,
+  "droneVideo": droneVideo.asset->{url, mimeType}
 }`)
 
 export const membershipPageQuery = defineQuery(`*[_type == "membershipPage"][0]{

@@ -1,5 +1,8 @@
 import Image from 'next/image'
 
+import Enter from '@/components/motion/Enter'
+import Reveal from '@/components/motion/Reveal'
+import RevealStagger from '@/components/motion/RevealStagger'
 import Container from '@/components/ui/Container'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -81,13 +84,19 @@ export default async function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white px-6 pt-32 pb-16 sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-16 sm:pt-42">
         <Container className="max-w-4xl">
           <div className="flex flex-col items-center gap-5 text-center">
-            <h1 className="font-poppins text-5xl font-extrabold tracking-tight text-stone-950 sm:text-6xl">
+            <Enter
+              as="h1"
+              className="font-poppins text-5xl font-extrabold tracking-tight text-stone-950 sm:text-6xl"
+            >
               About Us
-            </h1>
-            <div className="flex flex-wrap items-center justify-center gap-2">
+            </Enter>
+            <Enter
+              delay={0.07}
+              className="flex flex-wrap items-center justify-center gap-2"
+            >
               {hero.badges.map((badge, i) => (
                 <span
                   key={badge}
@@ -100,20 +109,23 @@ export default async function AboutPage() {
                   {badge}
                 </span>
               ))}
-            </div>
-            <div className="font-plus-jakarta-sans mt-4 flex flex-col gap-5 text-lg text-stone-600">
+            </Enter>
+            <Enter
+              delay={0.14}
+              className="mx-2 sm:mx-0 font-plus-jakarta-sans mt-4 flex flex-col gap-5 text-lg text-stone-600"
+            >
               {hero.paragraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
-            </div>
+            </Enter>
           </div>
         </Container>
       </section>
 
       {/* Our Story video */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-4xl">
-          <div className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
+          <Reveal className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
             <video
               controls
               playsInline
@@ -123,14 +135,14 @@ export default async function AboutPage() {
             >
               <source src={video.src} type="video/mp4" />
             </video>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Vision & Mission */}
-      <section className="bg-[#fafbf9] px-6 pb-16 lg:px-16">
+      <section className="bg-[#fafbf9] pb-16">
         <Container className="max-w-5xl">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <RevealStagger className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {[vision, mission].map((card, i) => (
               <div
                 key={i}
@@ -153,17 +165,17 @@ export default async function AboutPage() {
                 </p>
               </div>
             ))}
-          </div>
+          </RevealStagger>
         </Container>
       </section>
 
       {/* Message from the President */}
-      <section className="bg-white px-6 py-16 lg:px-16">
+      <section className="bg-white py-16">
         <Container className="max-w-3xl">
           <SectionHeading align="center">
             Message from the President
           </SectionHeading>
-          <div className="border-brand-700 relative mt-10 overflow-hidden rounded-[32px] border border-[#d9e6df] bg-white p-10 shadow-lg">
+          <Reveal className="border-brand-700 relative mt-10 overflow-hidden rounded-[32px] border border-[#d9e6df] bg-white p-10 shadow-lg">
             {/* <div className="bg-brand-700 absolute inset-y-0 left-0 w-2" /> */}
             <div className="flex flex-col gap-4 pl-2">
               <PortableTextBody value={about.president.message} />
@@ -179,21 +191,21 @@ export default async function AboutPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Our Team */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-5xl">
-          <div className="rounded-[36px] border border-[#d9e6df] bg-[#eef5f1] p-8 sm:p-12">
+          <div className="rounded-[36px] border border-[#d9e6df] bg-[#eef5f1] p-5 sm:p-8 lg:p-12">
             <div className="flex flex-col items-center gap-3">
               <SectionHeading align="center">Our Team</SectionHeading>
               <span className="bg-brand-700 rounded-full px-3.5 py-1 font-mono text-xs font-bold tracking-[0.6px] text-white">
                 {about.team?.year}
               </span>
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <RevealStagger className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
               <div className="flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm">
                 <h3 className="font-poppins border-b border-stone-100 pb-4 text-2xl text-stone-950">
                   Patrons
@@ -253,15 +265,15 @@ export default async function AboutPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </RevealStagger>
           </div>
         </Container>
       </section>
 
       {/* Tribute to the founder */}
-      <section className="bg-white px-6 py-16 lg:px-16">
+      <section className="bg-white py-16">
         <Container className="max-w-5xl">
-          <div className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
+          <Reveal className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
             <Image
               src={founderTribute.photo.src}
               alt={founderTribute.photo.alt}
@@ -282,7 +294,7 @@ export default async function AboutPage() {
                 {founderTribute.quote}
               </blockquote>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

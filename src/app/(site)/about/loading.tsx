@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white px-6 pt-32 pb-16 sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-16 sm:pt-42">
         <Container className="max-w-4xl">
           <div className="flex flex-col items-center gap-5 text-center">
             <Skeleton className="h-14 w-64 max-w-full" />
@@ -24,14 +24,14 @@ export default function Loading() {
       </section>
 
       {/* Our Story video */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-4xl">
           <Skeleton className="mt-10 aspect-video w-full rounded-3xl" />
         </Container>
       </section>
 
       {/* Vision & Mission */}
-      <section className="bg-[#fafbf9] px-6 pb-16 lg:px-16">
+      <section className="bg-[#fafbf9] pb-16">
         <Container className="max-w-5xl">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {Array.from({ length: 2 }).map((_, i) => (
@@ -52,7 +52,7 @@ export default function Loading() {
       </section>
 
       {/* Message from the President */}
-      <section className="bg-white px-6 py-16 lg:px-16">
+      <section className="bg-white py-16">
         <Container className="max-w-3xl">
           <Skeleton className="mx-auto h-9 w-72 max-w-full" />
           <div className="mt-10 rounded-[32px] border border-[#d9e6df] bg-white p-10 shadow-lg">
@@ -71,9 +71,9 @@ export default function Loading() {
       </section>
 
       {/* Our Team */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-5xl">
-          <div className="rounded-[36px] border border-[#d9e6df] bg-[#eef5f1] p-8 sm:p-12">
+          <div className="rounded-[36px] border border-[#d9e6df] bg-[#eef5f1] p-5 sm:p-8 lg:p-12">
             <div className="flex flex-col items-center gap-3">
               <Skeleton className="h-9 w-40" />
               <Skeleton className="h-6 w-20 rounded-full" />
@@ -98,7 +98,7 @@ export default function Loading() {
       </section>
 
       {/* Tribute to the founder */}
-      <section className="bg-white px-6 py-16 lg:px-16">
+      <section className="bg-white py-16">
         <Container className="max-w-5xl">
           <div className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
             <Skeleton className="h-72 w-48 shrink-0 rounded-2xl bg-white/15 sm:w-62" />

@@ -16,8 +16,60 @@
   --color-brand-600: #1b4d3e;
   --color-brand-500: #2f6a40;
   --color-brand-400: #3c8e71;
+
+  /* Stronger ease-out than Tailwind's default — overrides the `ease-out`
+     utility so every entrance/press transition shares one curve. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Stronger ease-in-out than Tailwind's default — overrides the
+     `ease-in-out` utility for things that morph or move on screen rather
+     than enter/exit (icon morphs, tab indicators). */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* iOS-style drawer curve (Ionic) — panels that slide in from an edge. */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Softer quartic ease-out for scroll reveals and page entrances — the
+     reveal curve from the Nexone scaffold. Also mirrored as a JS constant in
+     `src/components/motion/variants.ts` for the Framer Motion entrances. */
+  --ease-reveal: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 body {
   font-family: var(--font-plus-jakarta-sans);
+}
+
+/* ============================================================
+   Motion. Site-wide entrances/reveals now run on Framer Motion (see
+   `src/components/motion/`) — the `<Enter>`/`<EnterStagger>`/`<Reveal>`/
+   `<RevealStagger>` wrapper components. The one holdout is `<PagedGrid>`
+   (`src/components/ui/PagedGrid.tsx`): its per-item entrance delay has to
+   differ by breakpoint (fewer cards visible on mobile than desktop), and
+   that can only be resolved by CSS media queries without a hydration flash
+   — a JS/`matchMedia` equivalent would briefly guess wrong on first paint.
+   `rise`/`fade` and `enter` below exist solely for that component. Only
+   `from` frames: the element animates back to its own computed
+   opacity/translate, so it never fights a utility like `-translate-y-2` on
+   the same element. */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--rise-distance, 32px);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@utility enter {
+  --rise-distance: 14px;
+  animation: rise 500ms var(--ease-reveal) var(--enter-delay, 0ms) backwards;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: fade;
+  }
 }

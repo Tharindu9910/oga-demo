@@ -106,7 +106,6 @@ export type Chapter = {
   _updatedAt: string
   _rev: string
   country: string
-  description?: string
   images?: Array<
     {
       _key: string
@@ -122,17 +121,6 @@ export type Event = {
   _rev: string
   title: string
   date: string
-  description?: string
-  images?: Array<
-    {
-      _key: string
-    } & ImageWithAlt
-  >
-  links?: Array<
-    {
-      _key: string
-    } & EventLink
-  >
 }
 
 export type Project = {
@@ -184,6 +172,13 @@ export type MembershipPage = {
   ctaLabel?: string
 }
 
+export type SanityFileAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
+
 export type ProjectsPage = {
   _id: string
   _type: 'projectsPage'
@@ -214,6 +209,11 @@ export type ProjectsPage = {
     image: ImageWithAlt
     highlightsLabel?: string
     highlightsUrl?: string
+  }
+  droneVideo?: {
+    asset?: SanityFileAssetReference
+    media?: unknown
+    _type: 'file'
   }
 }
 
@@ -410,6 +410,7 @@ export type AllSanitySchemaTypes =
   | Project
   | LoyaltyPage
   | MembershipPage
+  | SanityFileAssetReference
   | ProjectsPage
   | AboutPage
   | HomePage
@@ -488,7 +489,7 @@ export type AboutPageQueryResult = {
 
 // Source: src/sanity/queries.ts
 // Variable: projectsPageQuery
-// Query: *[_type == "projectsPage"][0]{  dehiwala}
+// Query: *[_type == "projectsPage"][0]{  dehiwala,  "droneVideo": droneVideo.asset->{url, mimeType}}
 export type ProjectsPageQueryResult = {
   dehiwala: {
     show?: boolean
@@ -515,6 +516,10 @@ export type ProjectsPageQueryResult = {
     highlightsLabel?: string
     highlightsUrl?: string
   }
+  droneVideo: {
+    url: string
+    mimeType: string
+  } | null
 } | null
 
 // Source: src/sanity/queries.ts
@@ -554,7 +559,7 @@ export type LoyaltyPageQueryResult = {
 export type ChaptersQueryResult = Array<{
   _id: string
   country: string
-  description: string | null
+  description: null
   images: Array<
     {
       _key: string
@@ -582,17 +587,9 @@ export type UpcomingEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
-  description: string | null
-  images: Array<
-    {
-      _key: string
-    } & ImageWithAlt
-  > | null
-  links: Array<
-    {
-      _key: string
-    } & EventLink
-  > | null
+  description: null
+  images: null
+  links: null
 }>
 
 // Source: src/sanity/queries.ts
@@ -602,17 +599,9 @@ export type PastEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
-  description: string | null
-  images: Array<
-    {
-      _key: string
-    } & ImageWithAlt
-  > | null
-  links: Array<
-    {
-      _key: string
-    } & EventLink
-  > | null
+  description: null
+  images: null
+  links: null
 }>
 
 // Source: src/sanity/queries.ts
@@ -670,7 +659,7 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "homePage"][0]{\n  hero,\n  milestones\n}': HomePageQueryResult
     '*[_type == "aboutPage"][0]{\n  president,\n  team\n}': AboutPageQueryResult
-    '*[_type == "projectsPage"][0]{\n  dehiwala\n}': ProjectsPageQueryResult
+    '*[_type == "projectsPage"][0]{\n  dehiwala,\n  "droneVideo": droneVideo.asset->{url, mimeType}\n}': ProjectsPageQueryResult
     '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel\n}': MembershipPageQueryResult
     '*[_type == "loyaltyPage"][0]{\n  merchants\n}': LoyaltyPageQueryResult
     '*[_type == "chapter"]{\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult

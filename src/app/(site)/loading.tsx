@@ -43,7 +43,7 @@ export default function Loading() {
 
       {/* Ongoing Projects */}
       <section className="bg-white px-6 py-14 lg:px-24">
-        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-8 sm:p-12">
+        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
           <div className="flex items-end justify-between gap-4">
             <Skeleton className="h-9 w-52" />
             <Skeleton className="h-9 w-28 rounded-full" />
@@ -108,7 +108,7 @@ export default function Loading() {
 
       {/* Past Event Highlights */}
       <section className="bg-white px-6 py-14 lg:px-16">
-        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-8 sm:p-12">
+        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
           <div className="flex items-end justify-between gap-4">
             <Skeleton className="h-9 w-64" />
             <Skeleton className="h-9 w-28 rounded-full" />

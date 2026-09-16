@@ -1,5 +1,8 @@
 import Image from 'next/image'
 
+import Enter from '@/components/motion/Enter'
+import EnterStagger from '@/components/motion/EnterStagger'
+import Reveal from '@/components/motion/Reveal'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
@@ -91,23 +94,29 @@ const chevron = (
 
 export default function FaqPage() {
   return (
-    <section className="bg-white px-6 pt-32 pb-24 sm:pt-42 lg:px-16">
+    <section className="bg-white pt-32 pb-24 sm:pt-42">
       <Container className="max-w-3xl">
-        <h1 className="font-poppins text-brand-900 text-center text-4xl font-bold tracking-tight sm:text-5xl">
+        <Enter
+          as="h1"
+          className="font-poppins text-brand-900 text-center text-4xl font-bold tracking-tight sm:text-5xl"
+        >
           Frequently Asked Questions
-        </h1>
+        </Enter>
 
-        <div className="mt-12 flex flex-col gap-4">
+        <EnterStagger delay={0.07} className="mt-12 flex flex-col gap-4">
           {faqs.map((faq) => (
+            // Animates the native panel open/closed. Browsers without
+            // `interpolate-size` just fade; without `::details-content` they
+            // snap open as before.
             <details
               key={faq._id}
-              className="group rounded-2xl border border-stone-200 bg-white p-1"
+              className="group rounded-2xl border border-stone-200 bg-white p-1 [interpolate-size:allow-keywords] details-content:h-0 details-content:overflow-clip details-content:opacity-0 details-content:[transition:height_340ms_var(--ease-out),opacity_220ms_var(--ease-out),content-visibility_340ms_allow-discrete] open:details-content:h-auto open:details-content:opacity-100 motion-reduce:details-content:[transition:opacity_220ms_var(--ease-out),content-visibility_220ms_allow-discrete]"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-4">
                 <span className="font-poppins text-lg font-semibold text-stone-900">
                   {faq.question}
                 </span>
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-stone-100 transition-transform group-open:rotate-180">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-stone-100 transition-transform duration-200 ease-out group-open:rotate-180">
                   {chevron}
                 </span>
               </summary>
@@ -116,9 +125,12 @@ export default function FaqPage() {
               </p>
             </details>
           ))}
-        </div>
+        </EnterStagger>
 
-        <div className="border-brand-800/10 mt-12 flex flex-col items-center gap-6 rounded-3xl border bg-linear-to-br from-emerald-50/60 via-white to-stone-50 px-8 py-10 text-center shadow-sm sm:flex-row sm:justify-between sm:text-left">
+        <Reveal
+          variant="scale"
+          className="border-brand-800/10 mt-12 flex flex-col items-center gap-6 rounded-3xl border bg-linear-to-br from-emerald-50/60 via-white to-stone-50 px-6 py-8 text-center shadow-sm sm:flex-row sm:justify-between sm:px-8 sm:py-10 sm:text-left"
+        >
           <h2 className="font-poppins text-brand-950 text-2xl font-bold">
             Still have
             <br />
@@ -134,7 +146,7 @@ export default function FaqPage() {
             </Button>
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="font-poppins inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-5 py-3.5 text-sm font-medium text-stone-800 transition-colors hover:bg-stone-50"
+              className="font-poppins inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-5 py-3.5 text-sm font-medium text-stone-800 transition-[color,background-color,scale] duration-160 ease-out hover:bg-stone-50 active:scale-97 motion-reduce:active:scale-99"
             >
               <Image
                 src="/icons/email.svg"
@@ -146,7 +158,7 @@ export default function FaqPage() {
               Email Support
             </a>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   )

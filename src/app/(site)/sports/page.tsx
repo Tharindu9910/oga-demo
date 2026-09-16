@@ -1,5 +1,8 @@
 import Image from 'next/image'
 
+import Enter from '@/components/motion/Enter'
+import Reveal from '@/components/motion/Reveal'
+import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
@@ -42,34 +45,40 @@ const sportsSections = [
 export default function SportsPage() {
   return (
     <>
-      <section className="bg-white px-6 pt-32 pb-12 text-center sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-12 text-center sm:pt-42">
         <Container className="max-w-3xl">
-          <h1 className="font-poppins text-brand-900 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <Enter
+            as="h1"
+            className="font-poppins text-brand-900 text-4xl font-extrabold tracking-tight sm:text-5xl"
+          >
             Sports
-          </h1>
-          <div className="font-plus-jakarta-sans mt-5 flex flex-col gap-4 text-sm text-stone-600 sm:text-base">
+          </Enter>
+          <Enter
+            delay={0.07}
+            className="p-2 sm:p-0 font-plus-jakarta-sans mt-5 flex flex-col gap-4 text-sm text-stone-600 sm:text-base"
+          >
             <p>
               Whether you&apos;re aiming for a competitive win or just looking
               to have fun with friends, the OGA sports calendar has something
               for everyone.
             </p>
             <p>
-              The Old Girls&apos; Association hosts three exciting sports
-              events on a rotational basis — Netball, Badminton, and the
-              Sports Carnival — giving members the chance to stay active,
-              enjoy friendly competition, and reconnect with friends.
+              The Old Girls&apos; Association hosts three exciting sports events
+              on a rotational basis — Netball, Badminton, and the Sports
+              Carnival — giving members the chance to stay active, enjoy
+              friendly competition, and reconnect with friends.
             </p>
             <p>
-              All events are played in two categories, Under 30 and Over 30,
-              so everyone has an opportunity to participate. Event updates,
-              registration details, and try-out notices are shared via the
-              OGA WhatsApp community and our social media page.
+              All events are played in two categories, Under 30 and Over 30, so
+              everyone has an opportunity to participate. Event updates,
+              registration details, and try-out notices are shared via the OGA
+              WhatsApp community and our social media page.
             </p>
-          </div>
+          </Enter>
         </Container>
       </section>
 
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-6xl">
           <div className="flex flex-col gap-8">
             {sportsSections.map((sport, i) => (
@@ -77,7 +86,7 @@ export default function SportsPage() {
                 key={sport.title}
                 className={`flex flex-col gap-6 lg:items-stretch lg:gap-6 ${i % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
               >
-                <div className="overflow-hidden rounded-[28px] border-4 border-slate-900/80 shadow-2xl lg:w-2/5">
+                <Reveal className="overflow-hidden rounded-[28px] border-4 border-slate-900/80 shadow-2xl lg:w-2/5">
                   <Image
                     src={sport.image}
                     alt={sport.alt}
@@ -85,9 +94,12 @@ export default function SportsPage() {
                     height={480}
                     className="h-full w-full object-cover"
                   />
-                </div>
+                </Reveal>
 
-                <div className="bg-brand-600 flex flex-1 flex-col justify-center gap-5 rounded-[24px] px-8 py-10 sm:px-12 sm:py-12">
+                <Reveal
+                  delay={0.15}
+                  className="bg-brand-600 flex flex-1 flex-col justify-center gap-5 rounded-[24px] px-6 py-8 sm:px-12 sm:py-12"
+                >
                   <h2 className="font-poppins text-3xl font-extrabold tracking-tight text-white uppercase sm:text-[40px]">
                     {sport.title}
                   </h2>
@@ -107,23 +119,26 @@ export default function SportsPage() {
                       variant="light"
                       className="px-5 py-2.5 text-xs"
                     >
-                      Join Us <span aria-hidden="true">→</span>
+                      Join Us <Arrow />
                     </Button>
                   </div>
-                </div>
+                </Reveal>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-white px-6 pb-24 lg:px-16">
+      <section className="bg-white pb-24">
         <Container className="max-w-4xl">
-          <div className="flex flex-col items-center gap-2 rounded-[32px] border border-emerald-900/10 bg-[#eef4f0] px-8 py-12 text-center shadow-sm sm:px-12">
+          <Reveal
+            variant="scale"
+            className="flex flex-col items-center gap-2 rounded-[32px] border border-emerald-900/10 bg-[#eef4f0] px-6 py-10 text-center shadow-sm sm:px-12 sm:py-12"
+          >
             <p className="font-poppins text-xl tracking-tight text-slate-600 sm:text-2xl">
               So, whether you&apos;re picking up a racket, lacing up your
-              trainers, or simply cheering from the sidelines — come be part
-              of the action and keep the
+              trainers, or simply cheering from the sidelines — come be part of
+              the action and keep the
             </p>
             <p className="font-poppins text-brand-900 text-3xl font-extrabold tracking-tight sm:text-4xl">
               OGA sporting spirit
@@ -144,7 +159,7 @@ export default function SportsPage() {
                 </span>
               </Button>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

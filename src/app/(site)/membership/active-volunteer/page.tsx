@@ -1,5 +1,9 @@
 import Image from 'next/image'
 
+import Enter from '@/components/motion/Enter'
+import EnterStagger from '@/components/motion/EnterStagger'
+import Reveal from '@/components/motion/Reveal'
+import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import { siteConfig } from '@/config/site'
@@ -81,18 +85,26 @@ export default function ActiveVolunteerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white px-6 pt-32 pb-16 sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-16 sm:pt-42">
         <Container className="max-w-3xl">
           <div className="flex flex-col items-center gap-6 text-center">
-            <h1 className="font-poppins text-brand-950 text-5xl font-extrabold tracking-tight sm:text-6xl">
+            <Enter
+              as="h1"
+              className="font-poppins text-brand-950 text-5xl font-extrabold tracking-tight sm:text-6xl"
+            >
               Be an Active Volunteer
-            </h1>
-            <Button href={siteConfig.ctaUrls.activeVolunteer} variant="dark">
-              Join Us Now <span aria-hidden="true">→</span>
-            </Button>
+            </Enter>
+            <Enter delay={0.07}>
+              <Button href={siteConfig.ctaUrls.activeVolunteer} variant="dark">
+                Join Us Now <Arrow />
+              </Button>
+            </Enter>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <EnterStagger
+            delay={0.14}
+            className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {volunteerRoles.map((role) => (
               <div
                 key={role.label}
@@ -110,27 +122,35 @@ export default function ActiveVolunteerPage() {
                 </span>
               </div>
             ))}
-          </div>
+          </EnterStagger>
         </Container>
       </section>
 
       {/* Volunteer-driven events */}
-      <section className="bg-white px-6 pb-24 lg:px-16">
+      <section className="bg-white pb-24">
         <Container className="max-w-6xl">
           <div className="rounded-[40px] border border-[rgba(6,78,59,0.1)] bg-[#edf4f0]/80 px-6 py-10 shadow-sm sm:px-12 sm:py-12">
             <div className="flex items-end justify-between gap-4">
-              <h2 className="font-poppins text-brand-950 text-3xl font-extrabold tracking-tight sm:text-[42px]">
+              <Reveal
+                as="h2"
+                className="font-poppins text-brand-950 text-3xl font-extrabold tracking-tight sm:text-[42px]"
+              >
                 Events
-              </h2>
+              </Reveal>
             </div>
 
-            <div className="mt-8 -mx-6 flex snap-x snap-mandatory gap-7 overflow-x-auto px-6 pb-4 sm:mx-0 sm:grid sm:grid-cols-4 sm:gap-7 sm:overflow-visible sm:px-0">
+            {/* Revealed as one strip: per-item reveals would fade circles
+                in mid-swipe. */}
+            <Reveal
+              as="div"
+              className="mt-8 grid grid-cols-2 gap-7 sm:grid-cols-4"
+            >
               {volunteerEvents.map((event) => (
                 <div
                   key={event.label}
-                  className="flex w-35 shrink-0 snap-start flex-col items-center gap-4 sm:w-auto"
+                  className="flex flex-col items-center gap-4"
                 >
-                  <div className="border-brand-800/10 bg-linear-to-br size-35 rounded-full border from-white to-emerald-100 p-1.5 shadow-[0_10px_25px_-5px_rgba(20,56,38,0.12)]">
+                  <div className="border-brand-800/10 size-35 rounded-full border bg-linear-to-br from-white to-emerald-100 p-1.5 shadow-[0_10px_25px_-5px_rgba(20,56,38,0.12)]">
                     <Image
                       src={event.image}
                       alt={event.alt}
@@ -144,7 +164,7 @@ export default function ActiveVolunteerPage() {
                   </span>
                 </div>
               ))}
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>

@@ -6,7 +6,7 @@ const sectionBg = ['bg-[#14271f]', 'bg-brand-600', 'bg-[#14271f]'] as const
 export default function Loading() {
   return (
     <>
-      <section className="bg-[#14271f] px-6 pt-32 pb-12 text-center sm:pt-42 lg:px-16">
+      <section className="bg-[#14271f] pt-32 pb-12 text-center sm:pt-42">
         <Container className="max-w-3xl">
           <Skeleton className="mx-auto h-12 w-72 max-w-full bg-white/10" />
         </Container>

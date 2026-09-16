@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import RevealStagger from '@/components/motion/RevealStagger'
+import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -16,15 +18,15 @@ function formatEventDate(date: string) {
 export default function PastEventsSection({ events }: { events: Event[] }) {
   return (
     <section className="bg-white px-6 py-14 lg:px-16">
-      <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-8 sm:p-12">
-        <div className="flex items-end justify-between gap-4">
+      <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
+        <div className="flex items-center justify-center gap-4 sm:items-end sm:justify-between">
           <SectionHeading>Past Event Highlights</SectionHeading>
           <Button
             href="/events"
             variant="brand"
-            className="px-5 py-2.5 text-xs"
+            className="hidden px-5 py-2.5 text-xs sm:inline-flex"
           >
-            See more <span aria-hidden="true">→</span>
+            See more <Arrow />
           </Button>
         </div>
 
@@ -33,7 +35,7 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
             No past events to show yet.
           </p>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <RevealStagger className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {events.map((event) => {
               const { month, day } = formatEventDate(event.date)
               const image = event.images?.[0]
@@ -59,24 +61,29 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
                         {day}
                       </span>
                     </div>
-                    <div>
-                      <h3 className="font-poppins text-lg font-bold text-stone-900">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-poppins truncate text-lg font-bold text-stone-900">
                         {event.title}
                       </h3>
                       <Link
                         href="/events"
-                        className="font-poppins text-brand-600 mt-1 inline-flex items-center gap-1 text-xs font-semibold"
+                        className="group font-poppins text-brand-600 mt-1 inline-flex items-center gap-1 text-xs font-semibold"
                       >
-                        Check out Event Highlights{' '}
-                        <span aria-hidden="true">→</span>
+                        Check out Event Highlights <Arrow />
                       </Link>
                     </div>
                   </div>
                 </article>
               )
             })}
-          </div>
+          </RevealStagger>
         )}
+
+        <div className="mt-8 flex justify-center sm:hidden">
+          <Button href="/events" variant="brand" className="px-5 py-2.5 text-xs">
+            See more <Arrow />
+          </Button>
+        </div>
       </div>
     </section>
   )

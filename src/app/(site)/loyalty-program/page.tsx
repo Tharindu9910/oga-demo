@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+import Enter from '@/components/motion/Enter'
+import RevealStagger from '@/components/motion/RevealStagger'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
@@ -101,10 +103,10 @@ export default async function LoyaltyProgramPage() {
 
   return (
     <>
-      <section className="bg-white px-6 pt-32 pb-16 sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-16 px-5 sm:pt-42">
         <Container className="max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            <div>
+            <Enter>
               <h1 className="font-poppins text-brand-900 text-4xl font-extrabold tracking-tight sm:text-5xl">
                 {hero.headline}
               </h1>
@@ -135,7 +137,7 @@ export default async function LoyaltyProgramPage() {
                 </p>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 flex justify-center sm:justify-start">
                 <Button
                   href={siteConfig.ctaUrls.loyaltyWhatsapp}
                   className="gap-3 bg-[#25d366] px-7 py-3.5 text-white shadow-[0_4px_7px_0_rgba(37,211,102,0.35)] hover:bg-[#20bd5a]"
@@ -144,9 +146,9 @@ export default async function LoyaltyProgramPage() {
                   {hero.ctaLabel}
                 </Button>
               </div>
-            </div>
+            </Enter>
 
-            <div className="flex justify-center">
+            <Enter delay={0.14} className="flex justify-center">
               <div className="w-full max-w-md overflow-hidden rounded-[22px] border border-emerald-900/20 shadow-[0_30px_60px_-20px_rgba(17,58,44,0.18)]">
                 <Image
                   src={hero.card.src}
@@ -156,20 +158,22 @@ export default async function LoyaltyProgramPage() {
                   className="w-full object-cover"
                 />
               </div>
-            </div>
+            </Enter>
           </div>
         </Container>
       </section>
 
-      <section className="bg-white px-6 pb-20 lg:px-16">
+      <section className="bg-white pb-20">
         <Container className="max-w-6xl">
           <div className="rounded-[40px] border border-emerald-900/10 bg-[#edf4f0] px-6 py-12 sm:px-10 sm:py-14">
-            <SectionHeading>{whyPartner.heading}</SectionHeading>
-            <p className="font-plus-jakarta-sans mt-2 max-w-xl text-lg text-stone-500">
+            <SectionHeading className="text-center sm:text-left">
+              {whyPartner.heading}
+            </SectionHeading>
+            <p className="font-plus-jakarta-sans mx-auto mt-2 max-w-xl text-center text-lg text-stone-500 sm:mx-0 sm:text-left">
               {whyPartner.subheading}
             </p>
 
-            <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
+            <RevealStagger className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
               {whyPartner.benefits.map((benefit) => (
                 <div
                   key={benefit.title}
@@ -194,12 +198,12 @@ export default async function LoyaltyProgramPage() {
                   </p>
                 </div>
               ))}
-            </div>
+            </RevealStagger>
           </div>
         </Container>
       </section>
 
-      <section className="bg-brand-700 border-t border-emerald-950/40 px-6 py-20 lg:px-16">
+      <section className="bg-brand-700 border-t border-emerald-950/40 py-20">
         <Container className="max-w-5xl">
           <SectionHeading align="center" tone="light">
             {merchantsHeading}
@@ -210,7 +214,7 @@ export default async function LoyaltyProgramPage() {
               No merchant partners listed yet — check back soon.
             </p>
           ) : (
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            <RevealStagger className="px-5 mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
               {loyalty.merchants.map((merchant) => (
                 <div
                   key={merchant._key}
@@ -225,7 +229,7 @@ export default async function LoyaltyProgramPage() {
                   />
                 </div>
               ))}
-            </div>
+            </RevealStagger>
           )}
         </Container>
       </section>

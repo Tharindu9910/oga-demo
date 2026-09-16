@@ -27,9 +27,15 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    'inline-flex items-center justify-center gap-1.5 rounded-full px-7 py-3 font-poppins text-sm font-semibold tracking-[0.35px] whitespace-nowrap transition-colors',
+    'inline-flex items-center justify-center gap-1.5 rounded-full px-7 py-3 font-poppins text-sm font-semibold tracking-[0.35px] whitespace-nowrap transition-[color,background-color,scale] duration-160 ease-out',
     variantClasses[variant],
     className,
+  )
+  // Only real links press in and nudge their <Arrow />; the disabled
+  // placeholder below stays still.
+  const linkClasses = cn(
+    'group active:scale-98 motion-reduce:active:scale-99',
+    classes,
   )
 
   if (!href) {
@@ -52,7 +58,7 @@ export default function Button({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={classes}
+        className={linkClasses}
         {...props}
       >
         {children}
@@ -61,7 +67,7 @@ export default function Button({
   }
 
   return (
-    <Link href={href} className={classes} {...props}>
+    <Link href={href} className={linkClasses} {...props}>
       {children}
     </Link>
   )

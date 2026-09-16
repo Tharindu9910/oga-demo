@@ -1,7 +1,10 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 
+import Enter from '@/components/motion/Enter'
+import Arrow from '@/components/ui/Arrow'
 import Container from '@/components/ui/Container'
+import PagedGrid from '@/components/ui/PagedGrid'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -22,9 +25,11 @@ function formatPublishedDate(date: string) {
 
 export default function BlogsPage({ searchParams }: PageProps<'/blogs'>) {
   return (
-    <section className="bg-white px-6 pt-32 pb-24 sm:pt-42 lg:px-16">
+    <section className="bg-white pt-32 pb-24 sm:pt-42">
       <Container className="max-w-6xl">
-        <SectionHeading align="center">Blogs & Feedback</SectionHeading>
+        <SectionHeading align="center" enter>
+          Blogs & Feedback
+        </SectionHeading>
 
         <Suspense fallback={<BlogsSkeleton />}>
           <BlogsContent searchParams={searchParams} />
@@ -58,18 +63,21 @@ async function BlogsContent({
   return (
     <>
       <BlogCardsGrid posts={posts} activeSlug={activeSlug} />
-      {activePost && <BlogView post={activePost} />}
+      {/* Keyed so switching posts remounts the view and replays its entrance. */}
+      {activePost && <BlogView key={activePost.slug} post={activePost} />}
     </>
   )
 }
 
 function BlogsSkeleton() {
   return (
-    <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {Array.from({ length: 4 }).map((_, i) => (
+    <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+      {Array.from({ length: 8 }).map((_, i) => (
         <div
           key={i}
-          className="rounded-2xl border border-stone-200/70 bg-white p-4 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]"
+          className={`rounded-xl border border-stone-200/70 bg-white p-2.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] sm:rounded-2xl sm:p-4 ${
+            i >= 4 ? 'hidden lg:block' : ''
+          }`}
         >
           <Skeleton className="aspect-square w-full rounded-xl" />
           <Skeleton className="mt-3 h-3 w-20" />
@@ -91,59 +99,64 @@ function BlogCardsGrid({
   activeSlug: string
 }) {
   return (
-    <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {posts.map((post) => {
-        const isActive = post.slug === activeSlug
+    <PagedGrid
+      initialIndex={posts.findIndex((post) => post.slug === activeSlug)}
+      items={posts.map((post) => ({
+        id: post._id,
+        content: <BlogCard post={post} isActive={post.slug === activeSlug} />,
+      }))}
+    />
+  )
+}
 
-        return (
-          <article
-            key={post._id}
-            className={`rounded-2xl border bg-white p-4 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] ${
-              isActive ? 'border-brand-500' : 'border-stone-200/70'
-            }`}
-          >
-            <div className="aspect-square overflow-hidden rounded-xl bg-stone-100">
-              <SanityImage
-                image={post.coverImage}
-                width={400}
-                height={400}
-                className="size-full object-cover"
-              />
-            </div>
-            <p className="font-poppins mt-3 text-xs text-stone-400">
-              {formatPublishedDate(post.publishedAt)}
-            </p>
-            <h2 className="font-poppins mt-1 line-clamp-2 text-lg font-semibold text-stone-900">
-              {post.title}
-            </h2>
-            <div className="mt-3 border-t border-stone-100 pt-3">
-              <Link
-                href={`/blogs?post=${post.slug}#blog-view`}
-                className="font-poppins text-brand-800 inline-flex items-center gap-1 text-xs font-medium"
-              >
-                Read Article <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </article>
-        )
-      })}
-    </div>
+function BlogCard({ post, isActive }: { post: Post; isActive: boolean }) {
+  return (
+    <article
+      className={`h-full rounded-xl border bg-white p-2.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-colors duration-200 sm:rounded-2xl sm:p-4 ${
+        isActive ? 'border-brand-500' : 'border-stone-200/70'
+      }`}
+    >
+      <div className="aspect-square overflow-hidden rounded-lg bg-stone-100 sm:rounded-xl">
+        <SanityImage
+          image={post.coverImage}
+          width={400}
+          height={400}
+          className="size-full object-cover"
+        />
+      </div>
+      <p className="font-poppins mt-2 text-[11px] text-stone-400 sm:mt-3 sm:text-xs">
+        {formatPublishedDate(post.publishedAt)}
+      </p>
+      <h2 className="font-poppins mt-1 truncate text-sm font-semibold text-stone-900 sm:text-lg">
+        {post.title}
+      </h2>
+      <div className="mt-2 border-t border-stone-100 pt-2 sm:mt-3 sm:pt-3">
+        <Link
+          href={`/blogs?post=${post.slug}#blog-view`}
+          className="group font-poppins text-brand-800 inline-flex items-center gap-1 text-xs font-medium"
+        >
+          Read Article <Arrow />
+        </Link>
+      </div>
+    </article>
   )
 }
 
 function BlogView({ post }: { post: PostDetail }) {
   return (
-    <div
-      id="blog-view"
-      className="mt-16 scroll-mt-28 rounded-3xl bg-emerald-50 px-6 py-12 sm:px-14 sm:py-16"
-    >
-      <h2 className="font-poppins mx-auto max-w-3xl text-center text-2xl leading-tight font-bold tracking-tight text-stone-900 uppercase sm:text-3xl">
-        {post.title}
-      </h2>
+    <Enter as="div" className="mt-16 rounded-3xl bg-emerald-50 px-6 py-12 sm:px-14 sm:py-16">
+      <div id="blog-view" className="scroll-mt-28">
+        <h2 className="font-poppins mx-auto max-w-3xl text-center text-2xl leading-tight font-bold tracking-tight text-stone-900 uppercase sm:text-3xl">
+          {post.title}
+        </h2>
 
-      <div className="mx-auto mt-10 max-w-3xl">
-        <PortableTextBody value={post.body} />
+        <div className="mx-auto mt-10 max-w-3xl">
+          <PortableTextBody
+            value={post.body}
+            className="[&_img]:mx-auto [&_img]:max-w-md"
+          />
+        </div>
       </div>
-    </div>
+    </Enter>
   )
 }

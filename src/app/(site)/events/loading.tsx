@@ -5,14 +5,14 @@ export default function Loading() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white px-6 pt-32 pb-8 sm:pt-42 lg:px-16">
+      <section className="bg-white pt-32 pb-8 sm:pt-42">
         <Container className="max-w-3xl">
           <Skeleton className="mx-auto h-9 w-72 max-w-full" />
         </Container>
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-white px-6 pb-16 lg:px-16">
+      <section className="bg-white pb-16">
         <Container className="max-w-3xl">
           <div className="flex flex-col gap-4">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -29,7 +29,7 @@ export default function Loading() {
       </section>
 
       {/* Past Events */}
-      <section className="bg-white px-6 py-14 lg:px-16">
+      <section className="bg-white py-14">
         <Container className="max-w-5xl">
           <Skeleton className="mx-auto h-9 w-56" />
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -55,10 +55,10 @@ export default function Loading() {
       </section>
 
       {/* I want to volunteer */}
-      <section className="bg-brand-950 px-6 py-20 lg:px-16">
+      <section className="bg-brand-950 py-20">
         <Container className="max-w-2xl">
           <Skeleton className="mx-auto h-9 w-56 bg-white/10" />
-          <div className="mt-8 flex flex-col items-center gap-5 rounded-3xl border border-white/10 bg-white p-10 shadow-2xl">
+          <div className="mt-8 flex flex-col items-center gap-5 rounded-3xl border border-white/10 bg-white p-6 shadow-2xl sm:p-10">
             <Skeleton className="h-6 w-64 max-w-full" />
             <Skeleton className="h-12 w-70 max-w-full rounded-full" />
             <Skeleton className="h-4 w-56" />

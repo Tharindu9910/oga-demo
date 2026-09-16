@@ -1,3 +1,5 @@
+import Enter from '@/components/motion/Enter'
+import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
@@ -21,21 +23,29 @@ export default async function MembershipPage() {
   const membership = await getMembershipPage()
 
   return (
-    <section className="bg-white px-6 pt-32 pb-24 sm:pt-42 lg:px-16">
-      <Container className="max-w-5xl">
-        <SectionHeading align="center">Become a Member</SectionHeading>
+    <section className="bg-white pt-32 pb-24 sm:pt-42">
+      <Container className="max-w-5xl lg:max-w-6xl">
+        <SectionHeading align="center" enter>
+          Become a Member
+        </SectionHeading>
 
         <div className="mt-12 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
+          <Enter
+            delay={0.07}
+            className="overflow-hidden rounded-3xl border border-stone-100 shadow-xl"
+          >
             <SanityImage
               image={membership.poster}
               width={588}
               height={735}
               className="w-full object-cover"
             />
-          </div>
+          </Enter>
 
-          <div className="flex flex-col gap-6 rounded-[36px] border border-[#d6e5db] bg-[#edf5f0] p-4 sm:p-9">
+          <Enter
+            delay={0.14}
+            className="flex flex-col gap-6 rounded-[36px] border border-[#d6e5db] bg-[#edf5f0] p-4 sm:p-9"
+          >
             <div className="rounded-2xl border border-[#e0ece3] bg-white p-5 shadow-sm sm:p-7">
               <h3 className="font-poppins text-brand-950 text-xl font-bold">
                 Documents Required
@@ -71,7 +81,7 @@ export default async function MembershipPage() {
                       {membership.payment?.lifeMembership?.badge}
                     </span>
                   </div>
-                  <span className="font-poppins text-brand-950 text-xl font-extrabold tracking-tight">
+                  <span className="font-poppins text-brand-950 shrink-0 text-xl font-extrabold tracking-tight whitespace-nowrap">
                     {membership.payment?.lifeMembership?.price}
                   </span>
                 </div>
@@ -91,11 +101,11 @@ export default async function MembershipPage() {
                   variant="dark"
                   className="w-full px-4 sm:px-7"
                 >
-                  {membership.ctaLabel} <span aria-hidden="true">→</span>
+                  {membership.ctaLabel} <Arrow />
                 </Button>
               </div>
             </div>
-          </div>
+          </Enter>
         </div>
       </Container>
     </section>

@@ -6,9 +6,16 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 
+import HeroMedia from '@/components/home/HeroMedia'
 import PastEventsSection from '@/components/home/PastEventsSection'
+import Enter from '@/components/motion/Enter'
+import Reveal from '@/components/motion/Reveal'
+import RevealStagger from '@/components/motion/RevealStagger'
+import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import CountUp from '@/components/ui/CountUp'
+import HeroHeading from '@/components/ui/HeroHeading'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import {
@@ -65,24 +72,23 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="bg-brand-950 relative flex min-h-[600px] items-center overflow-hidden pt-32 pb-24 sm:min-h-180 sm:pt-42 sm:pb-38">
-        <SanityImage
-          image={home.hero.image}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        <HeroMedia image={home.hero.image} />
         <div className="from-brand-950 via-brand-950/60 absolute inset-0 bg-linear-to-tr to-transparent" />
         <div className="from-brand-950/70 absolute inset-0 bg-linear-to-t to-transparent" />
         <Container className="relative max-w-6xl">
           <div className="flex max-w-2xl flex-col items-start gap-6">
-            <span className="font-plus-jakarta-sans rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-[0.6px] text-white uppercase backdrop-blur-[5px]">
+            <Enter
+              as="span"
+              className="font-plus-jakarta-sans rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-[0.6px] text-white uppercase backdrop-blur-[5px]"
+            >
               {home.hero.eyebrow}
-            </span>
-            <h1 className="font-poppins text-5xl leading-tight font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-              {home.hero.headline}
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 pt-3">
+            </Enter>
+            <HeroHeading
+              text={home.hero.headline}
+              delay={0.07}
+              className="font-poppins text-5xl leading-tight font-bold tracking-tight text-white sm:text-6xl lg:text-7xl"
+            />
+            <Enter delay={0.14} className="flex flex-wrap items-center gap-4 pt-3">
               <Button href={home.hero.ctaUrl} variant="light">
                 {home.hero.ctaLabel}
               </Button>
@@ -91,7 +97,7 @@ export default async function HomePage() {
                   {home.hero.secondaryCtaLabel}
                 </Button>
               )}
-            </div>
+            </Enter>
           </div>
         </Container>
       </section>
@@ -99,7 +105,7 @@ export default async function HomePage() {
       {/* About summary */}
       <section className="bg-white py-20">
         <Container className="grid max-w-6xl grid-cols-1 items-center gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-7">
+          <Reveal className="mx-2 sm:mx-0 lg:col-span-7">
             <h2 className="font-poppins text-brand-800 text-3xl font-bold tracking-tight uppercase sm:text-4xl">
               {aboutSummary.heading}
             </h2>
@@ -109,10 +115,10 @@ export default async function HomePage() {
               ))}
             </div>
             <Button href={aboutSummary.ctaUrl} variant="brand" className="mt-8">
-              {aboutSummary.ctaLabel} <span aria-hidden="true">→</span>
+              {aboutSummary.ctaLabel} <Arrow />
             </Button>
-          </div>
-          <div className="lg:col-span-5">
+          </Reveal>
+          <Reveal delay={0.15} className="lg:col-span-5">
             <Image
               src={aboutSummary.image.src}
               alt={aboutSummary.image.alt}
@@ -120,21 +126,21 @@ export default async function HomePage() {
               height={800}
               className="aspect-square w-full rounded-[20px] object-cover"
             />
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Ongoing Projects */}
       <section className="bg-white px-6 py-14 lg:px-24">
-        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-8 sm:p-12">
-          <div className="flex items-end justify-between gap-4">
+        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
+          <div className="flex items-center justify-center gap-4 sm:items-end sm:justify-between">
             <SectionHeading>Ongoing Projects</SectionHeading>
             <Button
               href="/projects"
               variant="brand"
-              className="px-5 py-2.5 text-xs"
+              className="hidden px-5 py-2.5 text-xs sm:inline-flex"
             >
-              See more <span aria-hidden="true">→</span>
+              See more <Arrow />
             </Button>
           </div>
 
@@ -143,7 +149,7 @@ export default async function HomePage() {
               No ongoing projects right now — check back soon.
             </p>
           ) : (
-            <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            <RevealStagger className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {ongoingProjects.map((project) => (
                 <article
                   key={project._id}
@@ -158,7 +164,7 @@ export default async function HomePage() {
                         className="aspect-[4/3] w-full object-cover"
                       />
                     </div>
-                    <h3 className="font-poppins text-lg font-bold text-stone-900">
+                    <h3 className="font-poppins truncate text-lg font-bold text-stone-900">
                       {project.title}
                     </h3>
                   </div>
@@ -171,8 +177,18 @@ export default async function HomePage() {
                   )}
                 </article>
               ))}
-            </div>
+            </RevealStagger>
           )}
+
+          <div className="mt-8 flex justify-center sm:hidden">
+            <Button
+              href="/projects"
+              variant="brand"
+              className="px-5 py-2.5 text-xs"
+            >
+              See more <Arrow />
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -182,8 +198,8 @@ export default async function HomePage() {
           <SectionHeading align="center" tone="light">
             Tracking Progress and Milestones
           </SectionHeading>
-          <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
-            {(home.milestones ?? []).map((milestone) => {
+          <RevealStagger className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
+            {(home.milestones ?? []).map((milestone, i) => {
               const Icon = milestoneIcons[milestone.label] ?? Users
               return (
                 <div
@@ -198,7 +214,8 @@ export default async function HomePage() {
                   </div>
                   <div className="flex flex-col items-center">
                     <span className="font-poppins text-2xl font-bold tracking-tight text-white sm:text-4xl">
-                      {milestone.value}
+                      {/* Starts with its card's 80ms reveal stagger. */}
+                      <CountUp value={milestone.value} delay={i * 80} />
                     </span>
                     <span className="font-plus-jakarta-sans text-xs font-medium text-emerald-100/80 sm:text-sm">
                       {milestone.label}
@@ -207,7 +224,7 @@ export default async function HomePage() {
                 </div>
               )
             })}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
@@ -215,7 +232,7 @@ export default async function HomePage() {
       <section className="bg-white px-6 py-14 lg:px-48">
         <div className="mx-auto flex max-w-3xl flex-col items-center">
           <SectionHeading align="center">Upcoming Events</SectionHeading>
-          <div className="mt-8 flex w-full flex-col gap-4">
+          <RevealStagger className="mt-8 flex w-full flex-col gap-4">
             {upcomingEvents.length === 0 ? (
               <p className="font-plus-jakarta-sans text-center text-sm text-stone-500">
                 No upcoming events right now — check back soon.
@@ -228,7 +245,7 @@ export default async function HomePage() {
                     key={event._id}
                     className="flex items-center gap-4 rounded-2xl border border-stone-200/80 bg-white p-6"
                   >
-                    <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5]">
+                    <div className="flex size-20 p-2 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5]">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
                         {month} {day}
                       </span>
@@ -243,7 +260,7 @@ export default async function HomePage() {
                 )
               })
             )}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
