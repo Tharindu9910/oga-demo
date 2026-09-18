@@ -1,3 +1,4 @@
+import { orderRankField } from '@sanity/orderable-document-list'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const chapter = defineType({
@@ -23,6 +24,7 @@ export const chapter = defineType({
       type: 'array',
       of: [defineArrayMember({ type: 'imageWithAlt' })],
     }),
+    orderRankField({ type: 'chapter' }),
   ],
   preview: {
     select: { title: 'country', media: 'images.0' },

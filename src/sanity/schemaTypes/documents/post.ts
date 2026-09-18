@@ -1,3 +1,4 @@
+import { orderRankField } from '@sanity/orderable-document-list'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const post = defineType({
@@ -52,6 +53,7 @@ export const post = defineType({
       type: 'string',
       validation: (Rule) => Rule.max(160),
     }),
+    orderRankField({ type: 'post' }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'publishedAt', media: 'coverImage' },

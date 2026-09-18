@@ -4,15 +4,15 @@ import type { QueryParams } from 'next-sanity'
 import type {
   AboutPageQueryResult,
   ChaptersQueryResult,
-  EventLink,
   HomePageQueryResult,
-  ImageWithAlt,
   LoyaltyPageQueryResult,
   MembershipPageQueryResult,
+  PastEventsQueryResult,
   PostBySlugQueryResult,
   PostsQueryResult,
   ProjectsByStatusQueryResult,
   ProjectsPageQueryResult,
+  UpcomingEventsQueryResult,
 } from '../../../sanity.types'
 import {
   aboutPageQuery,
@@ -38,19 +38,7 @@ export type Chapter = ChaptersQueryResult[number]
 export type Project = ProjectsByStatusQueryResult[number]
 export type Post = PostsQueryResult[number]
 export type PostDetail = NonNullable<PostBySlugQueryResult>
-
-// The typegen static analyzer can't narrow the element type through the
-// `dateTime(date) >= now()` / `< now()` filters (a known GROQ typegen
-// limitation), so upcoming/pastEventsQuery come back as `Array<never>`.
-// The projection is hand-typed here instead of pulled from sanity.types.ts.
-export type Event = {
-  _id: string
-  title: string
-  date: string
-  description: string | null
-  images: Array<{ _key: string } & ImageWithAlt> | null
-  links: Array<{ _key: string } & EventLink> | null
-}
+export type Event = UpcomingEventsQueryResult[number] | PastEventsQueryResult[number]
 
 // The app's one shared `'use cache'` boundary. `sanityFetch` calls
 // `cacheTag`/`cacheLife` internally but doesn't create the boundary itself —
@@ -124,14 +112,12 @@ export async function getCompletedProjects(limit?: number): Promise<Project[]> {
 
 export async function getUpcomingEvents(limit?: number): Promise<Event[]> {
   const { data } = await cachedFetch(upcomingEventsQuery, undefined, 'days')
-  const events = data as unknown as Event[]
-  return limit ? events.slice(0, limit) : events
+  return limit ? data.slice(0, limit) : data
 }
 
 export async function getPastEvents(limit?: number): Promise<Event[]> {
   const { data } = await cachedFetch(pastEventsQuery, undefined, 'days')
-  const events = data as unknown as Event[]
-  return limit ? events.slice(0, limit) : events
+  return limit ? data.slice(0, limit) : data
 }
 
 export async function getPosts(): Promise<Post[]> {

@@ -91,6 +91,7 @@ export type Post = {
       } & ImageWithAlt)
   >
   seoDescription?: string
+  orderRank?: string
 }
 
 export type Slug = {
@@ -111,6 +112,7 @@ export type Chapter = {
       _key: string
     } & ImageWithAlt
   >
+  orderRank?: string
 }
 
 export type Event = {
@@ -120,7 +122,19 @@ export type Event = {
   _updatedAt: string
   _rev: string
   title: string
+  status: 'upcoming' | 'past'
   date: string
+  images?: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  >
+  links?: Array<
+    {
+      _key: string
+    } & EventLink
+  >
+  orderRank?: string
 }
 
 export type Project = {
@@ -135,6 +149,7 @@ export type Project = {
   description?: string
   progress?: number
   date: string
+  orderRank?: string
 }
 
 export type LoyaltyPage = {
@@ -555,7 +570,7 @@ export type LoyaltyPageQueryResult = {
 
 // Source: src/sanity/queries.ts
 // Variable: chaptersQuery
-// Query: *[_type == "chapter"]{  _id,  country,  description,  images}
+// Query: *[_type == "chapter"] | order(orderRank asc){  _id,  country,  description,  images}
 export type ChaptersQueryResult = Array<{
   _id: string
   country: string
@@ -569,7 +584,7 @@ export type ChaptersQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: projectsByStatusQuery
-// Query: *[_type == "project" && status == $status] | order(date desc){  _id,  title,  status,  image,  description,  progress,  date}
+// Query: *[_type == "project" && status == $status] | order(orderRank asc){  _id,  title,  status,  image,  description,  progress,  date}
 export type ProjectsByStatusQueryResult = Array<{
   _id: string
   title: string
@@ -582,31 +597,47 @@ export type ProjectsByStatusQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: upcomingEventsQuery
-// Query: *[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc){  _id,  title,  date,  description,  images,  links}
+// Query: *[_type == "event" && status == "upcoming"] | order(orderRank asc){  _id,  title,  date,  description,  images,  links}
 export type UpcomingEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
   description: null
-  images: null
-  links: null
+  images: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  > | null
+  links: Array<
+    {
+      _key: string
+    } & EventLink
+  > | null
 }>
 
 // Source: src/sanity/queries.ts
 // Variable: pastEventsQuery
-// Query: *[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc){  _id,  title,  date,  description,  images,  links}
+// Query: *[_type == "event" && status == "past"] | order(orderRank asc){  _id,  title,  date,  description,  images,  links}
 export type PastEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
   description: null
-  images: null
-  links: null
+  images: Array<
+    {
+      _key: string
+    } & ImageWithAlt
+  > | null
+  links: Array<
+    {
+      _key: string
+    } & EventLink
+  > | null
 }>
 
 // Source: src/sanity/queries.ts
 // Variable: postsQuery
-// Query: *[_type == "post"] | order(publishedAt desc){  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage}
+// Query: *[_type == "post"] | order(orderRank asc){  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage}
 export type PostsQueryResult = Array<{
   _id: string
   title: string
@@ -662,11 +693,11 @@ declare module '@sanity/client' {
     '*[_type == "projectsPage"][0]{\n  dehiwala,\n  "droneVideo": droneVideo.asset->{url, mimeType}\n}': ProjectsPageQueryResult
     '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel\n}': MembershipPageQueryResult
     '*[_type == "loyaltyPage"][0]{\n  merchants\n}': LoyaltyPageQueryResult
-    '*[_type == "chapter"]{\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult
-    '*[_type == "project" && status == $status] | order(date desc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
-    '*[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
-    '*[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
-    '*[_type == "post"] | order(publishedAt desc){\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage\n}': PostsQueryResult
+    '*[_type == "chapter"] | order(orderRank asc){\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult
+    '*[_type == "project" && status == $status] | order(orderRank asc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
+    '*[_type == "event" && status == "upcoming"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
+    '*[_type == "event" && status == "past"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
+    '*[_type == "post"] | order(orderRank asc){\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage\n}': PostsQueryResult
     '*[_type == "post" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage,\n  body,\n  seoDescription\n}': PostBySlugQueryResult
   }
 }

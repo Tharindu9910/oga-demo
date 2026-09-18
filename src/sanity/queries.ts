@@ -26,7 +26,7 @@ export const loyaltyPageQuery = defineQuery(`*[_type == "loyaltyPage"][0]{
   merchants
 }`)
 
-export const chaptersQuery = defineQuery(`*[_type == "chapter"]{
+export const chaptersQuery = defineQuery(`*[_type == "chapter"] | order(orderRank asc){
   _id,
   country,
   description,
@@ -34,7 +34,7 @@ export const chaptersQuery = defineQuery(`*[_type == "chapter"]{
 }`)
 
 export const projectsByStatusQuery =
-  defineQuery(`*[_type == "project" && status == $status] | order(date desc){
+  defineQuery(`*[_type == "project" && status == $status] | order(orderRank asc){
   _id,
   title,
   status,
@@ -45,7 +45,7 @@ export const projectsByStatusQuery =
 }`)
 
 export const upcomingEventsQuery =
-  defineQuery(`*[_type == "event" && dateTime(date) >= dateTime(now())] | order(date asc){
+  defineQuery(`*[_type == "event" && status == "upcoming"] | order(orderRank asc){
   _id,
   title,
   date,
@@ -55,7 +55,7 @@ export const upcomingEventsQuery =
 }`)
 
 export const pastEventsQuery =
-  defineQuery(`*[_type == "event" && dateTime(date) < dateTime(now())] | order(date desc){
+  defineQuery(`*[_type == "event" && status == "past"] | order(orderRank asc){
   _id,
   title,
   date,
@@ -65,7 +65,7 @@ export const pastEventsQuery =
 }`)
 
 export const postsQuery =
-  defineQuery(`*[_type == "post"] | order(publishedAt desc){
+  defineQuery(`*[_type == "post"] | order(orderRank asc){
   _id,
   title,
   "slug": slug.current,

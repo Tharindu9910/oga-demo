@@ -1,3 +1,4 @@
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import type { StructureResolver } from 'sanity/structure'
 
 import { singletonTypes } from './schemaTypes'
@@ -11,8 +12,14 @@ const SINGLETON_LIST_ITEMS: { id: string; title: string }[] = [
 ]
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure: StructureResolver = (S) => {
-  const groupedTypes = new Set([...singletonTypes, 'project', 'event'])
+export const structure: StructureResolver = (S, context) => {
+  const groupedTypes = new Set([
+    ...singletonTypes,
+    'project',
+    'event',
+    'chapter',
+    'post',
+  ])
 
   return S.list()
     .title('Content')
@@ -31,22 +38,22 @@ export const structure: StructureResolver = (S) => {
           S.list()
             .title('Projects')
             .items([
-              S.listItem()
-                .id('project-ongoing')
-                .title('Ongoing')
-                .child(
-                  S.documentList()
-                    .title('Ongoing projects')
-                    .filter('_type == "project" && status == "ongoing"'),
-                ),
-              S.listItem()
-                .id('project-completed')
-                .title('Completed')
-                .child(
-                  S.documentList()
-                    .title('Completed projects')
-                    .filter('_type == "project" && status == "completed"'),
-                ),
+              orderableDocumentListDeskItem({
+                type: 'project',
+                id: 'project-ongoing',
+                title: 'Ongoing',
+                filter: 'status == "ongoing"',
+                S,
+                context,
+              }),
+              orderableDocumentListDeskItem({
+                type: 'project',
+                id: 'project-completed',
+                title: 'Completed',
+                filter: 'status == "completed"',
+                S,
+                context,
+              }),
             ]),
         ),
       S.listItem()
@@ -56,28 +63,36 @@ export const structure: StructureResolver = (S) => {
           S.list()
             .title('Events')
             .items([
-              S.listItem()
-                .id('event-upcoming')
-                .title('Upcoming')
-                .child(
-                  S.documentList()
-                    .title('Upcoming events')
-                    .filter(
-                      '_type == "event" && dateTime(date) >= dateTime(now())',
-                    ),
-                ),
-              S.listItem()
-                .id('event-past')
-                .title('Past')
-                .child(
-                  S.documentList()
-                    .title('Past events')
-                    .filter(
-                      '_type == "event" && dateTime(date) < dateTime(now())',
-                    ),
-                ),
+              orderableDocumentListDeskItem({
+                type: 'event',
+                id: 'event-upcoming',
+                title: 'Upcoming',
+                filter: 'status == "upcoming"',
+                S,
+                context,
+              }),
+              orderableDocumentListDeskItem({
+                type: 'event',
+                id: 'event-past',
+                title: 'Past',
+                filter: 'status == "past"',
+                S,
+                context,
+              }),
             ]),
         ),
+      orderableDocumentListDeskItem({
+        type: 'chapter',
+        title: 'Overseas chapters',
+        S,
+        context,
+      }),
+      orderableDocumentListDeskItem({
+        type: 'post',
+        title: 'Blog posts',
+        S,
+        context,
+      }),
       ...S.documentTypeListItems().filter(
         (item) => !groupedTypes.has(item.getId() ?? ''),
       ),

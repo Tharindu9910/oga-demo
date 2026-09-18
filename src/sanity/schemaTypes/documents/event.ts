@@ -1,3 +1,4 @@
+import { orderRankField } from '@sanity/orderable-document-list'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const event = defineType({
@@ -12,11 +13,24 @@ export const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      description: 'Move the event between Upcoming and Past yourself.',
+      options: {
+        list: [
+          { title: 'Upcoming', value: 'upcoming' },
+          { title: 'Past', value: 'past' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'upcoming',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'date',
       title: 'Date',
       type: 'datetime',
-      description:
-        'Whether the event shows as upcoming or past is worked out from this date automatically.',
       validation: (Rule) => Rule.required(),
     }),
     // defineField({
@@ -25,20 +39,25 @@ export const event = defineType({
     //   type: 'text',
     //   rows: 3,
     // }),
-    // defineField({
-    //   name: 'images',
-    //   title: 'Images',
-    //   type: 'array',
-    //   of: [defineArrayMember({ type: 'imageWithAlt' })],
-    // }),
-    // defineField({
-    //   name: 'links',
-    //   title: 'Links',
-    //   type: 'array',
-    //   of: [defineArrayMember({ type: 'eventLink' })],
-    // }),
+    defineField({
+      name: 'images',
+      title: 'Images',
+      description: 'Only shown on the site for past events.',
+      type: 'array',
+      of: [defineArrayMember({ type: 'imageWithAlt' })],
+      hidden: ({ parent }) => parent?.status !== 'past',
+    }),
+    defineField({
+      name: 'links',
+      title: 'Links',
+      description: 'Only shown on the site for past events.',
+      type: 'array',
+      of: [defineArrayMember({ type: 'eventLink' })],
+      hidden: ({ parent }) => parent?.status !== 'past',
+    }),
+    orderRankField({ type: 'event' }),
   ],
   preview: {
-    select: { title: 'title', subtitle: 'date', media: 'images.0' },
+    select: { title: 'title', subtitle: 'status', media: 'images.0' },
   },
 })
