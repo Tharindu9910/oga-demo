@@ -70,8 +70,39 @@ export default function NavDropdown({
         data-open={open || undefined}
         className="absolute top-full left-0 z-50 min-w-55 rounded-2xl border border-stone-100 bg-white p-2 shadow-lg transition-[opacity,translate,display] transition-discrete duration-200 ease-out not-data-open:hidden not-data-open:translate-y-1.5 not-data-open:opacity-0 motion-reduce:not-data-open:translate-y-0 starting:translate-y-1.5 starting:opacity-0 motion-reduce:starting:translate-y-0"
       >
-        {items.map((item) =>
-          item.href ? (
+        {items.map((item) => {
+          if (!item.href) {
+            return (
+              <span
+                key={item.label}
+                aria-disabled="true"
+                role="menuitem"
+                className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-400"
+              >
+                {item.label}
+              </span>
+            )
+          }
+
+          const isExternal = /^https?:\/\//.test(item.href)
+
+          if (isExternal) {
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                role="menuitem"
+                onClick={() => setOpen(false)}
+                className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-700 hover:bg-stone-50"
+              >
+                {item.label}
+              </a>
+            )
+          }
+
+          return (
             <Link
               key={item.label}
               href={item.href}
@@ -81,17 +112,8 @@ export default function NavDropdown({
             >
               {item.label}
             </Link>
-          ) : (
-            <span
-              key={item.label}
-              aria-disabled="true"
-              role="menuitem"
-              className="font-plus-jakarta-sans block rounded-xl px-3 py-2 text-sm text-stone-400"
-            >
-              {item.label}
-            </span>
-          ),
-        )}
+          )
+        })}
       </div>
     </div>
   )

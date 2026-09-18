@@ -176,28 +176,37 @@ export default function MobileNav() {
                       More
                     </p>
                     <ul className="flex flex-col gap-2">
-                      {moreNav.map((item) =>
-                        item.href ? (
+                      {moreNav.map((item) => {
+                        if (!item.href) {
+                          return (
+                            <li key={item.label}>
+                              <span
+                                aria-disabled="true"
+                                className="font-plus-jakarta-sans text-base text-stone-400"
+                              >
+                                {item.label}
+                              </span>
+                            </li>
+                          )
+                        }
+
+                        const isExternal = /^https?:\/\//.test(item.href)
+
+                        return (
                           <li key={item.label}>
                             <Link
                               href={item.href}
                               onClick={() => setOpen(false)}
+                              {...(isExternal
+                                ? { target: '_blank', rel: 'noopener noreferrer' }
+                                : {})}
                               className="font-plus-jakarta-sans text-base text-stone-600"
                             >
                               {item.label}
                             </Link>
                           </li>
-                        ) : (
-                          <li key={item.label}>
-                            <span
-                              aria-disabled="true"
-                              className="font-plus-jakarta-sans text-base text-stone-400"
-                            >
-                              {item.label}
-                            </span>
-                          </li>
-                        ),
-                      )}
+                        )
+                      })}
                     </ul>
                   </motion.div>
 

@@ -51,8 +51,7 @@ export const moreNav: NavItem[] = [
   { label: 'Sports', href: '/sports' },
   { label: 'Blogs', href: '/blogs' },
   { label: 'Frequently Asked Questions', href: '/faq' },
-  // No page/URL yet — rendered as non-clickable (see FooterNavLink).
-  { label: "Ilma International Girls' School", href: '' },
+  { label: "Ilma International Girls' School", href: 'https://ilma.edu.lk/' },
 ]
 
 export const footerNavigation: NavItem[] = [

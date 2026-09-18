@@ -180,15 +180,21 @@ export default async function Footer() {
             Copyright @ {year} {siteConfig.name}, All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span className="font-plus-jakarta-sans text-xs text-stone-500">
+            <Link
+              href="/privacy-policy"
+              className="font-plus-jakarta-sans text-xs text-stone-500 hover:text-emerald-300"
+            >
               Privacy Policy
-            </span>
-            <span className="font-plus-jakarta-sans text-xs text-stone-500">
-              Terms of Service
-            </span>
-            <span className="font-plus-jakarta-sans text-xs text-stone-500">
+            </Link>
+            <Link
+              href="/terms-and-conditions"
+              className="font-plus-jakarta-sans text-xs text-stone-500 hover:text-emerald-300"
+            >
+              Terms and Conditions
+            </Link>
+            {/* <span className="font-plus-jakarta-sans text-xs text-stone-500">
               Cookie Settings
-            </span>
+            </span> */}
             <a
               href="#top"
               className="font-poppins flex items-center gap-1 text-xs text-emerald-400"

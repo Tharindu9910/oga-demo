@@ -23,7 +23,21 @@ export default function FooterNavLink({
     )
   }
 
-  const active = pathname === href
+  const isExternal = /^https?:\/\//.test(href)
+  const active = !isExternal && pathname === href
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-plus-jakarta-sans text-xs text-stone-400 hover:text-emerald-300"
+      >
+        {children}
+      </a>
+    )
+  }
 
   return (
     <Link

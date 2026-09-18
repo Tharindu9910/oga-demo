@@ -141,8 +141,8 @@ export default async function ProjectsPage() {
 
       {/* Ongoing Projects */}
       <section className="bg-white px-6 py-14 lg:px-24">
-        <div className="mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
-          <SectionHeading className="text-center sm:text-left">
+        <div className="mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] bg-brand-700 p-5 sm:p-8 lg:p-12">
+          <SectionHeading tone='light' className="text-center sm:text-left">
             Ongoing Projects
           </SectionHeading>
 

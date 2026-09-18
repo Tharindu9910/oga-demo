@@ -52,7 +52,7 @@ export default async function EventsPage() {
                 return (
                   <div
                     key={event._id}
-                    className="flex items-center gap-4 rounded-2xl border border-emerald-950/10 bg-white p-4 shadow-[0_10px_30px_-10px_rgba(20,56,38,0.07)] sm:gap-6 sm:p-7"
+                    className="flex items-center gap-4 rounded-2xl border border-emerald-950/10 bg-brand-700 p-4 shadow-[0_10px_30px_-10px_rgba(20,56,38,0.07)] sm:gap-6 sm:p-7"
                   >
                     {/* <div className="flex p-2 size-16 shrink-0 flex-col items-center justify-center rounded-xl border border-emerald-950/10 bg-[#f0f6f2] sm:size-20">
                       <span className="font-poppins text-brand-800 text-[11px] font-bold tracking-[1.1px] uppercase">
@@ -70,7 +70,7 @@ export default async function EventsPage() {
                         {year}
                       </span>
                     </div>
-                    <h3 className="font-poppins text-xl font-bold tracking-tight text-stone-900">
+                    <h3 className="font-poppins text-xl font-bold tracking-tight text-white">
                       {event.title}
                     </h3>
                   </div>
@@ -152,7 +152,7 @@ export default async function EventsPage() {
       </section>
 
       {/* I want to volunteer */}
-      <section className="bg-brand-950 py-20">
+      <section className="bg-brand-700 py-20">
         <Container className="max-w-2xl">
           <SectionHeading align="center" tone="light">
             I want to volunteer
