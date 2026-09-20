@@ -102,7 +102,7 @@ export default async function HomePage() {
       </section>
 
       {/* About summary */}
-      <section className="bg-white py-10">
+      <section className="bg-cream py-10">
         <Container className="grid max-w-6xl grid-cols-1 items-center gap-14 lg:grid-cols-12">
           <Enter className="mx-2 sm:mx-0 lg:col-span-7">
             <h2 className="font-poppins text-brand-800 text-3xl font-bold tracking-tight uppercase sm:text-4xl">
@@ -130,7 +130,7 @@ export default async function HomePage() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-brand-700 p-5 sm:p-8 lg:p-12">
           <div className="flex items-center justify-center gap-4 sm:items-end sm:justify-between">
             <SectionHeading tone="light">Ongoing Projects</SectionHeading>
@@ -192,7 +192,7 @@ export default async function HomePage() {
       </section>
 
       {/* Tracking Progress and Milestones */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="bg-brand-700 mx-auto max-w-6xl rounded-3xl p-8 shadow-xl sm:p-12">
           <SectionHeading align="center" tone="light">
             Tracking Progress and Milestones
@@ -228,7 +228,7 @@ export default async function HomePage() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-white px-6 py-14 lg:px-48">
+      <section className="bg-cream px-6 py-14 lg:px-48">
         <div className="mx-auto flex max-w-3xl flex-col items-center">
           <SectionHeading align="center">Upcoming Events</SectionHeading>
           <RevealStagger className="mt-8 flex w-full flex-col gap-4">

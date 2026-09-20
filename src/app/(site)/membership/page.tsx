@@ -23,7 +23,7 @@ export default async function MembershipPage() {
   const membership = await getMembershipPage()
 
   return (
-    <section className="bg-white pt-32 pb-24 sm:pt-42">
+    <section className="bg-cream pt-32 pb-24 sm:pt-42">
       <Container className="max-w-5xl lg:max-w-6xl">
         <SectionHeading align="center" enter>
           Become a Member

@@ -85,7 +85,7 @@ export default function ActiveVolunteerPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white pt-32 pb-16 sm:pt-42">
+      <section className="bg-cream pt-32 pb-16 sm:pt-42">
         <Container className="max-w-3xl">
           <div className="flex flex-col items-center gap-6 text-center">
             <Enter
@@ -127,7 +127,7 @@ export default function ActiveVolunteerPage() {
       </section>
 
       {/* Volunteer-driven events */}
-      <section className="bg-white pb-24">
+      <section className="bg-cream pb-24">
         <Container className="max-w-6xl">
           <div className="rounded-[40px] border border-[rgba(6,78,59,0.1)] bg-[#edf4f0]/80 px-6 py-10 shadow-sm sm:px-12 sm:py-12">
             <div className="flex items-end justify-between gap-4">

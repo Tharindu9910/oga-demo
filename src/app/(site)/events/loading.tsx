@@ -5,14 +5,14 @@ export default function Loading() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white pt-32 pb-8 sm:pt-42">
+      <section className="bg-cream pt-32 pb-8 sm:pt-42">
         <Container className="max-w-3xl">
           <Skeleton className="mx-auto h-9 w-72 max-w-full" />
         </Container>
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-white pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-3xl">
           <div className="flex flex-col gap-4">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -29,7 +29,7 @@ export default function Loading() {
       </section>
 
       {/* Past Events */}
-      <section className="bg-white py-14">
+      <section className="bg-cream py-14">
         <Container className="max-w-5xl">
           <Skeleton className="mx-auto h-9 w-56" />
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">

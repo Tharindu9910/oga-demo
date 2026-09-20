@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <>
       {/* Hero */}
-      <section className="from-brand-50/80 bg-linear-to-b via-white to-white pt-32 pb-16 sm:pt-42">
+      <section className="from-brand-50/80 bg-linear-to-b bg-cream pt-32 pb-16 sm:pt-42">
         <Container className="max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
             <div className="flex flex-col items-start gap-6 lg:col-span-6">
@@ -25,7 +25,7 @@ export default function Loading() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
           <Skeleton className="h-9 w-56" />
           <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
@@ -49,7 +49,7 @@ export default function Loading() {
       </section>
 
       {/* Completed Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl">
           <Skeleton className="h-9 w-56" />
           <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
@@ -70,7 +70,7 @@ export default function Loading() {
       </section>
 
       {/* Donations & Relief Drives */}
-      <section className="border-t border-stone-100 bg-white py-16">
+      <section className="border-t border-stone-100 bg-cream py-16">
         <Container className="max-w-4xl">
           <Skeleton className="mx-auto h-9 w-40" />
           <div className="mt-12 flex flex-col gap-8">

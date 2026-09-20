@@ -22,7 +22,7 @@ export default function Loading() {
       </section>
 
       {/* About summary */}
-      <section className="bg-white py-20">
+      <section className="bg-cream py-20">
         <Container className="grid max-w-6xl grid-cols-1 items-center gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Skeleton className="h-9 w-3/4" />
@@ -42,7 +42,7 @@ export default function Loading() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
           <div className="flex items-end justify-between gap-4">
             <Skeleton className="h-9 w-52" />
@@ -68,7 +68,7 @@ export default function Loading() {
       </section>
 
       {/* Tracking Progress and Milestones */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="bg-brand-700 mx-auto max-w-6xl rounded-3xl p-8 shadow-xl sm:p-12">
           <Skeleton className="mx-auto h-9 w-80 max-w-full bg-white/15" />
           <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
@@ -89,7 +89,7 @@ export default function Loading() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-white px-6 py-14 lg:px-48">
+      <section className="bg-cream px-6 py-14 lg:px-48">
         <div className="mx-auto flex max-w-3xl flex-col items-center">
           <Skeleton className="h-9 w-56" />
           <div className="mt-8 flex w-full flex-col gap-4">
@@ -107,7 +107,7 @@ export default function Loading() {
       </section>
 
       {/* Past Event Highlights */}
-      <section className="bg-white px-6 py-14 lg:px-16">
+      <section className="bg-cream px-6 py-14 lg:px-16">
         <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
           <div className="flex items-end justify-between gap-4">
             <Skeleton className="h-9 w-64" />

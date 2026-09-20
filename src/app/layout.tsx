@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${poppins.variable} ${plusJakartaSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white text-stone-700">
+      <body className="flex min-h-full flex-col bg-cream text-stone-700">
         {children}
         <SanityLive />
       </body>

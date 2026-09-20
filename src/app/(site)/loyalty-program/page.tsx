@@ -103,7 +103,7 @@ export default async function LoyaltyProgramPage() {
 
   return (
     <>
-      <section className="bg-white pt-32 pb-16 px-5 sm:pt-42">
+      <section className="bg-cream pt-32 pb-16 px-5 sm:pt-42">
         <Container className="max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <Enter>
@@ -163,7 +163,7 @@ export default async function LoyaltyProgramPage() {
         </Container>
       </section>
 
-      <section className="bg-white pb-20">
+      <section className="bg-cream pb-20">
         <Container className="max-w-6xl">
           <div className="rounded-[40px] border border-emerald-900/10 bg-[#edf4f0] px-6 py-12 sm:px-10 sm:py-14">
             <SectionHeading className="text-center sm:text-left">

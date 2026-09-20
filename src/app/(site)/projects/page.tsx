@@ -60,7 +60,7 @@ export default async function ProjectsPage() {
   return (
     <>
       {dehiwala.show && (
-        <section className="from-brand-50/80 bg-linear-to-b via-white to-white pt-32 pb-16 sm:pt-42">
+        <section className="from-brand-50/80 bg-linear-to-b bg-cream pt-32 pb-16 sm:pt-42">
           <Container className="max-w-6xl">
             <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
               <Enter className="flex flex-col items-start gap-6 mx-2 sm:mx-0 lg:col-span-6">
@@ -101,7 +101,7 @@ export default async function ProjectsPage() {
       )}
 
       {/* Drone Video */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <Reveal className="bg-brand-700 mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 rounded-4xl p-5 shadow-2xl sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-20">
           <div className="lg:col-span-7">
             {droneVideo?.url ? (
@@ -140,7 +140,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Ongoing Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] bg-brand-700 p-5 sm:p-8 lg:p-12">
           <SectionHeading tone='light' className="text-center sm:text-left">
             Ongoing Projects
@@ -191,7 +191,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Completed Projects */}
-      <section className="bg-white px-6 py-14 lg:px-24">
+      <section className="bg-cream px-6 py-14 lg:px-24">
         <div className="mx-auto max-w-6xl">
           <SectionHeading>Completed Projects</SectionHeading>
 
@@ -230,7 +230,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Donations & Relief Drives */}
-      <section className="border-t border-stone-100 bg-white py-16">
+      <section className="border-t border-stone-100 bg-cream py-16">
         <Container className="max-w-4xl">
           <SectionHeading align="center">Donations</SectionHeading>
           <div className="mt-12 flex flex-col gap-8">

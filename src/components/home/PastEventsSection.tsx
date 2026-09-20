@@ -17,7 +17,7 @@ function formatEventDate(date: string) {
 
 export default function PastEventsSection({ events }: { events: Event[] }) {
   return (
-    <section className="bg-white px-6 py-14 lg:px-16">
+    <section className="bg-cream px-6 py-14 lg:px-16">
       <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-[#f4f8f5] p-5 sm:p-8 lg:p-12">
         <div className="flex items-center justify-center gap-4 sm:items-end sm:justify-between">
           <SectionHeading>Past Event Highlights</SectionHeading>

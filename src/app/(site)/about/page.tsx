@@ -84,7 +84,7 @@ export default async function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white pt-32 pb-16 sm:pt-42">
+      <section className="bg-cream pt-32 pb-16 sm:pt-42">
         <Container className="max-w-4xl">
           <div className="flex flex-col items-center gap-5 text-center">
             <Enter
@@ -123,7 +123,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Our Story video */}
-      <section className="bg-white pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-4xl">
           <Reveal className="mt-10 overflow-hidden rounded-3xl border border-stone-100 shadow-xl">
             <video
@@ -140,13 +140,13 @@ export default async function AboutPage() {
       </section>
 
       {/* Vision & Mission */}
-      <section className="bg-[#fafbf9] pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-5xl">
           <RevealStagger className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {[vision, mission].map((card, i) => (
               <div
                 key={i}
-                className="border-brand-950 flex flex-col items-center gap-5 rounded-[32px] border bg-gradient-to-br from-[#1a3f30] via-[#0f2d21] to-[#091f16] p-10 text-center shadow-xl"
+                className="border-brand-950 flex h-full flex-col items-center gap-5 rounded-[32px] border bg-gradient-to-br from-[#1a3f30] via-[#0f2d21] to-[#091f16] p-10 text-center shadow-xl"
               >
                 <div className="flex size-25 items-center justify-center rounded-full bg-white/10 p-5">
                   <Image
@@ -170,7 +170,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Message from the President */}
-      <section className="bg-white py-16">
+      <section className="bg-cream py-16">
         <Container className="max-w-3xl">
           <SectionHeading align="center">
             Message from the President
@@ -196,7 +196,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Our Team */}
-      <section className="bg-white pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-5xl">
           <div className="rounded-[36px] border border-[#d9e6df] bg-[#eef5f1] p-5 sm:p-8 lg:p-12">
             <div className="flex flex-col items-center gap-3">
@@ -271,7 +271,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Tribute to the founder */}
-      <section className="bg-white py-16">
+      <section className="bg-cream py-16">
         <Container className="max-w-5xl">
           <Reveal className="bg-brand-700 flex flex-col items-center gap-8 rounded-[36px] border border-[#022c22] p-8 shadow-2xl sm:flex-row sm:items-start sm:p-14">
             <Image

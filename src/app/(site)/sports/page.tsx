@@ -45,7 +45,7 @@ const sportsSections = [
 export default function SportsPage() {
   return (
     <>
-      <section className="bg-white pt-32 pb-12 text-center sm:pt-42">
+      <section className="bg-cream pt-32 pb-12 text-center sm:pt-42">
         <Container className="max-w-3xl">
           <Enter
             as="h1"
@@ -78,7 +78,7 @@ export default function SportsPage() {
         </Container>
       </section>
 
-      <section className="bg-white pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-6xl">
           <div className="flex flex-col gap-8">
             {sportsSections.map((sport, i) => (
@@ -129,7 +129,7 @@ export default function SportsPage() {
         </Container>
       </section>
 
-      <section className="bg-white pb-24">
+      <section className="bg-cream pb-24">
         <Container className="max-w-4xl">
           <Reveal
             variant="scale"

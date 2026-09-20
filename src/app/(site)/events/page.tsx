@@ -30,7 +30,7 @@ export default async function EventsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-white pt-32 pb-8 sm:pt-42">
+      <section className="bg-cream pt-32 pb-8 sm:pt-42">
         <Container className="max-w-3xl">
           <SectionHeading align="center" enter>
             Upcoming Events
@@ -39,7 +39,7 @@ export default async function EventsPage() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="bg-white pb-16">
+      <section className="bg-cream pb-16">
         <Container className="max-w-3xl">
           {upcomingEvents.length === 0 ? (
             <p className="font-plus-jakarta-sans text-center text-sm text-stone-500">
@@ -82,7 +82,7 @@ export default async function EventsPage() {
       </section>
 
       {/* Past Events */}
-      <section className="bg-white py-14">
+      <section className="bg-cream py-14">
         <Container className="max-w-5xl">
           <SectionHeading align="center">Past Events</SectionHeading>
 

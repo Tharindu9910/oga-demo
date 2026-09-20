@@ -17,6 +17,8 @@
   --color-brand-500: #2f6a40;
   --color-brand-400: #3c8e71;
 
+  --color-cream: #f3f1e4;
+
   /* Stronger ease-out than Tailwind's default — overrides the `ease-out`
      utility so every entrance/press transition shares one curve. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
