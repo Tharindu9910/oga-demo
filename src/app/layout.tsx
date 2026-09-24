@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${plusJakartaSans.variable} ${inter.variable} h-full antialiased`}
+      className={`${poppins.variable} ${plusJakartaSans.variable} ${inter.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream text-stone-700">
         {children}

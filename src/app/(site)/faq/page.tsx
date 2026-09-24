@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
 import { siteConfig } from '@/config/site'
+import { getSiteSettings } from '@/sanity/lib/content'
 
 // Hardcoded per plans/plan.md (FAQ has no Sanity schema — not in
 // Docs/editable_content.md, so it doesn't change monthly like the CMS-driven
@@ -92,7 +93,9 @@ const chevron = (
   </svg>
 )
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const { whatsappUrl } = await getSiteSettings()
+
   return (
     <section className="bg-cream pt-32 pb-24 sm:pt-42">
       <Container className="max-w-3xl">
@@ -138,7 +141,7 @@ export default function FaqPage() {
           </h2>
           <div className="flex flex-col items-center gap-3 sm:flex-row">
             <Button
-              href={siteConfig.ctaUrls.faqWhatsapp}
+              href={whatsappUrl}
               className="gap-3 bg-[#25d366] px-7 py-3.5 text-white shadow-[0_4px_7px_0_rgba(37,211,102,0.35)] hover:bg-[#20bd5a]"
             >
               <WhatsAppIcon />

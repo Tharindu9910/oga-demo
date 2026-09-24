@@ -10,11 +10,11 @@ import Container from '@/components/ui/Container'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { siteConfig } from '@/config/site'
 import {
   getCompletedProjects,
   getOngoingProjects,
   getProjectsPage,
+  getSiteSettings,
 } from '@/sanity/lib/content'
 
 const donationStories = [
@@ -50,11 +50,13 @@ const donationTiers = [
 ]
 
 export default async function ProjectsPage() {
-  const [projectsPage, ongoingProjects, completedProjects] = await Promise.all([
-    getProjectsPage(),
-    getOngoingProjects(),
-    getCompletedProjects(),
-  ])
+  const [projectsPage, ongoingProjects, completedProjects, { donateUrl }] =
+    await Promise.all([
+      getProjectsPage(),
+      getOngoingProjects(),
+      getCompletedProjects(),
+      getSiteSettings(),
+    ])
   const { dehiwala, droneVideo } = projectsPage
 
   return (
@@ -291,7 +293,7 @@ export default async function ProjectsPage() {
                   {tier.label}
                 </span>
                 <Button
-                  href={siteConfig.ctaUrls.donate}
+                  href={donateUrl}
                   variant={tier.variant}
                   className="w-full"
                 >

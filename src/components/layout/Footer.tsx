@@ -4,9 +4,11 @@ import Link from 'next/link'
 
 import FooterNavLink from '@/components/layout/FooterNavLink'
 import Container from '@/components/ui/Container'
+import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
 import { footerNavigation, memberNav, moreNav, siteConfig } from '@/config/site'
+import { getSiteSettings } from '@/sanity/lib/content'
 
-const socialLinks = [
+const socialLinks: { label: string; href: string; icon: string }[] = [
   {
     label: 'Facebook',
     href: siteConfig.social.facebook,
@@ -52,6 +54,7 @@ export default async function Footer() {
   cacheLife('weeks')
 
   const year = new Date().getFullYear()
+  const { whatsappUrl } = await getSiteSettings()
 
   return (
     <footer className="bg-brand-700 border-t  border-white/10">
@@ -123,6 +126,44 @@ export default async function Footer() {
                   </span>
                 </span>
               </a>
+              {whatsappUrl ? (
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/4 p-2 text-left"
+                >
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-950/60">
+                    <WhatsAppIcon className="size-3.25 text-white" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="font-poppins text-[10px] font-semibold tracking-[0.5px] text-stone-500 uppercase">
+                      Chat with us
+                    </span>
+                    <span className="font-mono text-xs text-white">
+                      WhatsApp
+                    </span>
+                  </span>
+                </a>
+              ) : (
+                <span
+                  aria-disabled="true"
+                  title="Link coming soon"
+                  className="flex cursor-not-allowed items-center gap-3 rounded-xl border border-white/10 bg-white/4 p-2 text-left opacity-60"
+                >
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-950/60">
+                    <WhatsAppIcon className="size-3.25 text-white" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="font-poppins text-[10px] font-semibold tracking-[0.5px] text-stone-500 uppercase">
+                      Chat with us
+                    </span>
+                    <span className="font-mono text-xs text-white">
+                      WhatsApp
+                    </span>
+                  </span>
+                </span>
+              )}
             </div>
           </div>
 

@@ -32,12 +32,12 @@ export const project = defineType({
       type: 'imageWithAlt',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-    }),
+    // defineField({
+    //   name: 'description',
+    //   title: 'Description',
+    //   type: 'text',
+    //   rows: 3,
+    // }),
     defineField({
       name: 'progress',
       title: 'Progress (%)',

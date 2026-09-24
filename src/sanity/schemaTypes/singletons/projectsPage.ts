@@ -1,5 +1,11 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
+import {
+  MAX_VIDEO_SIZE_BYTES,
+  maxAssetSize,
+  requireWebSafeVideo,
+} from '../lib/maxAssetSize'
+
 export const projectsPage = defineType({
   name: 'projectsPage',
   title: 'Projects page',
@@ -53,9 +59,13 @@ export const projectsPage = defineType({
       name: 'droneVideo',
       title: 'Drone video',
       description:
-        "Ilma International Girls' School drone video. Leave empty to show a “Video coming soon” placeholder.",
+        "Ilma International Girls' School drone video (.mp4 or .webm only — .mov/QuickTime won't play outside Safari). Leave empty to show a “Video coming soon” placeholder.",
       type: 'file',
-      options: { accept: 'video/*' },
+      options: { accept: 'video/mp4,video/webm' },
+      validation: (Rule) =>
+        Rule.custom(maxAssetSize(MAX_VIDEO_SIZE_BYTES, 'Video')).custom(
+          requireWebSafeVideo(),
+        ),
     }),
   ],
   preview: {

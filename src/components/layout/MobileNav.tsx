@@ -10,7 +10,7 @@ function subscribeNever() {
 }
 
 import Button from '@/components/ui/Button'
-import { memberNav, moreNav, primaryNav, siteConfig } from '@/config/site'
+import { memberNav, moreNav, primaryNav } from '@/config/site'
 
 // Twin of `--ease-drawer` in globals.css.
 const EASE_DRAWER = [0.32, 0.72, 0, 1] as const
@@ -211,10 +211,7 @@ export default function MobileNav() {
                   </motion.div>
 
                   <motion.div variants={sectionVariants(reduceMotion)}>
-                    <Button
-                      href={siteConfig.ctaUrls.becomeAMember}
-                      className="w-full"
-                    >
+                    <Button href="/membership" className="w-full">
                       Become a Member
                     </Button>
                   </motion.div>

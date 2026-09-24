@@ -152,6 +152,17 @@ export type Project = {
   orderRank?: string
 }
 
+export type SiteSettings = {
+  _id: string
+  _type: 'siteSettings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  activeVolunteerUrl?: string
+  donateUrl?: string
+  whatsappUrl?: string
+}
+
 export type LoyaltyPage = {
   _id: string
   _type: 'loyaltyPage'
@@ -185,6 +196,7 @@ export type MembershipPage = {
     }
   }
   ctaLabel?: string
+  ctaUrl?: string
 }
 
 export type SanityFileAssetReference = {
@@ -423,6 +435,7 @@ export type AllSanitySchemaTypes =
   | Chapter
   | Event
   | Project
+  | SiteSettings
   | LoyaltyPage
   | MembershipPage
   | SanityFileAssetReference
@@ -539,7 +552,7 @@ export type ProjectsPageQueryResult = {
 
 // Source: src/sanity/queries.ts
 // Variable: membershipPageQuery
-// Query: *[_type == "membershipPage"][0]{  poster,  documentsRequired,  payment,  ctaLabel}
+// Query: *[_type == "membershipPage"][0]{  poster,  documentsRequired,  payment,  ctaLabel,  ctaUrl}
 export type MembershipPageQueryResult = {
   poster: ImageWithAlt
   documentsRequired: Array<string> | null
@@ -555,6 +568,7 @@ export type MembershipPageQueryResult = {
     }
   } | null
   ctaLabel: string | null
+  ctaUrl: string | null
 } | null
 
 // Source: src/sanity/queries.ts
@@ -566,6 +580,15 @@ export type LoyaltyPageQueryResult = {
       _key: string
     } & Merchant
   > | null
+} | null
+
+// Source: src/sanity/queries.ts
+// Variable: siteSettingsQuery
+// Query: *[_type == "siteSettings"][0]{  activeVolunteerUrl,  donateUrl,  whatsappUrl}
+export type SiteSettingsQueryResult = {
+  activeVolunteerUrl: string | null
+  donateUrl: string | null
+  whatsappUrl: string | null
 } | null
 
 // Source: src/sanity/queries.ts
@@ -691,8 +714,9 @@ declare module '@sanity/client' {
     '*[_type == "homePage"][0]{\n  hero,\n  milestones\n}': HomePageQueryResult
     '*[_type == "aboutPage"][0]{\n  president,\n  team\n}': AboutPageQueryResult
     '*[_type == "projectsPage"][0]{\n  dehiwala,\n  "droneVideo": droneVideo.asset->{url, mimeType}\n}': ProjectsPageQueryResult
-    '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel\n}': MembershipPageQueryResult
+    '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel,\n  ctaUrl\n}': MembershipPageQueryResult
     '*[_type == "loyaltyPage"][0]{\n  merchants\n}': LoyaltyPageQueryResult
+    '*[_type == "siteSettings"][0]{\n  activeVolunteerUrl,\n  donateUrl,\n  whatsappUrl\n}': SiteSettingsQueryResult
     '*[_type == "chapter"] | order(orderRank asc){\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult
     '*[_type == "project" && status == $status] | order(orderRank asc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
     '*[_type == "event" && status == "upcoming"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult

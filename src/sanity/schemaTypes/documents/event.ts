@@ -50,10 +50,12 @@ export const event = defineType({
     defineField({
       name: 'links',
       title: 'Links',
-      description: 'Only shown on the site for past events.',
+      description:
+        'Only shown on the site for past events. Limited to one link per event.',
       type: 'array',
       of: [defineArrayMember({ type: 'eventLink' })],
       hidden: ({ parent }) => parent?.status !== 'past',
+      validation: (Rule) => Rule.max(1),
     }),
     orderRankField({ type: 'event' }),
   ],

@@ -9,6 +9,7 @@ export const eventLink = defineType({
       name: 'label',
       title: 'Label',
       type: 'string',
+      initialValue: 'Check out Event Highlights',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

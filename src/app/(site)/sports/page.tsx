@@ -6,11 +6,14 @@ import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
-import { siteConfig } from '@/config/site'
+import { getSiteSettings } from '@/sanity/lib/content'
 
 // Hardcoded per plans/plan.md ("Sports (hardcoded content, still needs
 // the design)") — this page has no CMS-driven content.
 
+// "Join Us" buttons scroll to the WhatsApp CTA in the "OGA sporting spirit"
+// section below instead of linking out directly — there's one shared
+// WhatsApp community, not a per-sport group.
 const sportsSections = [
   {
     title: 'Netball',
@@ -20,7 +23,6 @@ const sportsSections = [
     ],
     image: '/images/sports/netball.jpg',
     alt: 'IIOGA netball team with trophies and gear bags',
-    joinUrl: siteConfig.ctaUrls.sportsNetballWhatsapp,
   },
   {
     title: 'Badminton',
@@ -29,7 +31,6 @@ const sportsSections = [
     ],
     image: '/images/sports/badminton.jpg',
     alt: 'IIOGA badminton squad lined up at the indoor stadium court',
-    joinUrl: siteConfig.ctaUrls.sportsBadmintonWhatsapp,
   },
   {
     title: 'Sports Carnival',
@@ -38,11 +39,12 @@ const sportsSections = [
     ],
     image: '/images/sports/sports-carnival.jpg',
     alt: 'Inaugural IIOGA Sports Carnival — trophies and the opening parade',
-    joinUrl: siteConfig.ctaUrls.sportsCarnivalWhatsapp,
   },
 ] as const
 
-export default function SportsPage() {
+export default async function SportsPage() {
+  const { whatsappUrl } = await getSiteSettings()
+
   return (
     <>
       <section className="bg-cream pt-32 pb-12 text-center sm:pt-42">
@@ -115,7 +117,7 @@ export default function SportsPage() {
                   </div>
                   <div className="border-t border-white/15 pt-6">
                     <Button
-                      href={sport.joinUrl}
+                      href="#oga-sporting-spirit"
                       variant="light"
                       className="px-5 py-2.5 text-xs"
                     >
@@ -129,7 +131,7 @@ export default function SportsPage() {
         </Container>
       </section>
 
-      <section className="bg-cream pb-24">
+      <section id="oga-sporting-spirit" className="scroll-mt-28 bg-cream pb-24">
         <Container className="max-w-4xl">
           <Reveal
             variant="scale"
@@ -145,7 +147,7 @@ export default function SportsPage() {
             </p>
             <div className="pt-6">
               <Button
-                href={siteConfig.ctaUrls.sportsWhatsapp}
+                href={whatsappUrl}
                 className="gap-3.5 rounded-2xl bg-[#25d366] px-7 py-4 text-white shadow-lg hover:bg-[#20bd5a]"
               >
                 <WhatsAppIcon />

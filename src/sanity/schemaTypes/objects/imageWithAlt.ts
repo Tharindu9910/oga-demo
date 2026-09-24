@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity'
 
+import { MAX_IMAGE_SIZE_BYTES, maxAssetSize } from '../lib/maxAssetSize'
+
 export const imageWithAlt = defineType({
   name: 'imageWithAlt',
   title: 'Image',
@@ -14,4 +16,6 @@ export const imageWithAlt = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  validation: (Rule) =>
+    Rule.custom(maxAssetSize(MAX_IMAGE_SIZE_BYTES, 'Image')),
 })

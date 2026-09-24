@@ -14,6 +14,7 @@ import { homePage } from './singletons/homePage'
 import { loyaltyPage } from './singletons/loyaltyPage'
 import { membershipPage } from './singletons/membershipPage'
 import { projectsPage } from './singletons/projectsPage'
+import { siteSettings } from './singletons/siteSettings'
 
 export const singletonTypes = new Set([
   'homePage',
@@ -21,6 +22,7 @@ export const singletonTypes = new Set([
   'projectsPage',
   'membershipPage',
   'loyaltyPage',
+  'siteSettings',
 ])
 
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -30,6 +32,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   projectsPage,
   membershipPage,
   loyaltyPage,
+  siteSettings,
   // documents
   project,
   event,

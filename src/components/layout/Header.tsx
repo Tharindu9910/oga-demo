@@ -38,7 +38,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2">
           <Button
-            href={siteConfig.ctaUrls.becomeAMember}
+            href="/membership"
             variant="cream"
             className="hidden px-3.5 py-2 text-xs sm:px-5 sm:text-sm lg:inline-flex"
           >

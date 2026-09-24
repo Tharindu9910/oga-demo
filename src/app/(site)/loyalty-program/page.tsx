@@ -7,8 +7,7 @@ import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import WhatsAppIcon from '@/components/ui/WhatsAppIcon'
-import { siteConfig } from '@/config/site'
-import { getLoyaltyPage } from '@/sanity/lib/content'
+import { getLoyaltyPage, getSiteSettings } from '@/sanity/lib/content'
 
 // Hardcoded per Docs/editable_content.md (Loyalty Program page lists only
 // "Our Merchants" as editable) — hero and "Why Partner" have no Sanity field.
@@ -99,7 +98,10 @@ const checkIcon = (
 )
 
 export default async function LoyaltyProgramPage() {
-  const loyalty = await getLoyaltyPage()
+  const [loyalty, { whatsappUrl }] = await Promise.all([
+    getLoyaltyPage(),
+    getSiteSettings(),
+  ])
 
   return (
     <>
@@ -139,7 +141,7 @@ export default async function LoyaltyProgramPage() {
 
               <div className="mt-8 flex justify-center sm:justify-start">
                 <Button
-                  href={siteConfig.ctaUrls.loyaltyWhatsapp}
+                  href={whatsappUrl}
                   className="gap-3 bg-[#25d366] px-7 py-3.5 text-white shadow-[0_4px_7px_0_rgba(37,211,102,0.35)] hover:bg-[#20bd5a]"
                 >
                   <WhatsAppIcon />

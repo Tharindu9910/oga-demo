@@ -8,23 +8,16 @@ export const siteConfig = {
     phone: '+94 76 055 5164',
     email: 'secretaryiioga@gmail.com',
   },
-  // Left empty until the client supplies these (see plans/plan.md, "Still
-  // needed from you"). Components must render sensibly with an empty href.
-  ctaUrls: {
-    becomeAMember: '/membership',
-    activeVolunteer: '',
-    donate: '',
-    loyaltyWhatsapp: '',
-    sportsWhatsapp: '',
-    sportsNetballWhatsapp: '',
-    sportsBadmintonWhatsapp: '',
-    sportsCarnivalWhatsapp: '',
-    faqWhatsapp: '',
-  },
+  // "Become a Member", "Join Now"/"Join Us Now" (volunteer), "Donate Now",
+  // and the general WhatsApp contact URL are editable in the Studio
+  // (`siteSettings` singleton) instead of hardcoded here — see
+  // `getSiteSettings()`. The Sports page's per-sport "Join Us" buttons
+  // scroll to that same WhatsApp CTA rather than linking to a separate
+  // per-sport group.
   social: {
-    facebook: '',
-    instagram: '',
-    linkedin: '',
+    facebook: 'https://web.facebook.com/Ilmaoga/?_rdc=1&_rdr#',
+    instagram: 'https://www.instagram.com/ilmaoga/?hl=en',
+    linkedin: 'https://www.linkedin.com/company/ilma-international-old-girls-association/',
   },
 } as const
 

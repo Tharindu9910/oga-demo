@@ -48,6 +48,14 @@ export const membershipPage = defineType({
       title: 'CTA label',
       type: 'string',
     }),
+    defineField({
+      name: 'ctaUrl',
+      title: 'CTA URL',
+      description: '',
+      type: 'url',
+      validation: (Rule) =>
+        Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),
+    }),
   ],
   preview: {
     prepare: () => ({ title: 'Become a Member page' }),

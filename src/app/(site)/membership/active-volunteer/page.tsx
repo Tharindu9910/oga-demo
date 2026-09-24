@@ -6,10 +6,12 @@ import Reveal from '@/components/motion/Reveal'
 import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
-import { siteConfig } from '@/config/site'
+import { getSiteSettings } from '@/sanity/lib/content'
 
 // Hardcoded per plans/plan.md ("Not in the editable doc: 4.2 Active
-// Volunteer") — this page has no CMS-driven content.
+// Volunteer") — this page has no CMS-driven content, except the "Join Us
+// Now" CTA URL, which comes from the `siteSettings` singleton (shared with
+// the Events page's "Join Now" button) so it's editable in the Studio.
 
 const volunteerRoles = [
   {
@@ -81,7 +83,9 @@ const volunteerEvents = [
   },
 ]
 
-export default function ActiveVolunteerPage() {
+export default async function ActiveVolunteerPage() {
+  const { activeVolunteerUrl } = await getSiteSettings()
+
   return (
     <>
       {/* Hero */}
@@ -95,7 +99,7 @@ export default function ActiveVolunteerPage() {
               Be an Active Volunteer
             </Enter>
             <Enter delay={0.07}>
-              <Button href={siteConfig.ctaUrls.activeVolunteer} variant="dark">
+              <Button href={activeVolunteerUrl} variant="dark">
                 Join Us Now <Arrow />
               </Button>
             </Enter>

@@ -25,6 +25,7 @@ import {
   postsQuery,
   projectsByStatusQuery,
   projectsPageQuery,
+  siteSettingsQuery,
   upcomingEventsQuery,
 } from '../queries'
 import { sanityFetch } from './live'
@@ -34,6 +35,11 @@ export type AboutPage = NonNullable<AboutPageQueryResult>
 export type ProjectsPage = NonNullable<ProjectsPageQueryResult>
 export type MembershipPage = NonNullable<MembershipPageQueryResult>
 export type LoyaltyPage = NonNullable<LoyaltyPageQueryResult>
+export type SiteSettings = {
+  activeVolunteerUrl: string
+  donateUrl: string
+  whatsappUrl: string
+}
 export type Chapter = ChaptersQueryResult[number]
 export type Project = ProjectsByStatusQueryResult[number]
 export type Post = PostsQueryResult[number]
@@ -89,6 +95,19 @@ export async function getMembershipPage(): Promise<MembershipPage> {
 export async function getLoyaltyPage(): Promise<LoyaltyPage> {
   const { data } = await cachedFetch(loyaltyPageQuery)
   return requireSingleton(data, 'loyaltyPage')
+}
+
+// Global CTA URLs render on every page (header/mobile nav), so a missing
+// singleton falls back to empty strings — Button already renders a disabled
+// "Link coming soon" state for an empty href — rather than throwing like
+// `requireSingleton` and breaking the whole site.
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { data } = await cachedFetch(siteSettingsQuery)
+  return {
+    activeVolunteerUrl: data?.activeVolunteerUrl ?? '',
+    donateUrl: data?.donateUrl ?? '',
+    whatsappUrl: data?.whatsappUrl ?? '',
+  }
 }
 
 export async function getChapters(): Promise<Chapter[]> {

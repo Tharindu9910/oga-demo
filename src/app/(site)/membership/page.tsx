@@ -4,7 +4,6 @@ import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { siteConfig } from '@/config/site'
 import { getMembershipPage } from '@/sanity/lib/content'
 
 const checkIcon = (
@@ -97,7 +96,7 @@ export default async function MembershipPage() {
 
               <div className="mt-6 border-t border-stone-100 pt-6">
                 <Button
-                  href={siteConfig.ctaUrls.becomeAMember}
+                  href={membership.ctaUrl ?? undefined}
                   variant="dark"
                   className="w-full px-4 sm:px-7"
                 >

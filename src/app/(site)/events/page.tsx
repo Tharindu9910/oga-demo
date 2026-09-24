@@ -3,13 +3,15 @@ import Link from 'next/link'
 import EnterStagger from '@/components/motion/EnterStagger'
 import Reveal from '@/components/motion/Reveal'
 import RevealStagger from '@/components/motion/RevealStagger'
-import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
-import { siteConfig } from '@/config/site'
-import { getPastEvents, getUpcomingEvents } from '@/sanity/lib/content'
+import {
+  getPastEvents,
+  getSiteSettings,
+  getUpcomingEvents,
+} from '@/sanity/lib/content'
 import { LucideArrowRight } from 'lucide-react'
 
 function formatEventDate(date: string) {
@@ -22,10 +24,12 @@ function formatEventDate(date: string) {
 }
 
 export default async function EventsPage() {
-  const [upcomingEvents, pastEvents] = await Promise.all([
-    getUpcomingEvents(),
-    getPastEvents(),
-  ])
+  const [upcomingEvents, pastEvents, { activeVolunteerUrl }] =
+    await Promise.all([
+      getUpcomingEvents(),
+      getPastEvents(),
+      getSiteSettings(),
+    ])
 
   return (
     <>
@@ -127,18 +131,15 @@ export default async function EventsPage() {
                             {event.description}
                           </p>
                         )} */}
-                        <p className="font-plus-jakarta-sans text-brand-600 flex items-center gap-1 text-sm font-bold">
-                          Check out Event Highlights{' '}
-                          <LucideArrowRight size={14} />
-                        </p>
                         {link && (
                           <a
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group font-poppins text-brand-600 mt-1 inline-flex items-center gap-1 text-xs font-semibold"
+                            className="font-plus-jakarta-sans text-brand-600 flex items-center gap-1 text-sm font-bold"
                           >
-                            {link.label} <Arrow />
+                            {link.label}
+                            <LucideArrowRight size={14} />
                           </a>
                         )}
                       </div>
@@ -165,7 +166,7 @@ export default async function EventsPage() {
               Fill the form below to join as a volunteer
             </p>
             <Button
-              href={siteConfig.ctaUrls.activeVolunteer}
+              href={activeVolunteerUrl}
               variant="dark"
               className="min-w-70"
             >

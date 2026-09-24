@@ -19,11 +19,18 @@ export const membershipPageQuery = defineQuery(`*[_type == "membershipPage"][0]{
   poster,
   documentsRequired,
   payment,
-  ctaLabel
+  ctaLabel,
+  ctaUrl
 }`)
 
 export const loyaltyPageQuery = defineQuery(`*[_type == "loyaltyPage"][0]{
   merchants
+}`)
+
+export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
+  activeVolunteerUrl,
+  donateUrl,
+  whatsappUrl
 }`)
 
 export const chaptersQuery = defineQuery(`*[_type == "chapter"] | order(orderRank asc){

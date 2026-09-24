@@ -66,6 +66,17 @@ export default function Button({
     )
   }
 
+  // Same-page anchors use a plain <a>, not next/link: the client router
+  // treats a click to a hash matching the current URL as a no-op and skips
+  // the scroll, so a second click on the same in-page anchor does nothing.
+  if (href.startsWith('#')) {
+    return (
+      <a href={href} className={linkClasses} {...props}>
+        {children}
+      </a>
+    )
+  }
+
   return (
     <Link href={href} className={linkClasses} {...props}>
       {children}
